@@ -22,10 +22,12 @@ module.exports = React.createClass({
 
     componentDidMount: function() {
         document.addEventListener('keydown', this.keyDown);
+        document.addEventListener('click', this.documentClick);
     },
 
     componentWillUnmount: function() {
         document.removeEventListener('keydown', this.keyDown);
+        document.removeEventListener('click', this.documentClick);
     },
 
     keyDown: function (e) {
@@ -68,6 +70,22 @@ module.exports = React.createClass({
         });
     },
 
+    //small hack for hide calendar
+    isCalendar: false,
+
+    documentClick: function () {
+        if (!this.isCalendar) {
+            this.setState({
+                isVisible: false
+            });
+        }
+        this.isCalendar = false;
+    },
+
+    calendarClick: function () {
+        this.isCalendar = true;
+    },
+
     todayClick: function () {
         this.setState({
             date: moment(),
@@ -77,6 +95,7 @@ module.exports = React.createClass({
     },
 
     toogleClick: function () {
+        this.isCalendar = true;
         this.setState({
             isVisible: !this.state.isVisible
         });
@@ -107,7 +126,7 @@ module.exports = React.createClass({
         }
 
         var calendar = !this.state.isVisible ? '' :
-            <div className="input-calendar-wrapper">
+            <div className="input-calendar-wrapper" onClick={this.calendarClick}>
                 {view}<span className="today-btn" onClick={this.todayClick} >Today</span>
             </div>;
 

@@ -34,6 +34,10 @@ module.exports = React.createClass({
             date = parseInt(cell.innerHTML, 10),
             newDate = this.props.date;
 
+        if (isNaN(date)) {
+            return;
+        }
+
         if (cell.className.indexOf('prev') > -1 ) {
             newDate.subtract(1, 'months');
         } else if (cell.className.indexOf('next') > -1) {
@@ -44,12 +48,13 @@ module.exports = React.createClass({
         this.props.setDate(newDate);
     },
 
-    
+
     getDays: function () {
         var now = this.props.date,
             start = now.clone().startOf('month').day(0),
             end = now.clone().endOf('month').day(6),
             month = now.month(),
+            today = moment(),
             currDay = now.date(),
             days = [];
 
@@ -60,7 +65,8 @@ module.exports = React.createClass({
                     label: day.format('D'),
                     prev: day.month() < month,
                     next: day.month() > month,
-                    curr: day.date() === currDay && day.month() === month
+                    curr: day.date() === currDay && day.month() === month,
+                    today: day.date() === today.day() && day.month() === today.month()
                 });
             });
 
@@ -77,7 +83,8 @@ module.exports = React.createClass({
                 'day': true,
                 'next': item.next,
                 'prev': item.prev,
-                'current': item.curr
+                'current': item.curr,
+                'today': item.today
             });
             return <Cell value={item.label} classes={_class} key={i} />
         });
@@ -85,7 +92,7 @@ module.exports = React.createClass({
         var currentDate = this.props.date.format('MMMM');
 
         return (
-            <div className="days-view" onKeyDown={this.keyDown}>
+            <div className="view days-view" onKeyDown={this.keyDown}>
                 <ViewHeader
                     prev={this.prev}
                     next={this.next}
