@@ -1,9 +1,9 @@
 {
   "name": "react-input-calendar",
   "version": "0.0.1",
-  "description": "datepicker widget react component",
-  "repository": "",
-  "main": "src/index.js",
+  "description": "Datepicker widget react component",
+  "repository": "https://github.com/Rudeg/react-input-calendar",
+  "main": "index.js",
   "dependencies": {
     "react": "^0.12.1",
     "moment-range": "^1.0.5"
@@ -17,11 +17,10 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "start": "watchify -o dist/input-calendar.js -v -d .",
-    "build": "NODE_ENV=production browserify . | uglifyjs -cm > dist/input-calendar.min.js",
+    "start": "watchify -o js/bundle.js -v -d .",
+    "build": "NODE_ENV=production browserify . | uglifyjs -cm > js/input-calendar.min.js",
     "test": "jest"
   },
-  "author": "Sergii Rudenko",
   "browserify": {
     "transform": [
       "reactify",
@@ -30,5 +29,19 @@
   },
   "jest": {
     "rootDir": "./src"
-  }
+  },
+  "keywords": [
+    "react",
+    "datepicker",
+    "calendar",
+    "input-datepicker",
+    "input-calendar",
+    "react-input-calendar",
+    "react-calendar",
+    "react-datepicker",
+    "react-component"
+  ],
+  "homepage": "https://github.com/Rudeg/react-input-calendar",
+  "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
+  "license": "MIT"
 }

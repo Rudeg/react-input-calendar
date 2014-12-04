@@ -11,9 +11,13 @@ var _keyDownActions = Utils.keyDownActions;
 module.exports = React.createClass({
 
     getInitialState: function() {
+        var date = moment(this.props.date);
+        var format = this.props.format || 'D-M-YYYY';
+
         return {
-            date: moment(),
-            inputValue: moment().format('D-M-YYYY'),
+            date: date,
+            format: format,
+            inputValue: date.format(format),
             views: ['days', 'months', 'years'],
             currentView: 0,
             isVisible: false
@@ -50,7 +54,7 @@ module.exports = React.createClass({
     setDate: function (date) {
         this.setState({
             date: date,
-            inputValue: date.format('D-M-YYYY')
+            inputValue: date.format(this.state.format)
         });
     },
 
@@ -61,12 +65,13 @@ module.exports = React.createClass({
     },
 
     inputBlur: function () {
-        var date = this.state.inputValue;
-        var newDate = moment(date, 'DD-MM-YYYY').isValid() ? moment(date, 'DD-MM-YYYY') : moment();
+        var date = (this.state.inputValue || '').trim();
+        var format = this.state.format;
+        var newDate = moment(date, format).isValid() ? moment(date, format) : moment();
 
         this.setState({
             date: newDate,
-            inputValue: newDate.format('D-M-YYYY')
+            inputValue: newDate.format(format)
         });
     },
 
@@ -89,7 +94,7 @@ module.exports = React.createClass({
     todayClick: function () {
         this.setState({
             date: moment(),
-            inputValue: moment().format('D-M-YYYY'),
+            inputValue: moment().format(this.state.format),
             currentView: 0
         });
     },

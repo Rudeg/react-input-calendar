@@ -1,3 +1,4 @@
+.DC_Store
 node_modules
 *.iml
 .idea/
