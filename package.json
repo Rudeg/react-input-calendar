@@ -1,0 +1,34 @@
+{
+  "name": "react-input-calendar",
+  "version": "0.0.1",
+  "description": "datepicker widget react component",
+  "repository": "",
+  "main": "src/index.js",
+  "dependencies": {
+    "react": "^0.12.1",
+    "moment-range": "^1.0.5"
+  },
+  "devDependencies": {
+    "browserify": "^6.3.3",
+    "envify": "^3.0.0",
+    "jest-cli": "~0.1.18",
+    "reactify": "^0.17.1",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o dist/input-calendar.js -v -d .",
+    "build": "NODE_ENV=production browserify . | uglifyjs -cm > dist/input-calendar.min.js",
+    "test": "jest"
+  },
+  "author": "Sergii Rudenko",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "jest": {
+    "rootDir": "./src"
+  }
+}
