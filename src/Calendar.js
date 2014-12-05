@@ -25,12 +25,10 @@ module.exports = React.createClass({
     },
 
     componentDidMount: function() {
-        document.addEventListener('keydown', this.keyDown);
         document.addEventListener('click', this.documentClick);
     },
 
     componentWillUnmount: function() {
-        document.removeEventListener('keydown', this.keyDown);
         document.removeEventListener('click', this.documentClick);
     },
 
@@ -65,7 +63,7 @@ module.exports = React.createClass({
     },
 
     inputBlur: function () {
-        var date = (this.state.inputValue || '').trim();
+        var date = this.state.inputValue;
         var format = this.state.format;
         var newDate = moment(date, format).isValid() ? moment(date, format) : moment();
 
@@ -80,9 +78,7 @@ module.exports = React.createClass({
 
     documentClick: function () {
         if (!this.isCalendar) {
-            this.setState({
-                isVisible: false
-            });
+            this.setVisibility(false);
         }
         this.isCalendar = false;
     },
@@ -101,8 +97,16 @@ module.exports = React.createClass({
 
     toogleClick: function () {
         this.isCalendar = true;
+        this.setVisibility();
+    },
+
+    setVisibility: function (val) {
+        var value = val !== undefined ? val : !this.state.isVisible;
+        var eventMethod = value ? 'addEventListener' : 'removeEventListener';
+        document[eventMethod]('keydown', this.keyDown);
+
         this.setState({
-            isVisible: !this.state.isVisible
+            isVisible: value
         });
     },
 
