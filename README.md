@@ -4,7 +4,7 @@ React component for calendar widged.
 
 ## Installation
 
-React Input calendar is available as an [npm package](https://www.npmjs.org/package/react-input-calendar).
+React Input Calendar is available as an [npm package](https://www.npmjs.org/package/react-input-calendar).
 ```sh
 npm install react-input-calendar
 ```
@@ -19,15 +19,14 @@ http://rudeg.github.io/react-input-calendar
 
 ## Usage
 
-For a typeahead input:
-
 ```javascript
 var Calendar = require('react-input-calendar');
 React.render(
   <Calendar
     format="DD/MM/YYYY"
     date="4-12-2014"
-  />
+  />,
+  document.body
 );
 ```
 
