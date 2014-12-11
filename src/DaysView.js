@@ -66,7 +66,7 @@ module.exports = React.createClass({
                     prev: day.month() < month,
                     next: day.month() > month,
                     curr: day.date() === currDay && day.month() === month,
-                    today: day.date() === today.day() && day.month() === today.month()
+                    today: day.date() === today.date() && day.month() === today.month()
                 });
             });
 
