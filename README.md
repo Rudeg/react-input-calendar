@@ -50,6 +50,24 @@ Default: Current date
 
 Set initial date value.
 
+#### props.computableFormat
+
+Type: `String`
+
+Default: 'YYYY-MM-DD'
+
+Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
+
+Format of date for the onChange event. Default on the internation date format (ISO 8601) to ease the save of data;
+
+#### props.onChange
+
+Type: `Function`
+
+Default: null
+
+Set an function that will be triggerred whenever there is a change in the selected date. It will return the date in the `props.computableFormat` format
+
 ## License
 
 MIT

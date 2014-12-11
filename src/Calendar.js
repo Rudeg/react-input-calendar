@@ -13,10 +13,12 @@ module.exports = React.createClass({
     getInitialState: function() {
         var date = moment(this.props.date);
         var format = this.props.format || 'D-M-YYYY';
+        var computableFormat = this.props.computableFormat || 'YYYY-MM-DD';
 
         return {
             date: date,
             format: format,
+            computableFormat: computableFormat,
             inputValue: date.format(format),
             views: ['days', 'months', 'years'],
             currentView: 0,
@@ -54,6 +56,9 @@ module.exports = React.createClass({
             date: date,
             inputValue: date.format(this.state.format)
         });
+        if (this.props.onChange) {
+            this.props.onChange(date.format(this.state.computableFormat));
+        }
     },
 
     changeDate: function (e) {
@@ -71,6 +76,9 @@ module.exports = React.createClass({
             date: newDate,
             inputValue: newDate.format(format)
         });
+        if (this.props.onChange) {
+            this.props.onChange(newDate.format(this.state.computableFormat));
+        }
     },
 
     //small hack for hide calendar
