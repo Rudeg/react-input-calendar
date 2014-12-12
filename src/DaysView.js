@@ -32,7 +32,7 @@ module.exports = React.createClass({
     cellClick: function (e) {
         var cell = e.target,
             date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date;
+            newDate = this.props.date ? this.props.date : moment();
 
         if (isNaN(date)) {
             return;
@@ -50,7 +50,7 @@ module.exports = React.createClass({
 
 
     getDays: function () {
-        var now = this.props.date,
+        var now = this.props.date ? this.props.date : moment(),
             start = now.clone().startOf('month').day(0),
             end = now.clone().endOf('month').day(6),
             month = now.month(),
@@ -89,7 +89,7 @@ module.exports = React.createClass({
             return <Cell value={item.label} classes={_class} key={i} />
         });
 
-        var currentDate = this.props.date.format('MMMM');
+        var currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM');
 
         return (
             <div className="view days-view" onKeyDown={this.keyDown}>

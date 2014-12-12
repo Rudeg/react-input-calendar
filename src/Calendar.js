@@ -19,7 +19,7 @@ module.exports = React.createClass({
             date: date,
             format: format,
             computableFormat: computableFormat,
-            inputValue: date.format(format),
+            inputValue: null,
             views: ['days', 'months', 'years'],
             currentView: 0,
             isVisible: false
@@ -69,15 +69,21 @@ module.exports = React.createClass({
 
     inputBlur: function () {
         var date = this.state.inputValue;
-        var format = this.state.format;
-        var newDate = moment(date, format).isValid() ? moment(date, format) : moment();
+        var newDate = null;
+        var computableDate = null;
+        if (date) {
+            var format = this.state.format;
+            newDate = moment(date, format).isValid() ? moment(date, format) : moment();
+            computableDate = newDate.format(this.state.computableFormat);
+            newDate = newDate.format(format);
+        }
 
         this.setState({
             date: newDate,
-            inputValue: newDate.format(format)
+            inputValue: newDate
         });
         if (this.props.onChange) {
-            this.props.onChange(newDate.format(this.state.computableFormat));
+            this.props.onChange(computableDate);
         }
     },
 
