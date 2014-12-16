@@ -37,6 +37,13 @@ module.exports = React.createClass({
         document.removeEventListener('click', this.documentClick);
     },
 
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            date: nextProps.date ? moment(nextProps.date) : null,
+            inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
+        });
+    },
+
     keyDown: function (e) {
         _keyDownActions.call(this, e.keyCode);
     },
