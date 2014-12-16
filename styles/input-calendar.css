@@ -45,7 +45,8 @@
 .input-calendar .days,
 .input-calendar .months,
 .input-calendar .years {
-    width: 175px;
+    width: 189px;
+    padding-bottom: 2px;
 }
 
 .input-calendar .cell {
