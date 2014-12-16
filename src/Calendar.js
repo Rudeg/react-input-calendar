@@ -11,7 +11,10 @@ var _keyDownActions = Utils.keyDownActions;
 module.exports = React.createClass({
 
     getInitialState: function() {
-        var date = moment(this.props.date);
+        var date;
+        if (this.props.date) {
+            var date = moment(this.props.date);
+        }
         var format = this.props.format || 'D-M-YYYY';
         var computableFormat = this.props.computableFormat || 'YYYY-MM-DD';
 
@@ -19,7 +22,7 @@ module.exports = React.createClass({
             date: date,
             format: format,
             computableFormat: computableFormat,
-            inputValue: null,
+            inputValue: date ? date.format(format) : null,
             views: ['days', 'months', 'years'],
             currentView: 0,
             isVisible: false
@@ -32,6 +35,13 @@ module.exports = React.createClass({
 
     componentWillUnmount: function() {
         document.removeEventListener('click', this.documentClick);
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({
+            date: nextProps.date ? moment(nextProps.date) : null,
+            inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
+        });
     },
 
     keyDown: function (e) {
