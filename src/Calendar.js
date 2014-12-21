@@ -11,12 +11,9 @@ var _keyDownActions = Utils.keyDownActions;
 module.exports = React.createClass({
 
     getInitialState: function() {
-        var date;
-        if (this.props.date) {
-            var date = moment(this.props.date);
-        }
-        var format = this.props.format || 'D-M-YYYY';
-        var computableFormat = this.props.computableFormat || 'YYYY-MM-DD';
+        var date = this.props.date ? moment(this.props.date) : moment(),
+            format = this.props.format || 'DD-MM-YYYY',
+            computableFormat = this.props.computableFormat || 'DD-MM-YYYY';
 
         return {
             date: date,
@@ -78,20 +75,20 @@ module.exports = React.createClass({
     },
 
     inputBlur: function () {
-        var date = this.state.inputValue;
-        var newDate = null;
-        var computableDate = null;
+        var date = this.state.inputValue,
+            newDate = null, computableDate = null, format;
+
         if (date) {
-            var format = this.state.format;
+            format = this.state.format;
             newDate = moment(date, format).isValid() ? moment(date, format) : moment();
             computableDate = newDate.format(this.state.computableFormat);
-            newDate = newDate.format(format);
         }
 
         this.setState({
             date: newDate,
-            inputValue: newDate
+            inputValue: computableDate
         });
+
         if (this.props.onChange) {
             this.props.onChange(computableDate);
         }

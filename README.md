@@ -54,7 +54,7 @@ Set initial date value.
 
 Type: `String`
 
-Default: 'YYYY-MM-DD'
+Default: 'DD-MM-YYYY'
 
 Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
 
