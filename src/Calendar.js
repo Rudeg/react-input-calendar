@@ -13,6 +13,7 @@ module.exports = React.createClass({
     getInitialState: function() {
         var date = this.props.date ? moment(this.props.date) : moment(),
             format = this.props.format || 'DD-MM-YYYY',
+            minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'DD-MM-YYYY';
 
         return {
@@ -21,7 +22,8 @@ module.exports = React.createClass({
             computableFormat: computableFormat,
             inputValue: date ? date.format(format) : null,
             views: ['days', 'months', 'years'],
-            currentView: 0,
+            minView: minView,
+            currentView: minView || 0,
             isVisible: false
         };
     },
@@ -52,10 +54,17 @@ module.exports = React.createClass({
     },
 
     prevView: function (date) {
-        this.setState({
-            date: date,
-            currentView: --this.state.currentView
-        });
+        if (this.state.currentView === this.state.minView) {
+            this.setState({
+                date: date,
+                inputValue: date.format(this.state.format)
+            });
+        } else {
+            this.setState({
+                date: date,
+                currentView: --this.state.currentView
+            });
+        }
     },
 
     setDate: function (date) {

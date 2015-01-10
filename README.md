@@ -50,6 +50,17 @@ Default: Current date
 
 Set initial date value.
 
+#### props.minView
+
+Type: `Int` (from 0 to 2)
+
+Default: 0 (DaysView)
+
+Set minimal view. Values:
+  0 - days
+  1 - months
+  2 - years
+
 #### props.computableFormat
 
 Type: `String`
