@@ -1,1 +1,1 @@
-module.exports = require('./src/Calendar');
+module.exports = require('./dist/Calendar');
