@@ -56,6 +56,7 @@ module.exports = React.createClass({displayName: "exports",
             month = now.month(),
             today = moment(),
             currDay = now.date(),
+            year = now.year(),
             days = [];
 
         moment()
@@ -63,8 +64,8 @@ module.exports = React.createClass({displayName: "exports",
             .by('days', function(day) {
                 days.push({
                     label: day.format('D'),
-                    prev: day.month() < month,
-                    next: day.month() > month,
+                    prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
+                    next: day.month() > month || day.year() > year,
                     curr: day.date() === currDay && day.month() === month,
                     today: day.date() === today.date() && day.month() === today.month()
                 });
