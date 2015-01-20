@@ -36,7 +36,7 @@ React.render(
 
 Type: `String`
 
-Default: 'DD-MM-YYYY'
+Default: 'MM-DD-YYYY'
 
 Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
 
@@ -65,7 +65,7 @@ Set minimal view. Values:
 
 Type: `String`
 
-Default: 'DD-MM-YYYY'
+Default: 'MM-DD-YYYY'
 
 Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
 

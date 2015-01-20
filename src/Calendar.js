@@ -12,9 +12,9 @@ module.exports = React.createClass({
 
     getInitialState: function() {
         var date = this.props.date ? moment(this.props.date) : moment(),
-            format = this.props.format || 'DD-MM-YYYY',
+            format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
-            computableFormat = this.props.computableFormat || 'DD-MM-YYYY';
+            computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
 
         return {
             date: date,
