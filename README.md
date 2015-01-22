@@ -30,6 +30,15 @@ React.render(
 );
 ```
 
+## Dependencies
+
+[React](http://facebook.github.io/react/)
+
+[Moment-range](https://github.com/gf3/moment-range)
+
+[Font-Awesome](http://fortawesome.github.io/Font-Awesome/)
+
+
 ## API
 
 #### props.format
@@ -57,8 +66,11 @@ Type: `Int` (from 0 to 2)
 Default: 0 (DaysView)
 
 Set minimal view. Values:
+
   0 - days
+
   1 - months
+
   2 - years
 
 #### props.computableFormat

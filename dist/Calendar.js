@@ -118,11 +118,17 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     todayClick: function () {
+        var today = moment();
+
         this.setState({
-            date: moment(),
-            inputValue: moment().format(this.state.format),
+            date: today,
+            inputValue: today.format(this.state.format),
             currentView: 0
         });
+
+        if (this.props.onChange) {
+            this.props.onChange(today.format(this.state.computableFormat));
+        }
     },
 
     toogleClick: function () {
