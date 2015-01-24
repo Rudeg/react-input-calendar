@@ -1,6 +1,6 @@
 # React Input Calendar
 
-React component for calendar widged.
+React component for calendar widget.
 
 ## Installation
 
@@ -71,7 +71,7 @@ Set minimal view. Values:
 
   1 - months
 
-  2 - years
+  2 - years.
 
 #### props.computableFormat
 
@@ -81,7 +81,7 @@ Default: 'MM-DD-YYYY'
 
 Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
 
-Format of date for the onChange event. Default on the internation date format (ISO 8601) to ease the save of data;
+Format of date for the onChange event. Default on the  date format (ISO 8601) to ease the save of data.
 
 #### props.onChange
 
@@ -89,7 +89,15 @@ Type: `Function`
 
 Default: null
 
-Set an function that will be triggerred whenever there is a change in the selected date. It will return the date in the `props.computableFormat` format
+Set an function that will be triggered whenever there is a change in the selected date. It will return the date in the `props.computableFormat` format.
+
+#### props.closeOnSelect
+
+Type: `Boolean`
+
+Default: undefined
+
+Define state when date picker would close once the user has clicked on a date.
 
 ## License
 

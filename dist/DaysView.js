@@ -45,7 +45,7 @@ module.exports = React.createClass({displayName: "exports",
         }
 
         newDate.date(date);
-        this.props.setDate(newDate);
+        this.props.setDate(newDate, true);
     },
 
 

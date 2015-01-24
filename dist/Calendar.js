@@ -67,11 +67,13 @@ module.exports = React.createClass({displayName: "exports",
         }
     },
 
-    setDate: function (date) {
+    setDate: function (date, isDayView) {
         this.setState({
             date: date,
-            inputValue: date.format(this.state.format)
+            inputValue: date.format(this.state.format),
+            isVisible: this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
         });
+
         if (this.props.onChange) {
             this.props.onChange(date.format(this.state.computableFormat));
         }
