@@ -99,6 +99,14 @@ Default: undefined
 
 Define state when date picker would close once the user has clicked on a date.
 
+#### props.placeholder
+
+Type: `String`
+
+Default: undefined
+
+Value to show in the input text box if no date is set.
+
 ## License
 
 MIT
