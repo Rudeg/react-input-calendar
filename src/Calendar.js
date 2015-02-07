@@ -97,11 +97,11 @@ module.exports = React.createClass({
 
     inputBlur: function () {
         var date = this.state.inputValue,
-            newDate = null, computableDate = null, format;
-
-        if (date) {
+            newDate = null,
+            computableDate = null,
             format = this.state.format;
 
+        if (date) {
             // format, with strict parsing true, so we catch bad dates
             newDate = moment(date, format, true);
 
@@ -123,7 +123,7 @@ module.exports = React.createClass({
 
         this.setState({
             date: newDate,
-            inputValue: computableDate
+            inputValue: newDate ? newDate.format(format) : null
         });
 
         if (this.props.onChange) {
