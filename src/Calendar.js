@@ -10,8 +10,18 @@ var _keyDownActions = Utils.keyDownActions;
 
 module.exports = React.createClass({
 
+    propTypes: {
+        closeOnSelect: React.PropTypes.bool,
+        computableFormat: React.PropTypes.string,
+        date: React.PropTypes.any,
+        format: React.PropTypes.string,
+        minView: React.PropTypes.number,
+        onChange: React.PropTypes.func,
+        placeholder: React.PropTypes.string
+    },
+
     getInitialState: function() {
-        var date = this.props.date ? moment(this.props.date) : moment(),
+        var date = this.props.date ? moment(this.props.date) : null,
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
@@ -87,17 +97,33 @@ module.exports = React.createClass({
 
     inputBlur: function () {
         var date = this.state.inputValue,
-            newDate = null, computableDate = null, format;
+            newDate = null,
+            computableDate = null,
+            format = this.state.format;
 
         if (date) {
-            format = this.state.format;
-            newDate = moment(date, format).isValid() ? moment(date, format) : moment();
+            // format, with strict parsing true, so we catch bad dates
+            newDate = moment(date, format, true);
+
+            // if the new date didn't match our format, see if the native
+            // js date can parse it
+            if (!newDate.isValid()) {
+                var d = new Date(date);
+
+                // if native js cannot parse, just make a new date
+                if (isNaN(d.getTime())) {
+                    d = new Date();
+                }
+
+                newDate = moment(d);
+            }
+
             computableDate = newDate.format(this.state.computableFormat);
         }
 
         this.setState({
             date: newDate,
-            inputValue: computableDate
+            inputValue: newDate ? newDate.format(format) : null
         });
 
         if (this.props.onChange) {
@@ -149,24 +175,30 @@ module.exports = React.createClass({
     },
 
     render: function () {
+
+        // its ok for this.state.date to be null, but we should never
+        // pass null for the date into the calendar pop up, as we want
+        // it to just start on todays date if there is no date set
+        var calendarDate = this.state.date || moment();
+
         var view;
         switch (this.state.currentView) {
             case 0:
                 view = <DaysView
-                    date={this.state.date}
+                    date={calendarDate}
                     setDate={this.setDate}
                     nextView={this.nextView} />;
                 break;
             case 1:
                 view = <MonthsView
-                    date={this.state.date}
+                    date={calendarDate}
                     setDate={this.setDate}
                     nextView={this.nextView}
                     prevView={this.prevView} />;
                 break;
             case 2:
                 view = <YearsView
-                    date={this.state.date}
+                    date={calendarDate}
                     setDate={this.setDate}
                     prevView={this.prevView} />;
                 break;
@@ -189,7 +221,8 @@ module.exports = React.createClass({
                     className="input-calendar-value"
                     value={this.state.inputValue}
                     onBlur={this.inputBlur}
-                    onChange={this.changeDate} />
+                    onChange={this.changeDate}
+                    placeholder={this.props.placeholder} />
 
                 <span onClick={this.toogleClick} className="icon-wrapper calendar-icon">
                     <i className={iconClass}></i>
