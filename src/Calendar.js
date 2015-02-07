@@ -101,7 +101,23 @@ module.exports = React.createClass({
 
         if (date) {
             format = this.state.format;
-            newDate = moment(date, format).isValid() ? moment(date, format) : moment();
+
+            // format, with strict parsing true, so we catch bad dates
+            newDate = moment(date, format, true);
+
+            // if the new date didn't match our format, see if the native
+            // js date can parse it
+            if (!newDate.isValid()) {
+                var d = new Date(date);
+
+                // if native js cannot parse, just make a new date
+                if (isNaN(d.getTime())) {
+                    d = new Date();
+                }
+
+                newDate = moment(d);
+            }
+
             computableDate = newDate.format(this.state.computableFormat);
         }
 
