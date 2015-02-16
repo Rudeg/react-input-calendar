@@ -6,11 +6,11 @@
   "main": "index.js",
   "dependencies": {
     "react": "^0.12.2",
+    "envify": "^3.0.0",
     "moment-range": "^1.0.5"
   },
   "devDependencies": {
     "browserify": "^7.0.2",
-    "envify": "^3.0.0",
     "gulp": "^3.8.10",
     "gulp-react": "^2.0.0",
     "jest-cli": "~0.1.18",
