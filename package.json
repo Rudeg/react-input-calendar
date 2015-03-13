@@ -7,6 +7,7 @@
   "dependencies": {
     "react": "^0.12.2",
     "envify": "^3.0.0",
+    "reactify": "^0.17.1",
     "moment-range": "^1.0.5"
   },
   "devDependencies": {
@@ -14,7 +15,6 @@
     "gulp": "^3.8.10",
     "gulp-react": "^2.0.0",
     "jest-cli": "~0.1.18",
-    "reactify": "^0.17.1",
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1"
   },
