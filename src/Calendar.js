@@ -48,7 +48,7 @@ module.exports = React.createClass({
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
-            date: nextProps.date ? moment(nextProps.date) : null,
+            date: nextProps.date ? moment(nextProps.date) : this.state.date,
             inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
         });
     },
