@@ -7,7 +7,7 @@ var ViewHeader = require('./ViewHeader');
 module.exports = React.createClass({displayName: "exports",
 
     propTypes: {
-        date: React.PropTypes.object
+        date: React.PropTypes.object.isRequired
     },
 
     next: function() {
