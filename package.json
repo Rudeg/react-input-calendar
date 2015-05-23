@@ -1,6 +1,6 @@
 {
   "name": "react-input-calendar",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Datepicker widget react component",
   "repository": "https://github.com/Rudeg/react-input-calendar",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "react": "^0.13.3",
     "envify": "^3.4.0",
     "reactify": "^1.1.1",
-    "moment-range": "^1.0.9"
+    "moment-range": "^1.0.5"
   },
   "devDependencies": {
     "browserify": "^7.0.2",
