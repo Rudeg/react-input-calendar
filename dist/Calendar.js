@@ -67,8 +67,14 @@ module.exports = React.createClass({displayName: "exports",
         if (this.state.currentView === this.state.minView) {
             this.setState({
                 date: date,
-                inputValue: date.format(this.state.format)
+                inputValue: date.format(this.state.format),
+                isVisible: false
             });
+
+            if (this.props.onChange) {
+                this.props.onChange(date.format(this.state.computableFormat));
+            }
+
         } else {
             this.setState({
                 date: date,
@@ -151,7 +157,7 @@ module.exports = React.createClass({displayName: "exports",
         this.setState({
             date: today,
             inputValue: today.format(this.state.format),
-            currentView: 0
+            currentView: this.state.minView
         });
 
         if (this.props.onChange) {
