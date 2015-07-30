@@ -5,7 +5,6 @@
   "repository": "https://github.com/Rudeg/react-input-calendar",
   "main": "index.js",
   "dependencies": {
-    "classname": "0.0.0",
     "envify": "^3.4.0",
     "moment-range": "^1.0.5",
     "react": "^0.13.3",
