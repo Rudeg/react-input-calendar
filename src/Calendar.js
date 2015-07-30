@@ -16,6 +16,7 @@ module.exports = React.createClass({
         date: React.PropTypes.any,
         format: React.PropTypes.string,
         minView: React.PropTypes.number,
+        onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
         placeholder: React.PropTypes.string
     },
@@ -101,7 +102,7 @@ module.exports = React.createClass({
         })
     },
 
-    inputBlur: function () {
+    inputBlur: function (e) {
         var date = this.state.inputValue,
             newDate = null,
             computableDate = null,
@@ -134,6 +135,10 @@ module.exports = React.createClass({
 
         if (this.props.onChange) {
             this.props.onChange(computableDate);
+        }
+
+        if (this.props.onBlur) {
+            this.props.onBlur(e, computableDate);
         }
     },
 
