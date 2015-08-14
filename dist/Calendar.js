@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var cs = require('classname');
+var cs = require('classnames');
 var moment = require('moment-range');
 var DaysView = require('./DaysView');
 var MonthsView = require('./MonthsView');
@@ -170,7 +170,7 @@ module.exports = React.createClass({displayName: "exports",
         }
     },
 
-    toogleClick: function () {
+    toggleClick: function () {
         this.isCalendar = true;
         this.setVisibility();
     },
@@ -233,9 +233,11 @@ module.exports = React.createClass({displayName: "exports",
                     value: this.state.inputValue, 
                     onBlur: this.inputBlur, 
                     onChange: this.changeDate, 
+                    onClick: this.props.openOnInputFocus ? this.toggleClick : '', 
+                    onFocus: this.props.openOnInputFocus ? this.toggleClick : '', 
                     placeholder: this.props.placeholder}), 
 
-                React.createElement("span", {onClick: this.toogleClick, className: "icon-wrapper calendar-icon"}, 
+                React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
                     React.createElement("i", {className: iconClass})
                 ), 
                 calendar

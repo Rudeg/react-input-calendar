@@ -170,7 +170,7 @@ module.exports = React.createClass({
         }
     },
 
-    toogleClick: function () {
+    toggleClick: function () {
         this.isCalendar = true;
         this.setVisibility();
     },
@@ -233,9 +233,11 @@ module.exports = React.createClass({
                     value={this.state.inputValue}
                     onBlur={this.inputBlur}
                     onChange={this.changeDate}
+                    onClick={this.props.openOnInputFocus ? this.toggleClick : ''}
+                    onFocus={this.props.openOnInputFocus ? this.toggleClick : ''}
                     placeholder={this.props.placeholder} />
 
-                <span onClick={this.toogleClick} className="icon-wrapper calendar-icon">
+                <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
                     <i className={iconClass}></i>
                 </span>
                 {calendar}
