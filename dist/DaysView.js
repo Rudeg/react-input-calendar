@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var cs = require('classname');
+var cs = require('classnames');
 var moment = require('moment-range');
 var Cell = require('./Cell');
 var ViewHeader = require('./ViewHeader');

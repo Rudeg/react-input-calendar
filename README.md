@@ -99,6 +99,14 @@ Default: undefined
 
 Define state when date picker would close once the user has clicked on a date.
 
+#### props.openOnInputFocus
+
+Type `Boolean`
+
+Default: undefined
+
+Setting this value to true makes the calendar widget open when the iput field is focused.
+
 #### props.placeholder
 
 Type: `String`
