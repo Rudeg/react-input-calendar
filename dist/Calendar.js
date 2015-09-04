@@ -18,7 +18,8 @@ module.exports = React.createClass({displayName: "exports",
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
-        placeholder: React.PropTypes.string
+        placeholder: React.PropTypes.string,
+        hideTouchKeyboard: React.PropTypes.bool,
     },
 
     getInitialState: function() {
@@ -226,6 +227,19 @@ module.exports = React.createClass({displayName: "exports",
             'fa-calendar-o': this.state.isVisible
         });
 
+        var readOnly = false;
+
+        if(this.props.hideTouchKeyboard) {
+            // do not break server side rendering:
+            try {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    readOnly = true;
+                }
+            } catch (e) {
+
+            }
+        }
+
         return (
             React.createElement("div", {className: "input-calendar"}, 
                 React.createElement("input", {type: "text", 
@@ -234,7 +248,8 @@ module.exports = React.createClass({displayName: "exports",
                     onBlur: this.inputBlur, 
                     onChange: this.changeDate, 
                     onFocus: this.props.openOnInputFocus ? this.toggleClick : '', 
-                    placeholder: this.props.placeholder}), 
+                    placeholder: this.props.placeholder, 
+                    readOnly: readOnly}), 
 
                 React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
                     React.createElement("i", {className: iconClass})
