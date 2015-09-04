@@ -233,7 +233,6 @@ module.exports = React.createClass({displayName: "exports",
                     value: this.state.inputValue, 
                     onBlur: this.inputBlur, 
                     onChange: this.changeDate, 
-                    onClick: this.props.openOnInputFocus ? this.toggleClick : '', 
                     onFocus: this.props.openOnInputFocus ? this.toggleClick : '', 
                     placeholder: this.props.placeholder}), 
 
