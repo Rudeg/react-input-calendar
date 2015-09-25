@@ -62,10 +62,15 @@
     user-select: none;
 }
 
-.input-calendar .cell:hover {
+.input-calendar .cell:not(.disabled):hover {
     color: #f39c12;
     border: 1px solid #f39c12;
     border-radius: 4px;
+}
+
+.input-calendar .cell.disabled,
+.input-calendar .today-btn.disabled {
+    cursor: default;
 }
 
 .input-calendar .cell.current {
@@ -82,7 +87,9 @@
 }
 
 .input-calendar .day.prev,
-.input-calendar .day.next {
+.input-calendar .day.next,
+.input-calendar .cell.disabled,
+.input-calendar .today-btn.disabled {
     opacity: .4;
 }
 
@@ -137,7 +144,7 @@
 }
 
 .input-calendar .icon:hover,
-.input-calendar .today-btn:hover,
+.input-calendar .today-btn:not(.disabled):hover,
 .input-calendar .icon-wrapper:hover {
     color: #f39c12;
 }

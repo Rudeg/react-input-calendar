@@ -8,6 +8,8 @@ module.exports = React.createClass({displayName: "exports",
 
     propTypes: {
         date: React.PropTypes.object.isRequired,
+        minDate: React.PropTypes.any,
+        maxDate: React.PropTypes.any,
         setDate: React.PropTypes.func,
         nextView: React.PropTypes.func
     },
@@ -22,17 +24,29 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     next: function() {
-        this.props.setDate(this.props.date.add(1, 'months'));
+        var nextDate = this.props.date.clone().add(1, 'months');
+
+        if (this.props.maxDate && nextDate.isAfter(this.props.maxDate)) {
+            nextDate = this.props.maxDate;
+        }
+
+        this.props.setDate(nextDate);
     },
 
     prev: function() {
-        this.props.setDate(this.props.date.subtract(1, 'months'));
+        var prevDate = this.props.date.clone().subtract(1, 'months');
+
+        if (this.props.minDate && prevDate.isBefore(this.props.minDate)) {
+            prevDate = this.props.minDate;
+        }
+
+        this.props.setDate(prevDate);
     },
 
     cellClick: function (e) {
         var cell = e.target,
             date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date ? this.props.date : moment();
+            newDate = this.props.date ? this.props.date.clone() : moment();
 
         if (isNaN(date)) {
             return;
@@ -53,6 +67,8 @@ module.exports = React.createClass({displayName: "exports",
         var now = this.props.date ? this.props.date : moment(),
             start = now.clone().startOf('month').day(0),
             end = now.clone().endOf('month').day(6),
+            minDate = this.props.minDate,
+            maxDate = this.props.maxDate,
             month = now.month(),
             today = moment(),
             currDay = now.date(),
@@ -66,6 +82,7 @@ module.exports = React.createClass({displayName: "exports",
                     label: day.format('D'),
                     prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
                     next: day.month() > month || day.year() > year,
+                    disabled: day.isBefore(minDate) || day.isAfter(maxDate),
                     curr: day.date() === currDay && day.month() === month,
                     today: day.date() === today.date() && day.month() === today.month()
                 });
@@ -84,6 +101,7 @@ module.exports = React.createClass({displayName: "exports",
                 'day': true,
                 'next': item.next,
                 'prev': item.prev,
+                'disabled': item.disabled,
                 'current': item.curr,
                 'today': item.today
             });
