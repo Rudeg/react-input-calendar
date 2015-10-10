@@ -14,6 +14,8 @@ module.exports = React.createClass({displayName: "exports",
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
         date: React.PropTypes.any,
+        minDate: React.PropTypes.any,
+        maxDate: React.PropTypes.any,
         format: React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
@@ -24,12 +26,16 @@ module.exports = React.createClass({displayName: "exports",
 
     getInitialState: function() {
         var date = this.props.date ? moment(this.props.date) : null,
+            minDate = this.props.minDate ? moment(this.props.minDate) : null,
+            maxDate = this.props.maxDate ? moment(this.props.maxDate) : null,
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
 
         return {
             date: date,
+            minDate: minDate,
+            maxDate: maxDate,
             format: format,
             computableFormat: computableFormat,
             inputValue: date ? date.format(format) : null,
@@ -59,13 +65,37 @@ module.exports = React.createClass({displayName: "exports",
         _keyDownActions.call(this, e.keyCode);
     },
 
+    checkIfDateDisabled: function (date) {
+        if (this.state.minDate && date.isBefore(this.state.minDate)) {
+            return true;
+        }
+
+        if (this.state.maxDate && date.isAfter(this.state.maxDate)) {
+            return true;
+        }
+
+        return false;
+    },
+
     nextView: function () {
+        if (this.checkIfDateDisabled(this.state.date)) {
+            return;
+        }
+
         this.setState({
             currentView: ++this.state.currentView
         });
     },
 
     prevView: function (date) {
+        if (this.state.minDate && date.isBefore(this.state.minDate)) {
+            date = this.state.minDate.clone();
+        }
+
+        if (this.state.maxDate && date.isAfter(this.state.maxDate)) {
+            date = this.state.maxDate.clone();
+        }
+
         if (this.state.currentView === this.state.minView) {
             this.setState({
                 date: date,
@@ -86,6 +116,10 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     setDate: function (date, isDayView) {
+        if (this.checkIfDateDisabled(date)) {
+            return;
+        }
+
         this.setState({
             date: date,
             inputValue: date.format(this.state.format),
@@ -158,7 +192,9 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     todayClick: function () {
-        var today = moment();
+        var today = moment().startOf('day');
+
+        if (this.checkIfDateDisabled(today)) return;
 
         this.setState({
             date: today,
@@ -198,12 +234,16 @@ module.exports = React.createClass({displayName: "exports",
             case 0:
                 view = React.createElement(DaysView, {
                     date: calendarDate, 
+                    minDate: this.state.minDate, 
+                    maxDate: this.state.maxDate, 
                     setDate: this.setDate, 
                     nextView: this.nextView});
                 break;
             case 1:
                 view = React.createElement(MonthsView, {
                     date: calendarDate, 
+                    minDate: this.state.minDate, 
+                    maxDate: this.state.maxDate, 
                     setDate: this.setDate, 
                     nextView: this.nextView, 
                     prevView: this.prevView});
@@ -211,6 +251,8 @@ module.exports = React.createClass({displayName: "exports",
             case 2:
                 view = React.createElement(YearsView, {
                     date: calendarDate, 
+                    minDate: this.state.minDate, 
+                    maxDate: this.state.maxDate, 
                     setDate: this.setDate, 
                     prevView: this.prevView});
                 break;
@@ -218,7 +260,12 @@ module.exports = React.createClass({displayName: "exports",
 
         var calendar = !this.state.isVisible ? '' :
             React.createElement("div", {className: "input-calendar-wrapper", onClick: this.calendarClick}, 
-                view, React.createElement("span", {className: "today-btn", onClick: this.todayClick}, "Today")
+                view, 
+                React.createElement("span", {
+                  className: "today-btn" + (this.checkIfDateDisabled(moment().startOf('day')) ? " disabled" : ""), 
+                  onClick: this.todayClick}, 
+                  "Today"
+                )
             );
 
         var iconClass = cs({
