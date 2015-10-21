@@ -217,9 +217,11 @@ module.exports = React.createClass({displayName: "exports",
         var eventMethod = value ? 'addEventListener' : 'removeEventListener';
         document[eventMethod]('keydown', this.keyDown);
 
-        this.setState({
-            isVisible: value
-        });
+        if(this.state.isVisible !== value){
+            this.setState({
+                isVisible: value
+            });
+        }
     },
 
     render: function () {
