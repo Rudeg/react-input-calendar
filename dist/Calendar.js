@@ -260,13 +260,17 @@ module.exports = React.createClass({displayName: "exports",
                 break;
         }
 
+        var todayText = 'Today';
+        if(moment.locale() === 'de')
+          todayText = 'Heute';
+
         var calendar = !this.state.isVisible ? '' :
             React.createElement("div", {className: "input-calendar-wrapper", onClick: this.calendarClick}, 
                 view, 
                 React.createElement("span", {
                   className: "today-btn" + (this.checkIfDateDisabled(moment().startOf('day')) ? " disabled" : ""), 
                   onClick: this.todayClick}, 
-                  "Today"
+                  todayText
                 )
             );
 
