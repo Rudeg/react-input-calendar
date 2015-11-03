@@ -1,12 +1,20 @@
-var React = require('react/addons');
+var React = require('react');
 var cs = require('classnames');
-var moment = require('moment-range');
+var moment = require('moment');
+require('moment-range');
 var DaysView = require('./DaysView');
 var MonthsView = require('./MonthsView');
 var YearsView = require('./YearsView');
 var Utils = require('./Utils');
 
 var _keyDownActions = Utils.keyDownActions;
+
+function toDate(date) {
+  if (date instanceof Date) {
+    return date;
+  }
+  return new Date(date);
+}
 
 module.exports = React.createClass({
 
@@ -25,9 +33,9 @@ module.exports = React.createClass({
     },
 
     getInitialState: function() {
-        var date = this.props.date ? moment(this.props.date) : null,
-            minDate = this.props.minDate ? moment(this.props.minDate) : null,
-            maxDate = this.props.maxDate ? moment(this.props.maxDate) : null,
+        var date = this.props.date ? moment(toDate(this.props.date)) : null,
+            minDate = this.props.minDate ? moment(toDate(this.props.minDate)) : null,
+            maxDate = this.props.maxDate ? moment(toDate(this.props.maxDate)) : null,
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
@@ -56,8 +64,8 @@ module.exports = React.createClass({
 
     componentWillReceiveProps: function(nextProps) {
         this.setState({
-            date: nextProps.date ? moment(nextProps.date) : this.state.date,
-            inputValue: nextProps.date ? moment(nextProps.date).format(this.state.format) : null
+            date: nextProps.date ? moment(toDate(nextProps.date)) : this.state.date,
+            inputValue: nextProps.date ? moment(toDate(nextProps.date)).format(this.state.format) : null
         });
     },
 
