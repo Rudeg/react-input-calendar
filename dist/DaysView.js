@@ -1,4 +1,4 @@
-var React = require('react/addons');
+var React = require('react');
 var cs = require('classnames');
 var moment = require('moment');
 require('moment-range');
