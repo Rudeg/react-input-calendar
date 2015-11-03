@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var cs = require('classnames');
-var moment = require('moment-range');
+var moment = require('moment');
+require('moment-range');
 var DaysView = require('./DaysView');
 var MonthsView = require('./MonthsView');
 var YearsView = require('./YearsView');
