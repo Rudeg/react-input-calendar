@@ -16,6 +16,15 @@ module.exports = React.createClass({
     },
 
     getDaysTitles: function () {
+        if(moment.locale() === 'de') {
+          return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(function (item) {
+              return {
+                  val: item,
+                  label: item
+              };
+          });
+        }
+
         return moment.weekdaysMin().map(function (item) {
             return {
                 val: item,
@@ -66,8 +75,8 @@ module.exports = React.createClass({
 
     getDays: function () {
         var now = this.props.date ? this.props.date : moment(),
-            start = now.clone().startOf('month').day(0),
-            end = now.clone().endOf('month').day(6),
+            start = now.clone().startOf('month').weekday(0),
+            end = now.clone().endOf('month').weekday(6),
             minDate = this.props.minDate,
             maxDate = this.props.maxDate,
             month = now.month(),
