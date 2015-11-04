@@ -10,11 +10,10 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var prop = this.props;
-        prop.classes += ' cell';
+        var classes = this.props.classes + ' cell';
 
         return (
-            <div className={prop.classes}>{prop.value}</div>
+            React.createElement("div", {className: classes}, this.props.value)
         );
     }
 
