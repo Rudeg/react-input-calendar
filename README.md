@@ -89,7 +89,15 @@ Type: `Function`
 
 Default: null
 
-Set an function that will be triggered whenever there is a change in the selected date. It will return the date in the `props.computableFormat` format.
+Set a function that will be triggered whenever there is a change in the selected date. It will return the date in the `props.computableFormat` format.
+
+#### props.onBlur
+
+Type: `Function`
+
+Default: null
+
+Set a function that will be triggered when the input field is blurred. It will return the event and the date in the props.computableFormat format.
 
 #### props.closeOnSelect
 
@@ -114,6 +122,14 @@ Type: `String`
 Default: undefined
 
 Value to show in the input text box if no date is set.
+
+#### props.inputFieldId
+
+Type: `String`
+
+Default: null
+
+Define the ID of the input field where the date picker represents it's value. This can be useful when the date picker is used with a label element. The label element can be bound to the input field using the `label for` attribute.
 
 ## License
 
