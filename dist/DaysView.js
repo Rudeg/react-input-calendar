@@ -16,7 +16,6 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     getDaysTitles: function () {
-        
         if(moment.locale() === 'de') {
           return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(function (item) {
               return {
@@ -24,8 +23,8 @@ module.exports = React.createClass({displayName: "exports",
                   label: item
               };
           });
-        }    
-        
+        }
+
         return moment.weekdaysMin().map(function (item) {
             return {
                 val: item,

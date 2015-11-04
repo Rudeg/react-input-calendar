@@ -267,7 +267,7 @@ module.exports = React.createClass({displayName: "exports",
                     prevView: this.prevView});
                 break;
         }
-        
+
         var todayText = 'Today';
         if(moment.locale() === 'de')
           todayText = 'Heute';
