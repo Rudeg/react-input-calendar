@@ -1,6 +1,6 @@
 {
   "name": "react-input-calendar",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Datepicker widget react component",
   "repository": "https://github.com/Rudeg/react-input-calendar",
   "main": "index.js",
