@@ -311,13 +311,14 @@ module.exports = React.createClass({
                     value={this.state.inputValue}
                     onBlur={this.inputBlur}
                     onChange={this.changeDate}
-                    onFocus={this.props.openOnInputFocus ? this.toggleClick : ''}
                     placeholder={this.props.placeholder}
+                    onClick={this.toggleClick}
                     readOnly={readOnly} />
-
-                <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
-                    <i className={iconClass}></i>
-                </span>
+                  {this.state.inputValue &&
+                    <div className="input-calendar-clear" onClick={() => this.setState({inputValue: null})}>
+                      x
+                    </div>
+                  }
                 {calendar}
             </div>
         );
