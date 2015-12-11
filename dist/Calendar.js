@@ -311,13 +311,14 @@ module.exports = React.createClass({displayName: "exports",
                     value: this.state.inputValue, 
                     onBlur: this.inputBlur, 
                     onChange: this.changeDate, 
-                    onFocus: this.props.openOnInputFocus ? this.toggleClick : '', 
                     placeholder: this.props.placeholder, 
+                    onClick: this.toggleClick, 
                     readOnly: readOnly}), 
-
-                React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
-                    React.createElement("i", {className: iconClass})
-                ), 
+                  this.state.inputValue &&
+                    React.createElement("div", {className: "input-calendar-clear", onClick: function()  {return this.setState({inputValue: null});}.bind(this)}, 
+                      "x"
+                    ), 
+                  
                 calendar
             )
         );

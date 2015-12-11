@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d .",
-    "build": "browserify reactify -cm > dist/input-calendar.js",
+    "build": "gulp",
     "test": "jest"
   },
   "browserify": {
