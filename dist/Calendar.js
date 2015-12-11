@@ -316,7 +316,7 @@ module.exports = React.createClass({displayName: "exports",
                     readOnly: readOnly}), 
                   this.state.inputValue &&
                     React.createElement("div", {className: "input-calendar-clear", onClick: function()  {return this.setState({inputValue: null});}.bind(this)}, 
-                      "x"
+                      "×"
                     ), 
                   
                 calendar
