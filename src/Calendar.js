@@ -316,7 +316,7 @@ module.exports = React.createClass({
                     readOnly={readOnly} />
                   {this.state.inputValue &&
                     <div className="input-calendar-clear" onClick={() => this.setState({inputValue: null})}>
-                      x
+                      &times;
                     </div>
                   }
                 {calendar}
