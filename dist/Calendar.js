@@ -148,7 +148,7 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     inputBlur: function (e) {
-        var date = this.state.inputValue,
+        var date = e.target.value,
             newDate = null,
             computableDate = null,
             format = this.state.format;
@@ -313,12 +313,17 @@ module.exports = React.createClass({displayName: "exports",
                     onChange: this.changeDate, 
                     placeholder: this.props.placeholder, 
                     onClick: this.toggleClick, 
-                    readOnly: readOnly}), 
-                  this.state.inputValue &&
-                    React.createElement("div", {className: "input-calendar-clear", onClick: function()  {this.setState({inputValue: null}); this.inputBlur(null)}.bind(this)}, 
-                      "×"
+                    readOnly: readOnly}
+                ), 
+                this.state.inputValue &&
+                    React.createElement("div", {className: "input-calendar-clear", 
+                        onClick: function()  {
+                            this.inputBlur({target: {value: null}});
+                        }.bind(this)
+                    }, 
+                        "×"
                     ), 
-                  
+                
                 calendar
             )
         );

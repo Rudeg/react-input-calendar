@@ -148,7 +148,7 @@ module.exports = React.createClass({
     },
 
     inputBlur: function (e) {
-        var date = this.state.inputValue,
+        var date = e.target.value,
             newDate = null,
             computableDate = null,
             format = this.state.format;
@@ -313,12 +313,17 @@ module.exports = React.createClass({
                     onChange={this.changeDate}
                     placeholder={this.props.placeholder}
                     onClick={this.toggleClick}
-                    readOnly={readOnly} />
-                  {this.state.inputValue &&
-                    <div className="input-calendar-clear" onClick={() => {this.setState({inputValue: null}); this.inputBlur(null)}}>
-                      &times;
+                    readOnly={readOnly}
+                />
+                {this.state.inputValue &&
+                    <div className="input-calendar-clear"
+                        onClick={() => {
+                            this.inputBlur({target: {value: null}});
+                        }}
+                    >
+                        &times;
                     </div>
-                  }
+                }
                 {calendar}
             </div>
         );
