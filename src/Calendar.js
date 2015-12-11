@@ -315,7 +315,7 @@ module.exports = React.createClass({
                     onClick={this.toggleClick}
                     readOnly={readOnly} />
                   {this.state.inputValue &&
-                    <div className="input-calendar-clear" onClick={() => this.setState({inputValue: null})}>
+                    <div className="input-calendar-clear" onClick={() => this.setState({inputValue: null, isVisible: true})}>
                       &times;
                     </div>
                   }
