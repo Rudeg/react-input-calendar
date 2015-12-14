@@ -119,6 +119,7 @@ module.exports = React.createClass({
         });
 
         var currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM');
+        currentDate += " " + (this.props.date ? this.props.date.format('YYYY') : moment().format('YYYY'));
 
         return (
             <div className="view days-view" onKeyDown={this.keyDown}>

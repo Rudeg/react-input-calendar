@@ -130,10 +130,15 @@
     border: 1px solid #fff;
 }
 
+.inpit-calendar .navigation-wrapper {
+  display: flex;
+}
+
 .input-calendar .navigation-title {
-    width: 100px;
+    width: 150px;
     display: inline-block;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .input-calendar .years-view .navigation-title {
@@ -154,6 +159,10 @@
 
 .input-calendar .icon {
     cursor: pointer;
+    border: medium none !important;
+    background: transparent none repeat scroll 0% 0% !important;
+    font-size: 15px;
+    flex: 1;
 }
 
 .input-calendar .icon:hover,

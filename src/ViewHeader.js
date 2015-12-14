@@ -14,9 +14,9 @@ module.exports = React.createClass({
 
         return (
             <div className="navigation-wrapper">
-                <span onClick={prop.prev} className="icon" ><i className="fa fa-angle-left"></i></span>
+                <span onClick={prop.prev} className="icon" >&#10092;</span>
                 <span onClick={prop.titleAction} className="navigation-title" >{prop.data}</span>
-                <span onClick={prop.next} className="icon" ><i className="fa fa-angle-right"></i></span>
+                <span onClick={prop.next} className="icon" >&#10093;</span>
             </div>
         );
     }

@@ -277,7 +277,7 @@ module.exports = React.createClass({
         var calendar = !this.state.isVisible ? '' :
             <div className="input-calendar-wrapper" onClick={this.calendarClick}>
                 {view}
-                <span
+                <span 
                   className={"today-btn" + (this.checkIfDateDisabled(moment().startOf('day')) ? " disabled" : "")}
                   onClick={this.todayClick}>
                   {todayText}
