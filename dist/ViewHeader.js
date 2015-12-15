@@ -14,9 +14,11 @@ module.exports = React.createClass({displayName: "exports",
 
         return (
             React.createElement("div", {className: "navigation-wrapper"}, 
-                React.createElement("span", {onClick: prop.prev, className: "icon"}, "❬"), 
+                prop.fastPrev && React.createElement("span", {onClick: prop.fastPrev, className: "icon", style: {paddingRight: '4px'}}, "❮❮"), 
+                React.createElement("span", {onClick: prop.prev, className: "icon"}, "❮"), 
                 React.createElement("span", {onClick: prop.titleAction, className: "navigation-title"}, prop.data), 
-                React.createElement("span", {onClick: prop.next, className: "icon"}, "❭")
+                React.createElement("span", {onClick: prop.next, className: "icon"}, "❯"), 
+                prop.fastNext && React.createElement("span", {onClick: prop.fastNext, className: "icon", style: {paddingLeft: '4px'}}, "❯❯")
             )
         );
     }

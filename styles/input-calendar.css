@@ -130,15 +130,18 @@
     border: 1px solid #fff;
 }
 
-.inpit-calendar .navigation-wrapper {
+.navigation-wrapper {
   display: flex;
+  padding: 5px 0px 7px !important;
+  align-items: flex-end;
 }
 
 .input-calendar .navigation-title {
-    width: 150px;
+    width: 130px;
     display: inline-block;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .input-calendar .years-view .navigation-title {
@@ -171,12 +174,9 @@
     color: #46B270;
 }
 
-.input-calendar .icon > .fa {
-    width: 20px;
-}
-
 .input-calendar .today-btn {
     cursor: pointer;
+    font-weight: bold;
 }
 
 .input-calendar .cell.day.today {
