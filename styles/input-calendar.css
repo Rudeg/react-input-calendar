@@ -13,13 +13,15 @@
     background-color: #fff;
     width: 189px;
     text-align: center;
-    left: 140px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     z-index: 2;
+}
+.input-calendar-wrapper.icon-hidden {
+	left: 0;
 }
 
 .input-calendar .input-calendar-value {
