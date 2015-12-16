@@ -26,6 +26,7 @@ module.exports = React.createClass({
         maxDate: React.PropTypes.any,
         format: React.PropTypes.string,
         inputFieldId: React.PropTypes.string,
+		  inputFieldClass: React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
@@ -38,6 +39,7 @@ module.exports = React.createClass({
             minDate = this.props.minDate ? moment(toDate(this.props.minDate)) : null,
             maxDate = this.props.maxDate ? moment(toDate(this.props.maxDate)) : null,
             inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : null,
+            inputFieldClass = this.props.inputFieldClass ? this.props.inputFieldClass : 'input-calendar-value',
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY';
@@ -307,7 +309,7 @@ module.exports = React.createClass({
             <div className="input-calendar">
                 <input type="text"
                     id={this.props.inputFieldId}
-                    className="input-calendar-value"
+                    className={this.props.inputFieldClass}
                     value={this.state.inputValue}
                     onBlur={this.inputBlur}
                     onChange={this.changeDate}

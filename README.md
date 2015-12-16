@@ -131,6 +131,15 @@ Default: null
 
 Define the ID of the input field where the date picker represents it's value. This can be useful when the date picker is used with a label element. The label element can be bound to the input field using the `label for` attribute.
 
+#### props.inputFieldClass
+
+Type: `String`
+
+Default: 'input-calendar-value'
+
+Define the class name of the input field where the date picker represents its value.
+
+
 ## License
 
 MIT
