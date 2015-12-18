@@ -21,6 +21,9 @@
     user-select: none;
     z-index: 2;
 }
+.input-calendar-wrapper.icon-hidden {
+    left: 0;
+}
 
 .input-calendar .input-calendar-value {
     width: 120px;

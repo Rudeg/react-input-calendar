@@ -115,6 +115,14 @@ Default: undefined
 
 Setting this value to true makes the calendar widget open when the iput field is focused.
 
+#### props.hideIcon
+
+Type `Boolean`
+
+Default: false
+
+If true, the icon next to the input field will not be shown. Make sure you set openOnInputFocus to true if using this.
+
 #### props.placeholder
 
 Type: `String`
