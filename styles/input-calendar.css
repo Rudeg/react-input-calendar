@@ -73,7 +73,7 @@
     cursor: default;
 }
 
-.input-calendar .cell.current {
+.input-calendar .cell:not(.disabled).current {
     background: #f39c12;
     color: #fff;
     border-radius: 4px;
