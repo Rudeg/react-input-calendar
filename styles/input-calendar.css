@@ -13,7 +13,6 @@
     background-color: #fff;
     width: 189px;
     text-align: center;
-    left: 140px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -73,7 +72,7 @@
     cursor: default;
 }
 
-.input-calendar .cell.current {
+.input-calendar .cell:not(.disabled).current {
     background: #f39c12;
     color: #fff;
     border-radius: 4px;
