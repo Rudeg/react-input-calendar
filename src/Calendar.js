@@ -31,7 +31,7 @@ module.exports = React.createClass({
         onChange: React.PropTypes.func,
         placeholder: React.PropTypes.string,
         hideTouchKeyboard: React.PropTypes.bool,
-		  hideIcon: React.PropTypes.bool,
+        hideIcon: React.PropTypes.bool,
     },
 
     getInitialState: function() {
@@ -275,10 +275,10 @@ module.exports = React.createClass({
         if(moment.locale() === 'de')
           todayText = 'Heute';
 
-		  var calendarClass = cs({
-				 'input-calendar-wrapper': true,
-				 'icon-hidden': this.props.hideIcon
-			 });
+        var calendarClass = cs({
+            'input-calendar-wrapper': true,
+            'icon-hidden': this.props.hideIcon
+        });
 
         var calendar = !this.state.isVisible ? '' :
             <div className={calendarClass} onClick={this.calendarClick}>
@@ -309,11 +309,11 @@ module.exports = React.createClass({
             }
         }
 
-		  // Do not show calendar icon if hideIcon is true
-		  var calendarIcon = this.props.hideIcon ? '' :
-				  <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
-					  <i className={iconClass}></i>
-				  </span>;
+        // Do not show calendar icon if hideIcon is true
+        var calendarIcon = this.props.hideIcon ? '' :
+            <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
+                  <i className={iconClass}></i>
+            </span>;
 
         return (
             <div className="input-calendar">
@@ -327,7 +327,7 @@ module.exports = React.createClass({
                     placeholder={this.props.placeholder}
                     readOnly={readOnly} />
 
-						  {calendarIcon}
+                    {calendarIcon}
                 {calendar}
             </div>
         );
