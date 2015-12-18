@@ -26,7 +26,7 @@ module.exports = React.createClass({
         maxDate: React.PropTypes.any,
         format: React.PropTypes.string,
         inputFieldId: React.PropTypes.string,
-		  inputFieldClass: React.PropTypes.string,
+        inputFieldClass: React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
