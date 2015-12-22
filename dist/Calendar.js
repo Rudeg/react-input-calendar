@@ -224,6 +224,9 @@ module.exports = React.createClass({displayName: "exports",
     },
 
     toggleClick: function () {
+        if (this.props.disabled)
+            return;
+
         this.isCalendar = true;
         this.setVisibility();
     },
