@@ -27,6 +27,8 @@ module.exports = React.createClass({
         format: React.PropTypes.string,
         inputFieldId: React.PropTypes.string,
         inputFieldClass: React.PropTypes.string,
+        divClass: React.PropTypes.string,
+        buttonIconClass: React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
@@ -313,12 +315,12 @@ module.exports = React.createClass({
 
         // Do not show calendar icon if hideIcon is true
         var calendarIcon = this.props.hideIcon ? '' :
-            <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
+            <button onClick={this.toggleClick} className={cs('icon-wrapper calendar-icon', this.props.buttonIconClass)}>
                   <i className={iconClass}></i>
-            </span>;
+            </button>;
 
         return (
-            <div className="input-calendar">
+            <div className={cs('input-calendar', this.props.divClass)}>
                 <input type="text"
                     id={this.props.inputFieldId}
                     className={this.props.inputFieldClass}
