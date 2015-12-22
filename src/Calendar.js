@@ -29,6 +29,7 @@ module.exports = React.createClass({
         inputFieldClass: React.PropTypes.string,
         divClass: React.PropTypes.string,
         buttonIconClass: React.PropTypes.string,
+        spanClass:  React.PropTypes.string,
         minView: React.PropTypes.number,
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
@@ -315,7 +316,7 @@ module.exports = React.createClass({
 
         // Do not show calendar icon if hideIcon is true
         var calendarIcon = this.props.hideIcon ? '' :
-            <span classnames={cs('icon-wrapper calendar-icon', this.props.spanClass)}>
+            <span className={cs('icon-wrapper calendar-icon', this.props.spanClass)}>
                 <button onClick={this.toggleClick} className={this.props.buttonClass}>
                       <i className={iconClass}></i>
                 </button>
