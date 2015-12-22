@@ -315,8 +315,10 @@ module.exports = React.createClass({displayName: "exports",
 
         // Do not show calendar icon if hideIcon is true
         var calendarIcon = this.props.hideIcon ? '' :
-            React.createElement("button", {onClick: this.toggleClick, className: cs('icon-wrapper calendar-icon', this.props.buttonIconClass)}, 
-                  React.createElement("i", {className: iconClass})
+            React.createElement("span", {classnames: cs('icon-wrapper calendar-icon', this.props.spanClass)}, 
+                React.createElement("button", {onClick: this.toggleClick, className: this.props.buttonClass}, 
+                      React.createElement("i", {className: iconClass})
+                )
             );
 
         return (
