@@ -315,9 +315,11 @@ module.exports = React.createClass({
 
         // Do not show calendar icon if hideIcon is true
         var calendarIcon = this.props.hideIcon ? '' :
-            <button onClick={this.toggleClick} className={cs('icon-wrapper calendar-icon', this.props.buttonIconClass)}>
-                  <i className={iconClass}></i>
-            </button>;
+            <span classnames={cs('icon-wrapper calendar-icon', this.props.spanClass)}>
+                <button onClick={this.toggleClick} className={this.props.buttonClass}>
+                      <i className={iconClass}></i>
+                </button>
+            </span>;
 
         return (
             <div className={cs('input-calendar', this.props.divClass)}>
