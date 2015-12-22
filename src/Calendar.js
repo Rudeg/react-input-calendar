@@ -215,7 +215,8 @@ module.exports = React.createClass({
         this.setState({
             date: today,
             inputValue: today.format(this.state.format),
-            currentView: this.state.minView
+            currentView: this.state.minView,
+            isVisible: this.props.closeOnSelect ? !this.state.isVisible : this.state.isVisible
         });
 
         if (this.props.onChange) {
