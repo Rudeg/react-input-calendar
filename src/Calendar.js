@@ -282,6 +282,8 @@ module.exports = React.createClass({
         var todayText = 'Today';
         if(moment.locale() === 'de')
           todayText = 'Heute';
+        else if (moment.locale() === 'es')
+          todayText = 'Hoy';
 
         var calendarClass = cs({
             'input-calendar-wrapper': true,
