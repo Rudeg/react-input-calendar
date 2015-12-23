@@ -25,6 +25,15 @@ module.exports = React.createClass({displayName: "exports",
           });
         }
 
+        if(moment.locale() === 'es') {
+          return 'Lu_Ma_Mi_Ju_Vi_Sá_Do'.split('_').map(function (item) {
+              return {
+                  val: item,
+                  label: item
+              };
+          });
+        }
+
         return moment.weekdaysMin().map(function (item) {
             return {
                 val: item,
