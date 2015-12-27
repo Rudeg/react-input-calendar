@@ -10,13 +10,13 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var prop = this.props;
+        let prop = this.props
 
         return (
             <div className="navigation-wrapper">
-                <span onClick={prop.prev} className="icon" ><i className="fa fa-angle-left"></i></span>
-                <span onClick={prop.titleAction} className="navigation-title" >{prop.data}</span>
-                <span onClick={prop.next} className="icon" ><i className="fa fa-angle-right"></i></span>
+                <span className="icon" onClick={prop.prev} ><i className="fa fa-angle-left"></i></span>
+                <span className="navigation-title" onClick={prop.titleAction} >{prop.data}</span>
+                <span className="icon" onClick={prop.next} ><i className="fa fa-angle-right"></i></span>
             </div>
         );
     }

@@ -18,65 +18,65 @@ module.exports = React.createClass({
     },
 
     getDaysTitles: function () {
-        if(moment.locale() === 'de') {
+        if (moment.locale() === 'de') {
           return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(function (item) {
               return {
                   val: item,
                   label: item
-              };
-          });
+              }
+          })
         }
 
         return moment.weekdaysMin().map(function (item) {
             return {
                 val: item,
                 label: item
-            };
-        });
+            }
+        })
     },
 
     next: function() {
-        var nextDate = this.props.date.clone().add(1, 'months');
+        let nextDate = this.props.date.clone().add(1, 'months')
 
         if (this.props.maxDate && nextDate.isAfter(this.props.maxDate)) {
-            nextDate = this.props.maxDate;
+            nextDate = this.props.maxDate
         }
 
-        this.props.setDate(nextDate);
+        this.props.setDate(nextDate)
     },
 
     prev: function() {
-        var prevDate = this.props.date.clone().subtract(1, 'months');
+        let prevDate = this.props.date.clone().subtract(1, 'months')
 
         if (this.props.minDate && prevDate.isBefore(this.props.minDate)) {
-            prevDate = this.props.minDate;
+            prevDate = this.props.minDate
         }
 
-        this.props.setDate(prevDate);
+        this.props.setDate(prevDate)
     },
 
     cellClick: function (e) {
-        var cell = e.target,
+        let cell = e.target,
             date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date ? this.props.date.clone() : moment();
+            newDate = this.props.date ? this.props.date.clone() : moment()
 
         if (isNaN(date)) {
-            return;
+            return
         }
 
         if (cell.className.indexOf('prev') > -1 ) {
-            newDate.subtract(1, 'months');
+            newDate.subtract(1, 'months')
         } else if (cell.className.indexOf('next') > -1) {
-            newDate.add(1, 'months');
+            newDate.add(1, 'months')
         }
 
-        newDate.date(date);
-        this.props.setDate(newDate, true);
+        newDate.date(date)
+        this.props.setDate(newDate, true)
     },
 
 
     getDays: function () {
-        var now = this.props.date ? this.props.date : moment(),
+        let now = this.props.date ? this.props.date : moment(),
             start = now.clone().startOf('month').weekday(0),
             end = now.clone().endOf('month').weekday(6),
             minDate = this.props.minDate,
@@ -85,7 +85,7 @@ module.exports = React.createClass({
             today = moment(),
             currDay = now.date(),
             year = now.year(),
-            days = [];
+            days = []
 
         moment()
             .range(start, end)
@@ -97,43 +97,42 @@ module.exports = React.createClass({
                     disabled: day.isBefore(minDate) || day.isAfter(maxDate),
                     curr: day.date() === currDay && day.month() === month,
                     today: day.date() === today.date() && day.month() === today.month()
-                });
-            });
+                })
+            })
 
-        return days;
+        return days
     },
 
     render: function () {
-        var titles = this.getDaysTitles().map(function (item, i) {
-            return <Cell value={item.label} classes="day title" key={i} />
-        });
+        let titles = this.getDaysTitles().map(function (item, i) {
+            return <Cell classes="day title" key={i} value={item.label} />
+        }), _class
 
-        var days = this.getDays().map(function (item, i) {
-            var _class = cs({
+        let days = this.getDays().map(function (item, i) {
+            _class = cs({
                 'day': true,
                 'next': item.next,
                 'prev': item.prev,
                 'disabled': item.disabled,
                 'current': item.curr,
                 'today': item.today
-            });
-            return <Cell value={item.label} classes={_class} key={i} />
-        });
+            })
+            return <Cell classes={_class} key={i} value={item.label} />
+        })
 
-        var currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM');
+        let currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM')
 
         return (
             <div className="view days-view" onKeyDown={this.keyDown}>
                 <ViewHeader
-                    prev={this.prev}
-                    next={this.next}
-                    data={currentDate}
-                    titleAction={this.props.nextView} />
-
+                  data={currentDate}
+                  next={this.next}
+                  prev={this.prev}
+                  titleAction={this.props.nextView} />
                 <div className="days-title">{titles}</div>
-                <div className="days" onClick={this.cellClick} >{days}</div>
+                <div className="days" onClick={this.cellClick}>{days}</div>
             </div>
-        );
+        )
     }
 
-});
+})

@@ -33,34 +33,31 @@ const KEYS = {
 module.exports = {
 
     keyDownActions: function (code) {
-        var _viewHelper = _keyDownViewHelper[this.state.currentView];
-        var unit = _viewHelper.unit;
+        let _viewHelper = _keyDownViewHelper[this.state.currentView],
+          unit = _viewHelper.unit
 
         switch (code) {
             case KEYS.left:
-                this.setDate(this.state.date.subtract(1, unit));
-                break;
+                this.setDate(this.state.date.subtract(1, unit))
+                break
             case KEYS.right:
-                this.setDate(this.state.date.add(1, unit));
-                break;
+                this.setDate(this.state.date.add(1, unit))
+                break
             case KEYS.up:
-                this.setDate(this.state.date.subtract(_viewHelper.upDown, unit));
-                break;
+                this.setDate(this.state.date.subtract(_viewHelper.upDown, unit))
+                break
             case KEYS.down:
-                this.setDate(this.state.date.add(_viewHelper.upDown, unit));
-                break;
+                this.setDate(this.state.date.add(_viewHelper.upDown, unit))
+                break
             case KEYS.enter:
                 if (_viewHelper.prev)
-                    this.prevView(this.state.date);
-
+                    this.prevView(this.state.date)
                 if (_viewHelper.exit)
-                    this.setState({isVisible: false});
-
-                break;
+                    this.setState({isVisible: false})
+                break
             case KEYS.esc:
-                this.setState({isVisible: false });
-                break;
+                this.setState({isVisible: false })
+                break
         }
     }
-
-};
+}

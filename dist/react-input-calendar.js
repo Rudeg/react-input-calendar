@@ -12456,11 +12456,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    render: function render() {
 	        var titles = this.getDaysTitles().map(function (item, i) {
-	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: 'day title', key: i });
-	        });
+	            return _react2['default'].createElement(_cell2['default'], { classes: 'day title', key: i, value: item.label });
+	        }),
+	            _class = undefined;
 	
 	        var days = this.getDays().map(function (item, i) {
-	            var _class = (0, _classnames2['default'])({
+	            _class = (0, _classnames2['default'])({
 	                'day': true,
 	                'next': item.next,
 	                'prev': item.prev,
@@ -12468,7 +12469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'current': item.curr,
 	                'today': item.today
 	            });
-	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: _class, key: i });
+	            return _react2['default'].createElement(_cell2['default'], { classes: _class, key: i, value: item.label });
 	        });
 	
 	        var currentDate = this.props.date ? this.props.date.format('MMMM') : (0, _moment2['default'])().format('MMMM');
@@ -12477,9 +12478,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'div',
 	            { className: 'view days-view', onKeyDown: this.keyDown },
 	            _react2['default'].createElement(_viewHeader2['default'], {
-	                prev: this.prev,
-	                next: this.next,
 	                data: currentDate,
+	                next: this.next,
+	                prev: this.prev,
 	                titleAction: this.props.nextView }),
 	            _react2['default'].createElement(
 	                'div',
@@ -12521,13 +12522,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: _react2['default'].PropTypes.string,
 	        classes: _react2['default'].PropTypes.string
 	    },
-	
 	    render: function render() {
 	        var classes = this.props.classes + ' cell';
-	
-	        return _react2['default'].createElement("div", { className: classes }, this.props.value);
+	        return _react2['default'].createElement(
+	            'div',
+	            { className: classes },
+	            this.props.value
+	        );
 	    }
-	
 	});
 
 /***/ },
@@ -12560,17 +12562,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { className: "navigation-wrapper" },
 	            _react2["default"].createElement(
 	                "span",
-	                { onClick: prop.prev, className: "icon" },
+	                { className: "icon", onClick: prop.prev },
 	                _react2["default"].createElement("i", { className: "fa fa-angle-left" })
 	            ),
 	            _react2["default"].createElement(
 	                "span",
-	                { onClick: prop.titleAction, className: "navigation-title" },
+	                { className: "navigation-title", onClick: prop.titleAction },
 	                prop.data
 	            ),
 	            _react2["default"].createElement(
 	                "span",
-	                { onClick: prop.next, className: "icon" },
+	                { className: "icon", onClick: prop.next },
 	                _react2["default"].createElement("i", { className: "fa fa-angle-right" })
 	            )
 	        );
@@ -12644,8 +12646,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    cellClick: function cellClick(e) {
-	        var month = e.target.innerHTML;
-	        var date = this.props.date.clone().month(month);
+	        var month = e.target.innerHTML,
+	            date = this.props.date.clone().month(month);
 	
 	        if (this.checkIfMonthDisabled(month)) {
 	            return;
@@ -12668,25 +12670,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    render: function render() {
+	        var currentDate = this.props.date.format('YYYY'),
+	            _class = undefined;
 	        var months = this.getMonth().map(function (item, i) {
-	            var _class = (0, _classnames2['default'])({
+	            _class = (0, _classnames2['default'])({
 	                'month': true,
 	                'disabled': item.disabled,
 	                'current': item.curr
 	            });
-	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: _class, key: i });
+	            return _react2['default'].createElement(_cell2['default'], { classes: _class, key: i, value: item.label });
 	        });
-	
-	        var currentDate = this.props.date.format('YYYY');
 	
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'months-view' },
-	            _react2['default'].createElement(_viewHeader2['default'], {
-	                prev: this.prev,
-	                next: this.next,
-	                data: currentDate,
-	                titleAction: this.props.nextView }),
+	            _react2['default'].createElement(_viewHeader2['default'], { data: currentDate, next: this.next, prev: this.prev, titleAction: this.props.nextView }),
 	            _react2['default'].createElement(
 	                'div',
 	                { className: 'months', onClick: this.cellClick },
@@ -12796,8 +12794,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    cellClick: function cellClick(e) {
-	        var year = parseInt(e.target.innerHTML, 10);
-	        var date = this.props.date.clone().year(year);
+	        var year = parseInt(e.target.innerHTML, 10),
+	            date = this.props.date.clone().year(year);
 	
 	        if (this.checkIfYearDisabled(date)) {
 	            return;
@@ -12807,11 +12805,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    render: function render() {
-	        var years = this.getYears();
-	        var currYear = this.props.date.year();
+	        var years = this.getYears(),
+	            currYear = this.props.date.year(),
+	            _class = undefined;
 	
 	        var yearsCells = years.map(function (item, i) {
-	            var _class = (0, _classnames2['default'])({
+	            _class = (0, _classnames2['default'])({
 	                'year': true,
 	                'disabled': item.disabled,
 	                'current': item.label == currYear
@@ -12824,10 +12823,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'years-view' },
-	            _react2['default'].createElement(_viewHeader2['default'], {
-	                prev: this.prev,
-	                next: this.next,
-	                data: currentDate }),
+	            _react2['default'].createElement(_viewHeader2['default'], { data: currentDate, next: this.next, prev: this.prev }),
 	            _react2['default'].createElement(
 	                'div',
 	                { className: 'years', onClick: this.cellClick },
@@ -12875,8 +12871,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {
 	
 	    keyDownActions: function keyDownActions(code) {
-	        var _viewHelper = _keyDownViewHelper[this.state.currentView];
-	        var unit = _viewHelper.unit;
+	        var _viewHelper = _keyDownViewHelper[this.state.currentView],
+	            unit = _viewHelper.unit;
 	
 	        switch (code) {
 	            case KEYS.left:
@@ -12893,16 +12889,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                break;
 	            case KEYS.enter:
 	                if (_viewHelper.prev) this.prevView(this.state.date);
-	
 	                if (_viewHelper.exit) this.setState({ isVisible: false });
-	
 	                break;
 	            case KEYS.esc:
 	                this.setState({ isVisible: false });
 	                break;
 	        }
 	    }
-	
 	};
 
 /***/ }
