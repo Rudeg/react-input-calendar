@@ -23,12 +23,12 @@ const config = {
     demo: path.join(ROOT_PATH, 'demo'),
     tests: path.join(ROOT_PATH, 'tests')
   },
-  filename: 'boilerplate',
-  library: 'Boilerplate'
+  filename: 'react-input-calendar',
+  library: 'react-input-calendar'
 };
 const CSS_PATHS = [
   config.paths.demo,
-  path.join(ROOT_PATH, 'style.css'),
+  path.join(ROOT_PATH, 'style/style.css'),
   path.join(ROOT_PATH, 'node_modules/purecss'),
   path.join(ROOT_PATH, 'node_modules/highlight.js/styles/github.css'),
   path.join(ROOT_PATH, 'node_modules/react-ghfork/gh-fork-ribbon.ie.css'),

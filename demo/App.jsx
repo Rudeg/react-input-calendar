@@ -1,17 +1,10 @@
-import React from 'react';
-import Fork from 'react-ghfork';
-import pkgInfo from '../package.json';
-import Demo from './Demo.jsx';
+import React from 'react'
+import Calendar from '../dist/react-input-calendar'
 
 export default class App extends React.Component {
   render() {
     return (
-      <div>
-        <Fork className="right" project={pkgInfo.user + '/' + pkgInfo.name} />
-        <p>Just demonstrating the awesomeness of this boilerplate here.</p>
-
-        <Demo />
-      </div>
-    );
+      <Calendar date={'01-20-2015'} format="MM-DD-YYYY" />
+    )
   }
 }

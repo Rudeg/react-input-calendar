@@ -1,11 +1,11 @@
 {
-  "name": "react-component-boilerplate",
-  "description": "Boilerplate for React.js components",
-  "author": "Juho Vepsalainen",
-  "user": "survivejs",
-  "version": "1.1.4",
+  "name": "react-input-calendar",
+  "description": "Datepicker widget react component",
+  "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
+  "user": "Rudeg",
+  "version": "0.2.0",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --port 3030",
     "test": "karma start",
     "tdd": "karma start --auto-watch --no-single-run",
     "gh-pages": "webpack",
@@ -19,10 +19,13 @@
     "postpublish": "npm run gh-pages && npm run deploy-gh-pages",
     "postinstall": "node lib/post_install.js"
   },
-  "main": "dist-modules",
+  "main": "dist/react-input-calendar.js",
   "dependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "classnames": "^2.2.1",
+    "moment": "^2.10.6",
+    "moment-range": "^2.1.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -69,16 +72,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/survivejs/react-component-boilerplate.git"
+    "url": "https://github.com/Rudeg/react-input-calendar"
   },
-  "homepage": "https://survivejs.github.io/react-component-boilerplate/",
+  "homepage": "http://rudeg.github.io/react-input-calendar/",
   "bugs": {
-    "url": "https://github.com/survivejs/react-component-boilerplate/issues"
+    "url": "https://github.com/Rudeg/react-input-calendar/issues"
   },
   "keywords": [
     "react",
-    "reactjs",
-    "boilerplate"
+    "datepicker",
+    "calendar",
+    "input-datepicker",
+    "input-calendar",
+    "react-input-calendar",
+    "react-calendar",
+    "react-datepicker",
+    "react-component"
   ],
   "license": "MIT",
   "pre-push": [

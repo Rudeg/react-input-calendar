@@ -9,24 +9,11 @@
     {% for (var css in o.htmlWebpackPlugin.files.css) { %}
     <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
     {% } %}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div class="pure-g">
-      <header class="pure-u-1">
-        <h1>%name%</h1>
-
-        <div class="description">%description%</div>
-      </header>
-
-      <article class="pure-u-1">
-        <h2>Demonstration</h2>
-        <section class="demonstration">%demo%</section>
-
-        <h2>Documentation</h2>
-        <section class="documentation">%documentation%</section>
-      </article>
-    </div>
-
+    <div class="demonstration"></div>
     {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
     <script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
     {% } %}
