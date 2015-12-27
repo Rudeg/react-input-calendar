@@ -6,63 +6,49 @@ import 'moment-range'
 import Cell from './cell'
 import ViewHeader from './view-header'
 
-
-module.exports = React.createClass({
-
-    propTypes: {
+class DayView extends React.Component {
+    constructor() {
+      super()
+      this.cellClick = this.cellClick.bind(this)
+    }
+    
+    static propTypes = {
         date: React.PropTypes.object.isRequired,
         minDate: React.PropTypes.any,
         maxDate: React.PropTypes.any,
         setDate: React.PropTypes.func,
         nextView: React.PropTypes.func
-    },
+    }
 
-    getDaysTitles: function () {
+    getDaysTitles() {
         if (moment.locale() === 'de') {
-          return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(function (item) {
-              return {
-                  val: item,
-                  label: item
-              }
-          })
+          return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(item => ({ val: item, label: item }))
         }
+        return moment.weekdaysMin().map(item => ({ val: item, label: item }))
+    }
 
-        return moment.weekdaysMin().map(function (item) {
-            return {
-                val: item,
-                label: item
-            }
-        })
-    },
-
-    next: function() {
+    next() {
         let nextDate = this.props.date.clone().add(1, 'months')
-
         if (this.props.maxDate && nextDate.isAfter(this.props.maxDate)) {
-            nextDate = this.props.maxDate
+          nextDate = this.props.maxDate
         }
-
         this.props.setDate(nextDate)
-    },
+    }
 
-    prev: function() {
+    prev() {
         let prevDate = this.props.date.clone().subtract(1, 'months')
-
         if (this.props.minDate && prevDate.isBefore(this.props.minDate)) {
-            prevDate = this.props.minDate
+          prevDate = this.props.minDate
         }
-
         this.props.setDate(prevDate)
-    },
+    }
 
-    cellClick: function (e) {
+    cellClick(e) {
         let cell = e.target,
-            date = parseInt(cell.innerHTML, 10),
-            newDate = this.props.date ? this.props.date.clone() : moment()
+          date = parseInt(cell.innerHTML, 10),
+          newDate = this.props.date ? this.props.date.clone() : moment()
 
-        if (isNaN(date)) {
-            return
-        }
+        if (isNaN(date)) return
 
         if (cell.className.indexOf('prev') > -1 ) {
             newDate.subtract(1, 'months')
@@ -72,43 +58,41 @@ module.exports = React.createClass({
 
         newDate.date(date)
         this.props.setDate(newDate, true)
-    },
+    }
 
-
-    getDays: function () {
+    getDays() {
         let now = this.props.date ? this.props.date : moment(),
-            start = now.clone().startOf('month').weekday(0),
-            end = now.clone().endOf('month').weekday(6),
-            minDate = this.props.minDate,
-            maxDate = this.props.maxDate,
-            month = now.month(),
-            today = moment(),
-            currDay = now.date(),
-            year = now.year(),
-            days = []
+          start = now.clone().startOf('month').weekday(0),
+          end = now.clone().endOf('month').weekday(6),
+          minDate = this.props.minDate,
+          maxDate = this.props.maxDate,
+          month = now.month(),
+          today = moment(),
+          currDay = now.date(),
+          year = now.year(),
+          days = []
 
         moment()
-            .range(start, end)
-            .by('days', function(day) {
-                days.push({
-                    label: day.format('D'),
-                    prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
-                    next: day.month() > month || day.year() > year,
-                    disabled: day.isBefore(minDate) || day.isAfter(maxDate),
-                    curr: day.date() === currDay && day.month() === month,
-                    today: day.date() === today.date() && day.month() === today.month()
-                })
+          .range(start, end)
+          .by('days', day => {
+            days.push({
+              label: day.format('D'),
+              prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
+              next: day.month() > month || day.year() > year,
+              disabled: day.isBefore(minDate) || day.isAfter(maxDate),
+              curr: day.date() === currDay && day.month() === month,
+              today: day.date() === today.date() && day.month() === today.month()
             })
-
+          })
         return days
-    },
+    }
 
-    render: function () {
-        let titles = this.getDaysTitles().map(function (item, i) {
+    render() {
+        let titles = this.getDaysTitles().map((item, i) => {
             return <Cell classes="day title" key={i} value={item.label} />
         }), _class
 
-        let days = this.getDays().map(function (item, i) {
+        let days = this.getDays().map((item, i) => {
             _class = cs({
                 'day': true,
                 'next': item.next,
@@ -134,4 +118,6 @@ module.exports = React.createClass({
             </div>
         )
     }
-})
+}
+
+export default DayView
