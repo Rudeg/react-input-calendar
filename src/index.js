@@ -1,2 +1,2 @@
 'use strict'
-module.exports = require('./Calendar')
+module.exports = require('./calendar')
