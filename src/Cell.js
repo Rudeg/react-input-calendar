@@ -1,6 +1,6 @@
-var React = require('react');
-var moment = require('moment');
-require('moment-range');
+import React from 'react'
+import moment from 'moment'
+import 'moment-range'
 
 module.exports = React.createClass({
 

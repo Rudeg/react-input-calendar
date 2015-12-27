@@ -1,6 +1,4 @@
-var Const = require('./Constants');
-
-var _keyDownViewHelper = [
+let _keyDownViewHelper = [
     {
         prev: false,
         next: true,
@@ -20,7 +18,17 @@ var _keyDownViewHelper = [
         unit: 'years',
         upDown: 3
     }
-];
+]
+
+const KEYS = {
+    backspace: 8,
+    enter: 13,
+    esc: 27,
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40
+}
 
 module.exports = {
 
@@ -29,19 +37,19 @@ module.exports = {
         var unit = _viewHelper.unit;
 
         switch (code) {
-            case Const.keys.left:
+            case KEYS.left:
                 this.setDate(this.state.date.subtract(1, unit));
                 break;
-            case Const.keys.right:
+            case KEYS.right:
                 this.setDate(this.state.date.add(1, unit));
                 break;
-            case Const.keys.up:
+            case KEYS.up:
                 this.setDate(this.state.date.subtract(_viewHelper.upDown, unit));
                 break;
-            case Const.keys.down:
+            case KEYS.down:
                 this.setDate(this.state.date.add(_viewHelper.upDown, unit));
                 break;
-            case Const.keys.enter:
+            case KEYS.enter:
                 if (_viewHelper.prev)
                     this.prevView(this.state.date);
 
@@ -49,7 +57,7 @@ module.exports = {
                     this.setState({isVisible: false});
 
                 break;
-            case Const.keys.esc:
+            case KEYS.esc:
                 this.setState({isVisible: false });
                 break;
         }

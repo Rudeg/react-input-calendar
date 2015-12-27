@@ -1,13 +1,14 @@
-var React = require('react');
-var cs = require('classnames');
-var moment = require('moment');
-require('moment-range');
-var DaysView = require('./DaysView');
-var MonthsView = require('./MonthsView');
-var YearsView = require('./YearsView');
-var Utils = require('./Utils');
+import React from 'react'
+import cs from 'classnames'
+import moment from 'moment'
+import 'moment-range'
 
-var _keyDownActions = Utils.keyDownActions;
+import DaysView from './day-view'
+import MonthsView from './month-view'
+import YearsView from './year-view'
+import Util from './util'
+
+var _keyDownActions = Util.keyDownActions;
 
 function toDate(date) {
   if (date instanceof Date) {

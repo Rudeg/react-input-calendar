@@ -55,7 +55,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
 	module.exports = __webpack_require__(1);
 
 /***/ },
@@ -64,16 +63,39 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var cs = __webpack_require__(3);
-	var moment = __webpack_require__(4);
-	__webpack_require__(92);
-	var DaysView = __webpack_require__(93);
-	var MonthsView = __webpack_require__(96);
-	var YearsView = __webpack_require__(97);
-	var Utils = __webpack_require__(98);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _keyDownActions = Utils.keyDownActions;
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _moment = __webpack_require__(4);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	__webpack_require__(92);
+	
+	var _dayView = __webpack_require__(93);
+	
+	var _dayView2 = _interopRequireDefault(_dayView);
+	
+	var _monthView = __webpack_require__(96);
+	
+	var _monthView2 = _interopRequireDefault(_monthView);
+	
+	var _yearView = __webpack_require__(97);
+	
+	var _yearView2 = _interopRequireDefault(_yearView);
+	
+	var _util = __webpack_require__(98);
+	
+	var _util2 = _interopRequireDefault(_util);
+	
+	var _keyDownActions = _util2['default'].keyDownActions;
 	
 	function toDate(date) {
 	    if (date instanceof Date) {
@@ -82,30 +104,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Date(date);
 	}
 	
-	module.exports = React.createClass({
+	module.exports = _react2['default'].createClass({
 	    displayName: 'exports',
 	
 	    propTypes: {
-	        closeOnSelect: React.PropTypes.bool,
-	        computableFormat: React.PropTypes.string,
-	        date: React.PropTypes.any,
-	        minDate: React.PropTypes.any,
-	        maxDate: React.PropTypes.any,
-	        format: React.PropTypes.string,
-	        inputFieldId: React.PropTypes.string,
-	        inputFieldClass: React.PropTypes.string,
-	        minView: React.PropTypes.number,
-	        onBlur: React.PropTypes.func,
-	        onChange: React.PropTypes.func,
-	        placeholder: React.PropTypes.string,
-	        hideTouchKeyboard: React.PropTypes.bool,
-	        hideIcon: React.PropTypes.bool
+	        closeOnSelect: _react2['default'].PropTypes.bool,
+	        computableFormat: _react2['default'].PropTypes.string,
+	        date: _react2['default'].PropTypes.any,
+	        minDate: _react2['default'].PropTypes.any,
+	        maxDate: _react2['default'].PropTypes.any,
+	        format: _react2['default'].PropTypes.string,
+	        inputFieldId: _react2['default'].PropTypes.string,
+	        inputFieldClass: _react2['default'].PropTypes.string,
+	        minView: _react2['default'].PropTypes.number,
+	        onBlur: _react2['default'].PropTypes.func,
+	        onChange: _react2['default'].PropTypes.func,
+	        placeholder: _react2['default'].PropTypes.string,
+	        hideTouchKeyboard: _react2['default'].PropTypes.bool,
+	        hideIcon: _react2['default'].PropTypes.bool
 	    },
 	
 	    getInitialState: function getInitialState() {
-	        var date = this.props.date ? moment(toDate(this.props.date)) : null,
-	            minDate = this.props.minDate ? moment(toDate(this.props.minDate)) : null,
-	            maxDate = this.props.maxDate ? moment(toDate(this.props.maxDate)) : null,
+	        var date = this.props.date ? (0, _moment2['default'])(toDate(this.props.date)) : null,
+	            minDate = this.props.minDate ? (0, _moment2['default'])(toDate(this.props.minDate)) : null,
+	            maxDate = this.props.maxDate ? (0, _moment2['default'])(toDate(this.props.maxDate)) : null,
 	            inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : null,
 	            inputFieldClass = this.props.inputFieldClass ? this.props.inputFieldClass : 'input-calendar-value',
 	            format = this.props.format || 'MM-DD-YYYY',
@@ -136,8 +158,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        this.setState({
-	            date: nextProps.date ? moment(toDate(nextProps.date)) : this.state.date,
-	            inputValue: nextProps.date ? moment(toDate(nextProps.date)).format(this.state.format) : null
+	            date: nextProps.date ? (0, _moment2['default'])(toDate(nextProps.date)) : this.state.date,
+	            inputValue: nextProps.date ? (0, _moment2['default'])(toDate(nextProps.date)).format(this.state.format) : null
 	        });
 	    },
 	
@@ -224,7 +246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        if (date) {
 	            // format, with strict parsing true, so we catch bad dates
-	            newDate = moment(date, format, true);
+	            newDate = (0, _moment2['default'])(date, format, true);
 	
 	            // if the new date didn't match our format, see if the native
 	            // js date can parse it
@@ -236,7 +258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    d = new Date();
 	                }
 	
-	                newDate = moment(d);
+	                newDate = (0, _moment2['default'])(d);
 	            }
 	
 	            computableDate = newDate.format(this.state.computableFormat);
@@ -271,7 +293,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    todayClick: function todayClick() {
-	        var today = moment().startOf('day');
+	        var today = (0, _moment2['default'])().startOf('day');
 	
 	        if (this.checkIfDateDisabled(today)) return;
 	
@@ -308,12 +330,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // its ok for this.state.date to be null, but we should never
 	        // pass null for the date into the calendar pop up, as we want
 	        // it to just start on todays date if there is no date set
-	        var calendarDate = this.state.date || moment();
+	        var calendarDate = this.state.date || (0, _moment2['default'])();
 	
 	        var view;
 	        switch (this.state.currentView) {
 	            case 0:
-	                view = React.createElement(DaysView, {
+	                view = _react2['default'].createElement(_dayView2['default'], {
 	                    date: calendarDate,
 	                    minDate: this.state.minDate,
 	                    maxDate: this.state.maxDate,
@@ -321,7 +343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    nextView: this.nextView });
 	                break;
 	            case 1:
-	                view = React.createElement(MonthsView, {
+	                view = _react2['default'].createElement(_monthView2['default'], {
 	                    date: calendarDate,
 	                    minDate: this.state.minDate,
 	                    maxDate: this.state.maxDate,
@@ -330,7 +352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    prevView: this.prevView });
 	                break;
 	            case 2:
-	                view = React.createElement(YearsView, {
+	                view = _react2['default'].createElement(_yearView2['default'], {
 	                    date: calendarDate,
 	                    minDate: this.state.minDate,
 	                    maxDate: this.state.maxDate,
@@ -340,27 +362,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        var todayText = 'Today';
-	        if (moment.locale() === 'de') todayText = 'Heute';
+	        if (_moment2['default'].locale() === 'de') todayText = 'Heute';
 	
-	        var calendarClass = cs({
+	        var calendarClass = (0, _classnames2['default'])({
 	            'input-calendar-wrapper': true,
 	            'icon-hidden': this.props.hideIcon
 	        });
 	
-	        var calendar = !this.state.isVisible ? '' : React.createElement(
+	        var calendar = !this.state.isVisible ? '' : _react2['default'].createElement(
 	            'div',
 	            { className: calendarClass, onClick: this.calendarClick },
 	            view,
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'span',
 	                {
-	                    className: "today-btn" + (this.checkIfDateDisabled(moment().startOf('day')) ? " disabled" : ""),
+	                    className: "today-btn" + (this.checkIfDateDisabled((0, _moment2['default'])().startOf('day')) ? " disabled" : ""),
 	                    onClick: this.todayClick },
 	                todayText
 	            )
 	        );
 	
-	        var iconClass = cs({
+	        var iconClass = (0, _classnames2['default'])({
 	            'fa': true,
 	            'fa-calendar': !this.state.isVisible,
 	            'fa-calendar-o': this.state.isVisible
@@ -378,16 +400,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        // Do not show calendar icon if hideIcon is true
-	        var calendarIcon = this.props.hideIcon ? '' : React.createElement(
+	        var calendarIcon = this.props.hideIcon ? '' : _react2['default'].createElement(
 	            'span',
 	            { onClick: this.toggleClick, className: 'icon-wrapper calendar-icon' },
-	            React.createElement('i', { className: iconClass })
+	            _react2['default'].createElement('i', { className: iconClass })
 	        );
 	
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'input-calendar' },
-	            React.createElement('input', { type: 'text',
+	            _react2['default'].createElement('input', { type: 'text',
 	                id: this.props.inputFieldId,
 	                className: this.props.inputFieldClass,
 	                value: this.state.inputValue,
@@ -12314,26 +12336,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var cs = __webpack_require__(3);
-	var moment = __webpack_require__(4);
-	__webpack_require__(92);
-	var Cell = __webpack_require__(94);
-	var ViewHeader = __webpack_require__(95);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	module.exports = React.createClass({
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _moment = __webpack_require__(4);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	__webpack_require__(92);
+	
+	var _cell = __webpack_require__(94);
+	
+	var _cell2 = _interopRequireDefault(_cell);
+	
+	var _viewHeader = __webpack_require__(95);
+	
+	var _viewHeader2 = _interopRequireDefault(_viewHeader);
+	
+	module.exports = _react2['default'].createClass({
 	    displayName: 'exports',
 	
 	    propTypes: {
-	        date: React.PropTypes.object.isRequired,
-	        minDate: React.PropTypes.any,
-	        maxDate: React.PropTypes.any,
-	        setDate: React.PropTypes.func,
-	        nextView: React.PropTypes.func
+	        date: _react2['default'].PropTypes.object.isRequired,
+	        minDate: _react2['default'].PropTypes.any,
+	        maxDate: _react2['default'].PropTypes.any,
+	        setDate: _react2['default'].PropTypes.func,
+	        nextView: _react2['default'].PropTypes.func
 	    },
 	
 	    getDaysTitles: function getDaysTitles() {
-	        if (moment.locale() === 'de') {
+	        if (_moment2['default'].locale() === 'de') {
 	            return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(function (item) {
 	                return {
 	                    val: item,
@@ -12342,7 +12381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	
-	        return moment.weekdaysMin().map(function (item) {
+	        return _moment2['default'].weekdaysMin().map(function (item) {
 	            return {
 	                val: item,
 	                label: item
@@ -12373,7 +12412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    cellClick: function cellClick(e) {
 	        var cell = e.target,
 	            date = parseInt(cell.innerHTML, 10),
-	            newDate = this.props.date ? this.props.date.clone() : moment();
+	            newDate = this.props.date ? this.props.date.clone() : (0, _moment2['default'])();
 	
 	        if (isNaN(date)) {
 	            return;
@@ -12390,18 +12429,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    getDays: function getDays() {
-	        var now = this.props.date ? this.props.date : moment(),
+	        var now = this.props.date ? this.props.date : (0, _moment2['default'])(),
 	            start = now.clone().startOf('month').weekday(0),
 	            end = now.clone().endOf('month').weekday(6),
 	            minDate = this.props.minDate,
 	            maxDate = this.props.maxDate,
 	            month = now.month(),
-	            today = moment(),
+	            today = (0, _moment2['default'])(),
 	            currDay = now.date(),
 	            year = now.year(),
 	            days = [];
 	
-	        moment().range(start, end).by('days', function (day) {
+	        (0, _moment2['default'])().range(start, end).by('days', function (day) {
 	            days.push({
 	                label: day.format('D'),
 	                prev: day.month() < month && !(day.year() > year) || day.year() < year,
@@ -12417,11 +12456,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    render: function render() {
 	        var titles = this.getDaysTitles().map(function (item, i) {
-	            return React.createElement(Cell, { value: item.label, classes: 'day title', key: i });
+	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: 'day title', key: i });
 	        });
 	
 	        var days = this.getDays().map(function (item, i) {
-	            var _class = cs({
+	            var _class = (0, _classnames2['default'])({
 	                'day': true,
 	                'next': item.next,
 	                'prev': item.prev,
@@ -12429,25 +12468,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'current': item.curr,
 	                'today': item.today
 	            });
-	            return React.createElement(Cell, { value: item.label, classes: _class, key: i });
+	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: _class, key: i });
 	        });
 	
-	        var currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM');
+	        var currentDate = this.props.date ? this.props.date.format('MMMM') : (0, _moment2['default'])().format('MMMM');
 	
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'view days-view', onKeyDown: this.keyDown },
-	            React.createElement(ViewHeader, {
+	            _react2['default'].createElement(_viewHeader2['default'], {
 	                prev: this.prev,
 	                next: this.next,
 	                data: currentDate,
 	                titleAction: this.props.nextView }),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'div',
 	                { className: 'days-title' },
 	                titles
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'div',
 	                { className: 'days', onClick: this.cellClick },
 	                days
@@ -12463,22 +12502,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var moment = __webpack_require__(4);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _moment = __webpack_require__(4);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
 	__webpack_require__(92);
 	
-	module.exports = React.createClass({
+	module.exports = _react2['default'].createClass({
 	    displayName: 'exports',
 	
 	    propTypes: {
-	        value: React.PropTypes.string,
-	        classes: React.PropTypes.string
+	        value: _react2['default'].PropTypes.string,
+	        classes: _react2['default'].PropTypes.string
 	    },
 	
 	    render: function render() {
 	        var classes = this.props.classes + ' cell';
 	
-	        return React.createElement("div", { className: classes }, this.props.value);
+	        return _react2['default'].createElement("div", { className: classes }, this.props.value);
 	    }
 	
 	});
@@ -12489,38 +12536,42 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 	
-	var React = __webpack_require__(2);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	module.exports = React.createClass({
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	module.exports = _react2["default"].createClass({
 	    displayName: "exports",
 	
 	    propTypes: {
-	        next: React.PropTypes.func,
-	        prev: React.PropTypes.func,
-	        titleAction: React.PropTypes.func,
-	        data: React.PropTypes.string
+	        next: _react2["default"].PropTypes.func,
+	        prev: _react2["default"].PropTypes.func,
+	        titleAction: _react2["default"].PropTypes.func,
+	        data: _react2["default"].PropTypes.string
 	    },
 	
 	    render: function render() {
 	        var prop = this.props;
 	
-	        return React.createElement(
+	        return _react2["default"].createElement(
 	            "div",
 	            { className: "navigation-wrapper" },
-	            React.createElement(
+	            _react2["default"].createElement(
 	                "span",
 	                { onClick: prop.prev, className: "icon" },
-	                React.createElement("i", { className: "fa fa-angle-left" })
+	                _react2["default"].createElement("i", { className: "fa fa-angle-left" })
 	            ),
-	            React.createElement(
+	            _react2["default"].createElement(
 	                "span",
 	                { onClick: prop.titleAction, className: "navigation-title" },
 	                prop.data
 	            ),
-	            React.createElement(
+	            _react2["default"].createElement(
 	                "span",
 	                { onClick: prop.next, className: "icon" },
-	                React.createElement("i", { className: "fa fa-angle-right" })
+	                _react2["default"].createElement("i", { className: "fa fa-angle-right" })
 	            )
 	        );
 	    }
@@ -12533,20 +12584,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var cs = __webpack_require__(3);
-	var moment = __webpack_require__(4);
-	__webpack_require__(92);
-	var Cell = __webpack_require__(94);
-	var ViewHeader = __webpack_require__(95);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	module.exports = React.createClass({
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _moment = __webpack_require__(4);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	__webpack_require__(92);
+	
+	var _cell = __webpack_require__(94);
+	
+	var _cell2 = _interopRequireDefault(_cell);
+	
+	var _viewHeader = __webpack_require__(95);
+	
+	var _viewHeader2 = _interopRequireDefault(_viewHeader);
+	
+	module.exports = _react2['default'].createClass({
 	    displayName: 'exports',
 	
 	    propTypes: {
-	        date: React.PropTypes.object.isRequired,
-	        minDate: React.PropTypes.any,
-	        maxDate: React.PropTypes.any
+	        date: _react2['default'].PropTypes.object.isRequired,
+	        minDate: _react2['default'].PropTypes.any,
+	        maxDate: _react2['default'].PropTypes.any
 	    },
 	
 	    checkIfMonthDisabled: function checkIfMonthDisabled(month) {
@@ -12590,7 +12658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var now = this.props.date,
 	            month = now.month();
 	
-	        return moment.monthsShort().map((function (item, i) {
+	        return _moment2['default'].monthsShort().map((function (item, i) {
 	            return {
 	                label: item,
 	                disabled: this.checkIfMonthDisabled(i),
@@ -12601,25 +12669,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    render: function render() {
 	        var months = this.getMonth().map(function (item, i) {
-	            var _class = cs({
+	            var _class = (0, _classnames2['default'])({
 	                'month': true,
 	                'disabled': item.disabled,
 	                'current': item.curr
 	            });
-	            return React.createElement(Cell, { value: item.label, classes: _class, key: i });
+	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: _class, key: i });
 	        });
 	
 	        var currentDate = this.props.date.format('YYYY');
 	
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'months-view' },
-	            React.createElement(ViewHeader, {
+	            _react2['default'].createElement(_viewHeader2['default'], {
 	                prev: this.prev,
 	                next: this.next,
 	                data: currentDate,
 	                titleAction: this.props.nextView }),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'div',
 	                { className: 'months', onClick: this.cellClick },
 	                months
@@ -12635,21 +12703,38 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var cs = __webpack_require__(3);
-	var moment = __webpack_require__(4);
-	__webpack_require__(92);
-	var Cell = __webpack_require__(94);
-	var ViewHeader = __webpack_require__(95);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	module.exports = React.createClass({
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _moment = __webpack_require__(4);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	__webpack_require__(92);
+	
+	var _cell = __webpack_require__(94);
+	
+	var _cell2 = _interopRequireDefault(_cell);
+	
+	var _viewHeader = __webpack_require__(95);
+	
+	var _viewHeader2 = _interopRequireDefault(_viewHeader);
+	
+	module.exports = _react2['default'].createClass({
 	    displayName: 'exports',
 	
 	    propTypes: {
-	        date: React.PropTypes.object,
-	        minDate: React.PropTypes.any,
-	        maxDate: React.PropTypes.any,
-	        changeView: React.PropTypes.func
+	        date: _react2['default'].PropTypes.object,
+	        minDate: _react2['default'].PropTypes.any,
+	        maxDate: _react2['default'].PropTypes.any,
+	        changeView: _react2['default'].PropTypes.func
 	    },
 	
 	    years: [],
@@ -12698,7 +12783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return this.years;
 	        }
 	
-	        moment().range(start, end).by('years', (function (year) {
+	        (0, _moment2['default'])().range(start, end).by('years', (function (year) {
 	            items.push({
 	                label: year.format('YYYY'),
 	                disabled: this.checkIfYearDisabled(year),
@@ -12726,24 +12811,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var currYear = this.props.date.year();
 	
 	        var yearsCells = years.map(function (item, i) {
-	            var _class = cs({
+	            var _class = (0, _classnames2['default'])({
 	                'year': true,
 	                'disabled': item.disabled,
 	                'current': item.label == currYear
 	            });
-	            return React.createElement(Cell, { value: item.label, classes: _class, key: i });
+	            return _react2['default'].createElement(_cell2['default'], { value: item.label, classes: _class, key: i });
 	        });
 	
 	        var currentDate = [years[0].label, years[years.length - 1].label].join('-');
 	
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'years-view' },
-	            React.createElement(ViewHeader, {
+	            _react2['default'].createElement(_viewHeader2['default'], {
 	                prev: this.prev,
 	                next: this.next,
 	                data: currentDate }),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'div',
 	                { className: 'years', onClick: this.cellClick },
 	                yearsCells
@@ -12755,11 +12840,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 98 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
-	
-	var Const = __webpack_require__(99);
 	
 	var _keyDownViewHelper = [{
 	    prev: false,
@@ -12779,6 +12862,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    upDown: 3
 	}];
 	
+	var KEYS = {
+	    backspace: 8,
+	    enter: 13,
+	    esc: 27,
+	    left: 37,
+	    up: 38,
+	    right: 39,
+	    down: 40
+	};
+	
 	module.exports = {
 	
 	    keyDownActions: function keyDownActions(code) {
@@ -12786,48 +12879,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var unit = _viewHelper.unit;
 	
 	        switch (code) {
-	            case Const.keys.left:
+	            case KEYS.left:
 	                this.setDate(this.state.date.subtract(1, unit));
 	                break;
-	            case Const.keys.right:
+	            case KEYS.right:
 	                this.setDate(this.state.date.add(1, unit));
 	                break;
-	            case Const.keys.up:
+	            case KEYS.up:
 	                this.setDate(this.state.date.subtract(_viewHelper.upDown, unit));
 	                break;
-	            case Const.keys.down:
+	            case KEYS.down:
 	                this.setDate(this.state.date.add(_viewHelper.upDown, unit));
 	                break;
-	            case Const.keys.enter:
+	            case KEYS.enter:
 	                if (_viewHelper.prev) this.prevView(this.state.date);
 	
 	                if (_viewHelper.exit) this.setState({ isVisible: false });
 	
 	                break;
-	            case Const.keys.esc:
+	            case KEYS.esc:
 	                this.setState({ isVisible: false });
 	                break;
 	        }
 	    }
 	
-	};
-
-/***/ },
-/* 99 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	module.exports = {
-	    keys: {
-	        backspace: 8,
-	        enter: 13,
-	        esc: 27,
-	        left: 37,
-	        up: 38,
-	        right: 39,
-	        down: 40
-	    }
 	};
 
 /***/ }

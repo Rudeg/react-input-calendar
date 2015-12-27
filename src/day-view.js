@@ -1,9 +1,11 @@
-var React = require('react');
-var cs = require('classnames');
-var moment = require('moment');
-require('moment-range');
-var Cell = require('./Cell');
-var ViewHeader = require('./ViewHeader');
+import React from 'react'
+import cs from 'classnames'
+import moment from 'moment'
+import 'moment-range'
+
+import Cell from './cell'
+import ViewHeader from './view-header'
+
 
 module.exports = React.createClass({
 
