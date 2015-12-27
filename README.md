@@ -1,29 +1,153 @@
-[![build status](https://secure.travis-ci.org/survivejs/react-component-boilerplate.png)](http://travis-ci.org/survivejs/react-component-boilerplate) [![bitHound Score](https://www.bithound.io/github/survivejs/react-component-boilerplate/badges/score.svg)](https://www.bithound.io/github/survivejs/react-component-boilerplate) [![Dependency Status](https://david-dm.org/survivejs/react-component-boilerplate.svg)](https://david-dm.org/survivejs/react-component-boilerplate)
-# react-component-boilerplate - Boilerplate for React.js components
+# React Input Calendar
 
-This is a simple boilerplate that has been developed to make it easier to develop React components and small projects. Check out [SurviveJS - Webpack and React](http://survivejs.com/) to dig deeper into the topic.
+React component for calendar widget.
 
-## Basic Usage
+## Installation
 
-If you want to replace project meta information (author etc.), consider using a tool like [replace-project-meta](https://www.npmjs.com/package/replace-project-meta).
-
-* Linting - **npm run lint** - Runs ESLint.
-* Testing - **npm test** and **npm run tdd** - Runs Karma/Mocha/Chai/Phantom. Code coverage report is generated through istanbul/isparta to `build/`.
-* Developing - **npm start** - Runs the development server at *localhost:8080* and use Hot Module Replacement. You can override the default host and port through env (`HOST`, `PORT`).
-* Creating a version - **npm version <x.y.<>** - Updates */dist* and *package.json* with the new version and create a version tag to Git.
-* Publishing a version - **npm publish** - Pushes a new version to npm and updates the project site.
-
-## Highlighting Demo
-
-```js
-var a = 5;
-var b = 10;
-
-// just trying out code highlighting feature here
-console.log(a + b);
+React Input Calendar is available as an [npm package](https://www.npmjs.org/package/react-input-calendar).
+```sh
+npm install react-input-calendar
 ```
+
+Use [browserify](http://browserify.org/) and [reactify](https://github.com/andreypopp/reactify) for dependency management and JSX transformation.
+
+All styles written in CSS and are in file input-component.css.
+
+## Demo
+
+http://rudeg.github.io/react-input-calendar
+
+## Usage
+
+```javascript
+var Calendar = require('react-input-calendar');
+React.render(
+  <Calendar
+    format="DD/MM/YYYY"
+    date="4-12-2014"
+  />,
+  document.body
+);
+```
+
+## Dependencies
+
+[React](http://facebook.github.io/react/)
+
+[Moment-range](https://github.com/gf3/moment-range)
+
+[Font-Awesome](http://fortawesome.github.io/Font-Awesome/)
+
+
+## API
+
+#### props.format
+
+Type: `String`
+
+Default: 'MM-DD-YYYY'
+
+Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
+
+Format of date, which display in input and set in date property.
+
+#### props.date
+
+Type: `String` or `Date`
+
+Default: Current date
+
+Set initial date value.
+
+#### props.minView
+
+Type: `Int` (from 0 to 2)
+
+Default: 0 (DaysView)
+
+Set minimal view. Values:
+
+  0 - days
+
+  1 - months
+
+  2 - years.
+
+#### props.computableFormat
+
+Type: `String`
+
+Default: 'MM-DD-YYYY'
+
+Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
+
+Format of date for the onChange event. Default on the  date format (ISO 8601) to ease the save of data.
+
+#### props.onChange
+
+Type: `Function`
+
+Default: null
+
+Set a function that will be triggered whenever there is a change in the selected date. It will return the date in the `props.computableFormat` format.
+
+#### props.onBlur
+
+Type: `Function`
+
+Default: null
+
+Set a function that will be triggered when the input field is blurred. It will return the event and the date in the props.computableFormat format.
+
+#### props.closeOnSelect
+
+Type: `Boolean`
+
+Default: undefined
+
+Define state when date picker would close once the user has clicked on a date.
+
+#### props.openOnInputFocus
+
+Type `Boolean`
+
+Default: undefined
+
+Setting this value to true makes the calendar widget open when the iput field is focused.
+
+#### props.hideIcon
+
+Type `Boolean`
+
+Default: false
+
+If true, the icon next to the input field will not be shown. Make sure you set openOnInputFocus to true if using this.
+
+#### props.placeholder
+
+Type: `String`
+
+Default: undefined
+
+Value to show in the input text box if no date is set.
+
+#### props.inputFieldId
+
+Type: `String`
+
+Default: null
+
+Define the ID of the input field where the date picker represents it's value. This can be useful when the date picker is used with a label element. The label element can be bound to the input field using the `label for` attribute.
+
+#### props.inputFieldClass
+
+Type: `String`
+
+Default: 'input-calendar-value'
+
+Define the class name of the input field where the date picker represents its value.
+
 
 ## License
 
-*react-component-boilerplate* is available under MIT. See LICENSE for more details.
-
+MIT

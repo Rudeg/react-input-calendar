@@ -7,7 +7,7 @@ var MonthsView = require('./MonthsView');
 var YearsView = require('./YearsView');
 var Utils = require('./Utils');
 
-var _keyDownActions = Utils.keyDownActions
+var _keyDownActions = Utils.keyDownActions;
 
 function toDate(date) {
   if (date instanceof Date) {
