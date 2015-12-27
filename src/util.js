@@ -32,6 +32,10 @@ const KEYS = {
 
 module.exports = {
 
+    toDate: (date) => {
+      return date instanceof Date ? date : new Date(date)
+    },
+
     keyDownActions: function (code) {
         let _viewHelper = _keyDownViewHelper[this.state.currentView],
           unit = _viewHelper.unit
