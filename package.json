@@ -47,5 +47,6 @@
   ],
   "homepage": "https://github.com/Rudeg/react-input-calendar",
   "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
-  "license": "MIT"
+  "license": "MIT",
+  "pre-push": []
 }
