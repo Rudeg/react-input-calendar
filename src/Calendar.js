@@ -15,7 +15,7 @@ const todayTr = {
   pl: "Dzisiaj",
   de: "Heute",
   en: "Today",
-}
+};
 
 function toDate(date) {
   if (date instanceof Date) {
@@ -244,12 +244,17 @@ module.exports = React.createClass({
     },
 
     render: function () {
-
         // its ok for this.state.date to be null, but we should never
         // pass null for the date into the calendar pop up, as we want
         // it to just start on todays date if there is no date set
         var calendarDate = this.state.date || moment();
-        var locale = this.props.locale || moment.locale();
+        var locale
+        if (this.props.locale) {
+          locale = this.props.locale
+          moment.locale(locale)
+        } else {
+          locale = moment.locale();
+        }
 
         var view;
         switch (this.state.currentView) {
@@ -279,7 +284,6 @@ module.exports = React.createClass({
                     prevView={this.prevView} />;
                 break;
         }
-
         const todayText = todayTr[locale] || todayTr.en;
 
         var calendar = !this.state.isVisible ? '' :
