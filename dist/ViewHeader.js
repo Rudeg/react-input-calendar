@@ -14,11 +14,11 @@ module.exports = React.createClass({displayName: "exports",
 
         return (
             React.createElement("div", {className: "navigation-wrapper"}, 
-                prop.fastPrev && React.createElement("span", {onClick: prop.fastPrev, className: "icon", style: {paddingRight: '4px'}}, "❮❮"), 
-                React.createElement("span", {onClick: prop.prev, className: "icon"}, "❮"), 
-                React.createElement("span", {onClick: prop.titleAction, className: "navigation-title"}, prop.data), 
-                React.createElement("span", {onClick: prop.next, className: "icon"}, "❯"), 
-                prop.fastNext && React.createElement("span", {onClick: prop.fastNext, className: "icon", style: {paddingLeft: '4px'}}, "❯❯")
+                prop.fastPrev && React.createElement("span", {onClick: function(ev)  {prop.fastPrev();ev.preventDefault()}, className: "icon", style: {paddingRight: '4px'}}, "❮❮"), 
+                React.createElement("span", {onClick: function(ev)  {prop.prev();ev.preventDefault()}, className: "icon"}, "❮"), 
+                React.createElement("span", {onClick: function(ev)  {prop.titleAction();ev.preventDefault()}, className: "navigation-title"}, prop.data), 
+                React.createElement("span", {onClick: function(ev)  {prop.next();ev.preventDefault()}, className: "icon"}, "❯"), 
+                prop.fastNext && React.createElement("span", {onClick: function(ev)  {prop.fastNext();ev.preventDefault()}, className: "icon", style: {paddingLeft: '4px'}}, "❯❯")
             )
         );
     }

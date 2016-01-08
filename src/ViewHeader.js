@@ -14,11 +14,11 @@ module.exports = React.createClass({
 
         return (
             <div className="navigation-wrapper">
-                {prop.fastPrev && <span onClick={prop.fastPrev} className="icon" style={{paddingRight: '4px'}}>&#10094;&#10094;</span>}
-                <span onClick={prop.prev} className="icon" >&#10094;</span>
-                <span onClick={prop.titleAction} className="navigation-title" >{prop.data}</span>
-                <span onClick={prop.next} className="icon" >&#10095;</span>
-                {prop.fastNext && <span onClick={prop.fastNext} className="icon" style={{paddingLeft: '4px'}}>&#10095;&#10095;</span>}
+                {prop.fastPrev && <span onClick={ev => {prop.fastPrev();ev.preventDefault()}} className="icon" style={{paddingRight: '4px'}}>&#10094;&#10094;</span>}
+                <span onClick={ev => {prop.prev();ev.preventDefault()}} className="icon" >&#10094;</span>
+                <span onClick={ev => {prop.titleAction();ev.preventDefault()}} className="navigation-title" >{prop.data}</span>
+                <span onClick={ev => {prop.next();ev.preventDefault()}} className="icon" >&#10095;</span>
+                {prop.fastNext && <span onClick={ev => {prop.fastNext();ev.preventDefault()}} className="icon" style={{paddingLeft: '4px'}}>&#10095;&#10095;</span>}
             </div>
         );
     }
