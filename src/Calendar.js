@@ -43,7 +43,7 @@ module.exports = React.createClass({
     },
 
     getInitialState: function() {
-        var date = this.props.date ? moment(toDate(this.props.date)) : null,
+        var date = this.props.date ? moment(toDate(this.props.date)) : moment(),
             minDate = this.props.minDate ? moment(toDate(this.props.minDate)) : null,
             maxDate = this.props.maxDate ? moment(toDate(this.props.maxDate)) : null,
             inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : null,
