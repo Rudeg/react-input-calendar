@@ -269,7 +269,8 @@ module.exports = React.createClass({
             'fa': true,
             'fa-calendar': !this.state.isVisible,
             'fa-calendar-o': this.state.isVisible
-        }), readOnly = false) : null;
+        })) : null;
+      let readOnly = false;
 
         if (this.props.hideTouchKeyboard) {
           // do not break server side rendering:
@@ -288,7 +289,7 @@ module.exports = React.createClass({
               <i className={iconClass}></i>
             </span>
         else {
-          calendarIcon = <span className={cs("icon-wrapper", "calendar-icon", this.props.customIcon)} />
+          calendarIcon = <span className={cs("icon-wrapper", "calendar-icon", this.props.customIcon)} onClick={this.toggleClick}/>
         }
 
         return (
