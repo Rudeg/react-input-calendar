@@ -379,7 +379,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: 'icon-wrapper calendar-icon', onClick: this.toggleClick },
 	                _react2['default'].createElement('i', { className: iconClass })
 	            );else {
-	            calendarIcon = _react2['default'].createElement('span', { className: (0, _classnames2['default'])("icon-wrapper", "calendar-icon", this.props.customIcon), onClick: this.toggleClick });
+	            calendarIcon = _react2['default'].createElement('span', { className: (0, _classnames2['default'])('icon-wrapper', 'calendar-icon', this.props.customIcon), onClick: this.toggleClick });
 	        }
 	
 	        return _react2['default'].createElement(

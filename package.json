@@ -89,5 +89,6 @@
     "react-datepicker",
     "react-component"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "pre-push": []
 }

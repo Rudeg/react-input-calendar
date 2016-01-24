@@ -289,7 +289,7 @@ module.exports = React.createClass({
               <i className={iconClass}></i>
             </span>
         else {
-          calendarIcon = <span className={cs("icon-wrapper", "calendar-icon", this.props.customIcon)} onClick={this.toggleClick}/>
+          calendarIcon = <span className={cs('icon-wrapper', 'calendar-icon', this.props.customIcon)} onClick={this.toggleClick}/>
         }
 
         return (
