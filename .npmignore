@@ -1,7 +1,6 @@
 demo/
 dist/
 tests/
-src/
 .*
 karma.conf.js
 webpack.config.babel.js
