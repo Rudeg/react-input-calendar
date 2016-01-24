@@ -25,7 +25,8 @@ module.exports = React.createClass({
         onChange: React.PropTypes.func,
         placeholder: React.PropTypes.string,
         hideTouchKeyboard: React.PropTypes.bool,
-        hideIcon: React.PropTypes.bool
+        hideIcon: React.PropTypes.bool,
+        customIcon: React.PropTypes.string
     },
 
     getInitialState: function() {
@@ -264,11 +265,12 @@ module.exports = React.createClass({
                 </span>
             </div>
 
-        let iconClass = cs({
+        let iconClass = this.props.customIcon == null ? (iconClass = cs({
             'fa': true,
             'fa-calendar': !this.state.isVisible,
             'fa-calendar-o': this.state.isVisible
-        }), readOnly = false
+        })) : null;
+      let readOnly = false;
 
         if (this.props.hideTouchKeyboard) {
           // do not break server side rendering:
@@ -279,11 +281,16 @@ module.exports = React.createClass({
           } catch (e) {}
         }
 
+        let calendarIcon;
+        if (this.props.customIcon == null)
         // Do not show calendar icon if hideIcon is true
-        let calendarIcon = this.props.hideIcon ? '' :
+        calendarIcon = this.props.hideIcon ? '' :
             <span className="icon-wrapper calendar-icon" onClick={this.toggleClick} >
               <i className={iconClass}></i>
             </span>
+        else {
+          calendarIcon = <span className={cs('icon-wrapper', 'calendar-icon', this.props.customIcon)} onClick={this.toggleClick}/>
+        }
 
         return (
             <div className="input-calendar">
