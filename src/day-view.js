@@ -11,7 +11,7 @@ class DayView extends React.Component {
       super()
       this.cellClick = this.cellClick.bind(this)
     }
-    
+
     static propTypes = {
         date: React.PropTypes.object.isRequired,
         minDate: React.PropTypes.any,
@@ -81,7 +81,7 @@ class DayView extends React.Component {
               next: day.month() > month || day.year() > year,
               disabled: day.isBefore(minDate) || day.isAfter(maxDate),
               curr: day.date() === currDay && day.month() === month,
-              today: day.date() === today.date() && day.month() === today.month()
+              today: day.date() === today.date() && day.month() === today.month() && day.year() === today.year()
             })
           })
         return days
