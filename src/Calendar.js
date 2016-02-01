@@ -119,9 +119,9 @@ module.exports = React.createClass({
                 isVisible: false
             });
 
-            if (this.props.onChange) {
-                this.props.onChange(date.format(this.state.computableFormat));
-            }
+            // if (this.props.onChange) {
+            //     this.props.onChange(date.format(this.state.computableFormat));
+            // }
 
         } else {
             this.setState({
