@@ -73,10 +73,10 @@ module.exports = React.createClass({
     },
 
     checkIfDateDisabled: function (date) {
-        if (this.state.minDate && date.isBefore(this.state.minDate)) {
+        if (date && this.state.minDate && date.isBefore(this.state.minDate)) {
             return true
         }
-        if (this.state.maxDate && date.isAfter(this.state.maxDate)) {
+        if (date && this.state.maxDate && date.isAfter(this.state.maxDate)) {
             return true
         }
         return false
