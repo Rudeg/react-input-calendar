@@ -10,6 +10,8 @@ class DayView extends React.Component {
     constructor() {
       super()
       this.cellClick = this.cellClick.bind(this)
+      this.next = this.next.bind(this)
+      this.prev = this.prev.bind(this)
     }
 
     static propTypes = {
