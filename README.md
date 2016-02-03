@@ -83,6 +83,16 @@ Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/pa
 
 Format of date for the onChange event. Default on the  date format (ISO 8601) to ease the save of data.
 
+#### props.strictDateParsing
+
+Type: `Boolean`
+
+Defaults: false
+
+If set `true`, the parsing process will catch bad dates and does
+not try to parse the date with the native js date function and does not set
+the date to now either. Therefore the computed date will be reported as 'Invalid date'.
+
 #### props.onChange
 
 Type: `Function`
