@@ -15,6 +15,10 @@ module.exports = React.createClass({
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
         strictDateParsing: React.PropTypes.bool,
+        parsingFormat: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.arrayOf(React.PropTypes.string)
+        ]),
         date: React.PropTypes.any,
         minDate: React.PropTypes.any,
         maxDate: React.PropTypes.any,
@@ -39,7 +43,8 @@ module.exports = React.createClass({
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
             computableFormat = this.props.computableFormat || 'MM-DD-YYYY',
-            strictDateParsing = this.props.strictDateParsing || false;
+            strictDateParsing = this.props.strictDateParsing || false,
+            parsingFormat = this.props.parsingFormat || format;
 
         return {
             date: date,
@@ -52,7 +57,8 @@ module.exports = React.createClass({
             minView: minView,
             currentView: minView || 0,
             isVisible: false,
-            strictDateParsing: strictDateParsing
+            strictDateParsing: strictDateParsing,
+            parsingFormat: parsingFormat
         }
     },
 
@@ -140,11 +146,12 @@ module.exports = React.createClass({
         let date = this.state.inputValue,
             newDate = null,
             computableDate = null,
-            format = this.state.format
+            format = this.state.format,
+            parsingFormat = this.state.parsingFormat
 
         if (date) {
             // format, with strict parsing true, so we catch bad dates
-            newDate = moment(date, format, true)
+            newDate = moment(date, parsingFormat, true)
             // if the new date didn't match our format, see if the native
             // js date can parse it
             if (!newDate.isValid() && !this.props.strictDateParsing) {
