@@ -59,6 +59,22 @@ Default: Current date
 
 Set initial date value.
 
+#### props.minDate
+
+Type: `String` or `Date`
+
+Defaults: null
+
+Set the selectable minimum date.
+
+#### props.maxDate
+
+Type: `String` or `Date`
+
+Defaults: null
+
+Set the selectable maximum date.
+
 #### props.minView
 
 Type: `Int` (from 0 to 2)
