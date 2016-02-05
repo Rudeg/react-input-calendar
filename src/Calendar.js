@@ -14,6 +14,7 @@ module.exports = React.createClass({
     propTypes: {
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
+        strictDateParsing: React.PropTypes.bool,
         date: React.PropTypes.any,
         minDate: React.PropTypes.any,
         maxDate: React.PropTypes.any,
@@ -37,7 +38,8 @@ module.exports = React.createClass({
             inputFieldClass = this.props.inputFieldClass ? this.props.inputFieldClass : 'input-calendar-value',
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
-            computableFormat = this.props.computableFormat || 'MM-DD-YYYY'
+            computableFormat = this.props.computableFormat || 'MM-DD-YYYY',
+            strictDateParsing = this.props.strictDateParsing || false;
 
         return {
             date: date,
@@ -49,7 +51,8 @@ module.exports = React.createClass({
             views: ['days', 'months', 'years'],
             minView: minView,
             currentView: minView || 0,
-            isVisible: false
+            isVisible: false,
+            strictDateParsing: strictDateParsing
         }
     },
 
@@ -144,7 +147,7 @@ module.exports = React.createClass({
             newDate = moment(date, format, true)
             // if the new date didn't match our format, see if the native
             // js date can parse it
-            if (!newDate.isValid()) {
+            if (!newDate.isValid() && !this.props.strictDateParsing) {
                 let d = new Date(date)
                 // if native js cannot parse, just make a new date
                 if (isNaN(d.getTime())) {
