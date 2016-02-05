@@ -29,7 +29,7 @@ class DayView extends React.Component {
 
     next() {
         let nextDate = this.props.date.clone().add(1, 'months')
-        if (this.props.maxDate && nextDate.isAfter(this.props.maxDate)) {
+        if (this.props.maxDate && nextDate.isAfter(this.props.maxDate, 'day')) {
           nextDate = this.props.maxDate
         }
         this.props.setDate(nextDate)
@@ -37,7 +37,7 @@ class DayView extends React.Component {
 
     prev() {
         let prevDate = this.props.date.clone().subtract(1, 'months')
-        if (this.props.minDate && prevDate.isBefore(this.props.minDate)) {
+        if (this.props.minDate && prevDate.isBefore(this.props.minDate, 'day')) {
           prevDate = this.props.minDate
         }
         this.props.setDate(prevDate)
@@ -79,7 +79,7 @@ class DayView extends React.Component {
               label: day.format('D'),
               prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
               next: day.month() > month || day.year() > year,
-              disabled: day.isBefore(minDate) || day.isAfter(maxDate),
+              disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
               curr: day.date() === currDay && day.month() === month,
               today: day.date() === today.date() && day.month() === today.month() && day.year() === today.year()
             })

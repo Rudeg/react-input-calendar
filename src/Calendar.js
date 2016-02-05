@@ -73,10 +73,10 @@ module.exports = React.createClass({
     },
 
     checkIfDateDisabled: function (date) {
-        if (date && this.state.minDate && date.isBefore(this.state.minDate)) {
+        if (date && this.state.minDate && date.isBefore(this.state.minDate, 'day')) {
             return true
         }
-        if (date && this.state.maxDate && date.isAfter(this.state.maxDate)) {
+        if (date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day')) {
             return true
         }
         return false
@@ -88,11 +88,11 @@ module.exports = React.createClass({
     },
 
     prevView: function (date) {
-        if (this.state.minDate && date.isBefore(this.state.minDate)) {
+        if (this.state.minDate && date.isBefore(this.state.minDate, 'day')) {
             date = this.state.minDate.clone()
         }
 
-        if (this.state.maxDate && date.isAfter(this.state.maxDate)) {
+        if (this.state.maxDate && date.isAfter(this.state.maxDate, 'day')) {
             date = this.state.maxDate.clone()
         }
 

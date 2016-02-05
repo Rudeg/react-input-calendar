@@ -18,14 +18,14 @@ module.exports = React.createClass({
     checkIfMonthDisabled: function (month) {
         let now = this.props.date
 
-        return now.clone().month(month).endOf('month').isBefore(this.props.minDate) ||
-            now.clone().month(month).startOf('month').isAfter(this.props.maxDate)
+        return now.clone().month(month).endOf('month').isBefore(this.props.minDate, 'day') ||
+            now.clone().month(month).startOf('month').isAfter(this.props.maxDate, 'day')
     },
 
     next: function() {
         let nextDate = this.props.date.clone().add(1, 'years')
 
-        if (this.props.maxDate && nextDate.isAfter(this.props.maxDate)) {
+        if (this.props.maxDate && nextDate.isAfter(this.props.maxDate, 'day')) {
             nextDate = this.props.maxDate
         }
 
@@ -35,7 +35,7 @@ module.exports = React.createClass({
     prev: function() {
         let prevDate = this.props.date.clone().subtract(1, 'years')
 
-        if (this.props.minDate && prevDate.isBefore(this.props.minDate)) {
+        if (this.props.minDate && prevDate.isBefore(this.props.minDate, 'day')) {
             prevDate = this.props.minDate
         }
 
