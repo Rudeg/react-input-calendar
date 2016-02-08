@@ -51,6 +51,19 @@ Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/pa
 
 Format of date, which display in input and set in date property.
 
+#### props.parsingFormat
+
+Type: `String` or `Array`
+
+Default: 'props.format'
+
+Allowed Keys: All formats supported by [moment.js](http://momentjs.com/docs/#/parsing/string-format/)
+
+This property allows the parsing format to be different to the display format.
+[Format](http://momentjs.com/docs/#/parsing/string-format/) or [Formats](http://momentjs.com/docs/#/parsing/string-formats/)
+ could be used to parse manually entered dates. The parsing does only happen if the date was entered manually and
+ on blur of the input field gets called.
+
 #### props.date
 
 Type: `String` or `Date`
