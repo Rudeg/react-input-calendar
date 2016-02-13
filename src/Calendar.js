@@ -31,7 +31,8 @@ module.exports = React.createClass({
         placeholder: React.PropTypes.string,
         hideTouchKeyboard: React.PropTypes.bool,
         hideIcon: React.PropTypes.bool,
-        customIcon: React.PropTypes.string
+        customIcon: React.PropTypes.string,
+        todayText: React.PropTypes.string
     },
 
     getInitialState: function() {
@@ -259,7 +260,7 @@ module.exports = React.createClass({
                 break
         }
 
-        let todayText = moment.locale() === 'de' ? 'Heute' : 'Today',
+        let todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today'),
           calendarClass = cs({
             'input-calendar-wrapper': true,
             'icon-hidden': this.props.hideIcon
@@ -280,7 +281,8 @@ module.exports = React.createClass({
             'fa-calendar': !this.state.isVisible,
             'fa-calendar-o': this.state.isVisible
         })) : null;
-      let readOnly = false;
+
+        let readOnly = false;
 
         if (this.props.hideTouchKeyboard) {
           // do not break server side rendering:

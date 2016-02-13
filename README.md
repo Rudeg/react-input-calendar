@@ -162,6 +162,14 @@ Default: false
 
 If true, the icon next to the input field will not be shown. Make sure you set openOnInputFocus to true if using this.
 
+#### props.hideTouchKeyboard
+
+Type `Boolean`
+
+Default: false
+
+If true, the keyboard won't be shown on touch devices.
+
 #### props.placeholder
 
 Type: `String`
@@ -169,6 +177,14 @@ Type: `String`
 Default: undefined
 
 Value to show in the input text box if no date is set.
+
+#### props.todayText
+
+Type: `String`
+
+Default: `'today'`
+
+'Today' button text.
 
 #### props.inputFieldId
 
