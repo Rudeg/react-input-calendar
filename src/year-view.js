@@ -7,7 +7,7 @@ import Cell from './cell'
 import ViewHeader from './view-header'
 
 
-module.exports = React.createClass({
+export default React.createClass({
     propTypes: {
         date: React.PropTypes.object,
         minDate: React.PropTypes.any,

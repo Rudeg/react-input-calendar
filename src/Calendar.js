@@ -9,7 +9,7 @@ import YearsView from './year-view'
 import Util from './util'
 
 
-module.exports = React.createClass({
+export default React.createClass({
 
     propTypes: {
         closeOnSelect: React.PropTypes.bool,

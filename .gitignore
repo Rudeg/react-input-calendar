@@ -1,6 +1,5 @@
-build/
+dist/
 gh-pages/
-dist-modules/
 node_modules/
 .DC_Store
 *.iml
