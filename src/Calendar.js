@@ -32,7 +32,8 @@ module.exports = React.createClass({
         hideTouchKeyboard: React.PropTypes.bool,
         hideIcon: React.PropTypes.bool,
         customIcon: React.PropTypes.string,
-        todayText: React.PropTypes.string
+        todayText: React.PropTypes.string,
+        disabled: React.propTypes.bool
     },
 
     getInitialState: function() {
@@ -72,6 +73,12 @@ module.exports = React.createClass({
     },
 
     componentWillReceiveProps: function(nextProps) {
+        if (nextProps.disabled === true) {
+            this.setState({
+                isVisible: false
+            });
+        }
+
         this.setState({
             date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
             inputValue: nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null
@@ -222,7 +229,7 @@ module.exports = React.createClass({
 
         document[eventMethod]('keydown', this.keyDown)
 
-        if (this.state.isVisible !== value){
+        if (this.state.isVisible !== value && !this.props.disabled){
           this.setState({ isVisible: value })
         }
     },
@@ -296,7 +303,7 @@ module.exports = React.createClass({
         let calendarIcon;
         if (this.props.customIcon == null)
         // Do not show calendar icon if hideIcon is true
-        calendarIcon = this.props.hideIcon ? '' :
+        calendarIcon = this.props.hideIcon || this.props.disabled ? '' :
             <span className="icon-wrapper calendar-icon" onClick={this.toggleClick} >
               <i className={iconClass}></i>
             </span>
@@ -314,6 +321,7 @@ module.exports = React.createClass({
                 onFocus={this.props.openOnInputFocus ? this.toggleClick : ''}
                 placeholder={this.props.placeholder}
                 readOnly={readOnly}
+                disabled={this.props.disabled}
                 type="text"
                 value={this.state.inputValue}
                 />
