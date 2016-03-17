@@ -31,6 +31,7 @@ module.exports = React.createClass({
         placeholder: React.PropTypes.string,
         hideTouchKeyboard: React.PropTypes.bool,
         hideIcon: React.PropTypes.bool,
+        hideOnBlur: React.PropTypes.bool,
         customIcon: React.PropTypes.string,
         todayText: React.PropTypes.string
     },
@@ -58,6 +59,7 @@ module.exports = React.createClass({
             minView: minView,
             currentView: minView || 0,
             isVisible: false,
+            hideOnBlur: false,
             strictDateParsing: strictDateParsing,
             parsingFormat: parsingFormat
         }
@@ -177,7 +179,12 @@ module.exports = React.createClass({
         }
 
         if (this.props.onBlur) {
+            this.state.isVisible = this.props.hideOnBlur;
             this.props.onBlur(e, computableDate)
+        }
+
+        if(this.props.hideOnBlur) {
+          this.state.isVisible = !this.state.isVisible;
         }
     },
 
