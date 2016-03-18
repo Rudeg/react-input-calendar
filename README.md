@@ -152,7 +152,7 @@ Type `Boolean`
 
 Default: undefined
 
-Setting this value to true makes the calendar widget open when the iput field is focused.
+Setting this value to true makes the calendar widget open when the input field is focused.
 
 #### props.hideIcon
 
@@ -202,6 +202,13 @@ Default: 'input-calendar-value'
 
 Define the class name of the input field where the date picker represents its value.
 
+#### props.disabled
+
+Type: `Boolean`
+
+Default: false
+
+If true, the input field gets disabled and the icon next to it disappears.
 
 ## License
 
