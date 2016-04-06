@@ -129,6 +129,10 @@
     cursor: pointer;
 }
 
+.inside-input {
+    margin-left: -25px;
+}
+
 .input-calendar .icon {
     cursor: pointer;
 }

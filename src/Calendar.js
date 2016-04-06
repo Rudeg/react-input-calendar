@@ -23,6 +23,7 @@ module.exports = React.createClass({
         minDate: React.PropTypes.any,
         maxDate: React.PropTypes.any,
         format: React.PropTypes.string,
+        iconInsideInput: React.PropTypes.bool,
         inputFieldId: React.PropTypes.string,
         inputFieldClass: React.PropTypes.string,
         minView: React.PropTypes.number,
@@ -34,7 +35,7 @@ module.exports = React.createClass({
         hideOnBlur: React.PropTypes.bool,
         customIcon: React.PropTypes.string,
         todayText: React.PropTypes.string,
-        disabled: React.propTypes.bool
+        disabled: React.PropTypes.bool
     },
 
     getInitialState: function() {
@@ -308,14 +309,21 @@ module.exports = React.createClass({
         }
 
         let calendarIcon;
+
+        let iconWrapper = cs(
+          'icon-wrapper',
+          'calendar-icon',
+          this.props.customIcon, {
+            'inside-input': this.props.iconInsideInput
+          })
         if (this.props.customIcon == null)
         // Do not show calendar icon if hideIcon is true
         calendarIcon = this.props.hideIcon || this.props.disabled ? '' :
-            <span className="icon-wrapper calendar-icon" onClick={this.toggleClick} >
+            <span className={iconWrapper} onClick={this.toggleClick} >
               <i className={iconClass}></i>
             </span>
         else {
-          calendarIcon = <span className={cs('icon-wrapper', 'calendar-icon', this.props.customIcon)} onClick={this.toggleClick}/>
+          calendarIcon = <span className={iconWrapper} onClick={this.toggleClick}/>
         }
 
         return (
