@@ -1,6 +1,5 @@
 import './main.css'
 import '../style/style.css'
-import '../style/lumn-icon.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
