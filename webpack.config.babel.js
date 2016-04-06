@@ -29,6 +29,7 @@ const config = {
 const CSS_PATHS = [
   config.paths.demo,
   path.join(ROOT_PATH, 'style/style.css'),
+  path.join(ROOT_PATH, 'style/lumn-icon.css'),
   path.join(ROOT_PATH, 'node_modules/purecss'),
   path.join(ROOT_PATH, 'node_modules/highlight.js/styles/github.css'),
   path.join(ROOT_PATH, 'node_modules/react-ghfork/gh-fork-ribbon.ie.css'),
@@ -67,6 +68,10 @@ const demoCommon = {
         test: /\.json$/,
         loader: 'json',
         include: path.join(ROOT_PATH, 'package.json')
+      },
+      {
+        test: /\.(otf|eot|svg|ttf|woff)$/,
+        loader: 'url-loader?limit=8192'
       }
     ]
   },
