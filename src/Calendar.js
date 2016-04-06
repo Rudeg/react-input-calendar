@@ -14,56 +14,57 @@ module.exports = React.createClass({
     propTypes: {
         closeOnSelect: React.PropTypes.bool,
         computableFormat: React.PropTypes.string,
-        strictDateParsing: React.PropTypes.bool,
-        parsingFormat: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.arrayOf(React.PropTypes.string)
-        ]),
+        customHighlightColor: React.PropTypes.string,
+        customIcon: React.PropTypes.string,
         date: React.PropTypes.any,
-        minDate: React.PropTypes.any,
-        maxDate: React.PropTypes.any,
+        disabled: React.PropTypes.bool,
         format: React.PropTypes.string,
-        iconInsideInput: React.PropTypes.bool,
-        inputFieldId: React.PropTypes.string,
-        inputFieldClass: React.PropTypes.string,
-        minView: React.PropTypes.number,
-        onBlur: React.PropTypes.func,
-        onChange: React.PropTypes.func,
-        placeholder: React.PropTypes.string,
-        hideTouchKeyboard: React.PropTypes.bool,
         hideIcon: React.PropTypes.bool,
         hideOnBlur: React.PropTypes.bool,
-        customIcon: React.PropTypes.string,
-        todayText: React.PropTypes.string,
-        disabled: React.PropTypes.bool
+        hideTouchKeyboard: React.PropTypes.bool,
+        inputFieldClass: React.PropTypes.string,
+        inputFieldId: React.PropTypes.string,
+        iconInsideInput: React.PropTypes.bool,
+        minDate: React.PropTypes.any,
+        minView: React.PropTypes.number,
+        maxDate: React.PropTypes.any,
+        onBlur: React.PropTypes.func,
+        onChange: React.PropTypes.func,
+        parsingFormat: React.PropTypes.oneOfType([
+          React.PropTypes.string,
+          React.PropTypes.arrayOf(React.PropTypes.string)
+        ]),
+        placeholder: React.PropTypes.string,
+        strictDateParsing: React.PropTypes.bool,
+        todayText: React.PropTypes.string
     },
 
     getInitialState: function() {
-        let date = this.props.date ? moment(Util.toDate(this.props.date)) : null,
+        let computableFormat = this.props.computableFormat || 'MM-DD-YYYY',
+            date = this.props.date ? moment(Util.toDate(this.props.date)) : null,
+            format = this.props.format || 'MM-DD-YYYY',
+            inputFieldClass = this.props.inputFieldClass ? this.props.inputFieldClass : 'input-calendar-value',
+            inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : null,
             minDate = this.props.minDate ? moment(Util.toDate(this.props.minDate)) : null,
             maxDate = this.props.maxDate ? moment(Util.toDate(this.props.maxDate)) : null,
-            inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : null,
-            inputFieldClass = this.props.inputFieldClass ? this.props.inputFieldClass : 'input-calendar-value',
-            format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
-            computableFormat = this.props.computableFormat || 'MM-DD-YYYY',
-            strictDateParsing = this.props.strictDateParsing || false,
-            parsingFormat = this.props.parsingFormat || format;
+            parsingFormat = this.props.parsingFormat || format,
+            strictDateParsing = this.props.strictDateParsing || false;
 
         return {
-            date: date,
-            minDate: minDate,
-            maxDate: maxDate,
-            format: format,
             computableFormat: computableFormat,
-            inputValue: date ? date.format(format) : null,
-            views: ['days', 'months', 'years'],
-            minView: minView,
             currentView: minView || 0,
-            isVisible: false,
+            date: date,
+            format: format,
             hideOnBlur: false,
+            inputValue: date ? date.format(format) : null,
+            isVisible: false,
+            minDate: minDate,
+            minView: minView,
+            maxDate: maxDate,
+            parsingFormat: parsingFormat,
             strictDateParsing: strictDateParsing,
-            parsingFormat: parsingFormat
+            views: ['days', 'months', 'years']
         }
     },
 
