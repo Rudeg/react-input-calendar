@@ -34,7 +34,7 @@ module.exports = React.createClass({
         hideOnBlur: React.PropTypes.bool,
         customIcon: React.PropTypes.string,
         todayText: React.PropTypes.string,
-        disabled: React.propTypes.bool
+        disabled: React.PropTypes.bool
     },
 
     getInitialState: function() {
