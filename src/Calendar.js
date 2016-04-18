@@ -38,10 +38,10 @@ module.exports = React.createClass({
     },
 
     getInitialState: function() {
-        let date = this.props.date ? moment(Util.toDate(this.props.date)) : null,
-            minDate = this.props.minDate ? moment(Util.toDate(this.props.minDate)) : null,
-            maxDate = this.props.maxDate ? moment(Util.toDate(this.props.maxDate)) : null,
-            inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : null,
+        let date = this.props.date ? moment(Util.toDate(this.props.date)) : '',
+            minDate = this.props.minDate ? moment(Util.toDate(this.props.minDate)) : '',
+            maxDate = this.props.maxDate ? moment(Util.toDate(this.props.maxDate)) : '',
+            inputFieldId = this.props.inputFieldId ? this.props.inputFieldId : '',
             inputFieldClass = this.props.inputFieldClass ? this.props.inputFieldClass : 'input-calendar-value',
             format = this.props.format || 'MM-DD-YYYY',
             minView = parseInt(this.props.minView, 10) || 0,
@@ -55,7 +55,7 @@ module.exports = React.createClass({
             maxDate: maxDate,
             format: format,
             computableFormat: computableFormat,
-            inputValue: date ? date.format(format) : null,
+            inputValue: date ? date.format(format) : '',
             views: ['days', 'months', 'years'],
             minView: minView,
             currentView: minView || 0,
@@ -83,7 +83,7 @@ module.exports = React.createClass({
 
         this.setState({
             date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
-            inputValue: nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null
+            inputValue: nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : ''
         })
     },
 
@@ -178,7 +178,7 @@ module.exports = React.createClass({
 
         this.setState({
             date: newDate,
-            inputValue: newDate ? newDate.format(format) : null
+            inputValue: newDate ? newDate.format(format) : ''
         })
 
         if (this.props.onChange) {
