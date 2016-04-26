@@ -1,0 +1,78 @@
+{
+  "name": "react-input-calendar",
+  "description": "Datepicker widget react component",
+  "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
+  "user": "Rudeg",
+  "version": "0.3.0",
+  "scripts": {
+    "prepublish": ". ./.scripts/prepublish.sh",
+    "lint": "eslint src",
+    "lintfix": "eslint src --fix",
+    "testonly": "mocha --require .scripts/mocha_runner src/**/tests/**/*.js",
+    "test": "npm run lint && npm run testonly",
+    "test-watch": "npm run testonly -- --watch --watch-extensions js",
+    "storybook": "start-storybook -p 9010",
+    "publish-storybook": "bash .scripts/publish_storybook.sh"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^1.11.0",
+    "babel-cli": "^6.5.0",
+    "babel-core": "^6.5.0",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.5.0",
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.2.0",
+    "eslint": "^2.7.0",
+    "eslint-config-airbnb": "^7.0.0",
+    "eslint-plugin-babel": "^3.2.0",
+    "eslint-plugin-jsx-a11y": "^0.6.2",
+    "eslint-plugin-react": "^4.3.0",
+    "git-url-parse": "^6.0.1",
+    "jsdom": "^8.3.1",
+    "mocha": "^2.4.5",
+    "raw-loader": "^0.5.1",
+    "react": "^15.0.0",
+    "react-addons-test-utils": "^15.0.0",
+    "react-dom": "^15.0.0",
+    "sinon": "^1.17.3",
+    "style-loader": "^0.13.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.7 || ^15.0.0",
+    "moment": "^2.10.6",
+    "moment-range": "^2.1.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.5.0",
+    "classnames": "^2.2.3"
+  },
+  "main": "dist/index.js",
+  "engines": {
+    "npm": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rudeg/react-input-calendar"
+  },
+  "homepage": "http://rudeg.github.io/react-input-calendar/",
+  "bugs": {
+    "url": "https://github.com/Rudeg/react-input-calendar/issues"
+  },
+  "keywords": [
+    "react",
+    "datepicker",
+    "calendar",
+    "input-datepicker",
+    "input-calendar",
+    "react-input-calendar",
+    "react-calendar",
+    "react-datepicker",
+    "react-component"
+  ],
+  "license": "MIT"
+}
