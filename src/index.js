@@ -240,32 +240,32 @@ const Calendar = React.createClass({
         />
         break
       case 1:
-        view = <MonthsView
+        view = (<MonthsView
           date={calendarDate}
           nextView={this.nextView}
           maxDate={this.state.maxDate}
           minDate={this.state.minDate}
           prevView={this.prevView}
           setDate={this.setDate}
-        />
+        />)
         break
       case 2:
-        view = <YearsView
+        view = (<YearsView
           date={calendarDate}
           maxDate={this.state.maxDate}
           minDate={this.state.minDate}
           prevView={this.prevView}
           setDate={this.setDate}
-        />
+        />)
         break
       default:
-        view = <DaysView
+        view = (<DaysView
           date={calendarDate}
           nextView={this.nextView}
           maxDate={this.state.maxDate}
           minDate={this.state.minDate}
           setDate={this.setDate}
-        />
+        />)
     }
 
     let todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today')
@@ -279,7 +279,8 @@ const Calendar = React.createClass({
         {view}
         <span
           className={'today-btn' + (this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : '')}
-          onClick={this.todayClick}>
+          onClick={this.todayClick}
+        >
           {todayText}
         </span>
       </div>
