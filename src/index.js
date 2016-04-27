@@ -27,7 +27,7 @@ const Calendar = React.createClass({
     minView: React.PropTypes.number,
     onBlur: React.PropTypes.func,
     onChange: React.PropTypes.func,
-    openOnInputFocus: React.PropTypes.func,
+    openOnInputFocus: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     hideTouchKeyboard: React.PropTypes.bool,
     hideIcon: React.PropTypes.bool,
