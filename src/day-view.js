@@ -16,10 +16,11 @@ export default class DayView extends React.Component {
   }
 
   getDaysTitles() {
-    if (moment.locale() === 'de') {
-      return 'Mo_Di_Mi_Do_Fr_Sa_So'.split('_').map(item => ({ val: item, label: item }))
-    }
-    return moment.weekdaysMin().map(item => ({ val: item, label: item }))
+    let now = moment()
+    return [0,1,2,3,4,5,6].map(i => {
+      let weekday = now.weekday(i).format('dd')
+      return { val: weekday, label: weekday }
+    })
   }
 
   next = () => {
