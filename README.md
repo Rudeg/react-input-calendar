@@ -178,6 +178,14 @@ Default: `'today'`
 
 'Today' button text.
 
+#### props.inputName
+
+Type: `String`
+
+Default: null
+
+Define the name of the input field where the date picker represents its value.
+
 #### props.inputFieldId
 
 Type: `String`

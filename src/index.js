@@ -22,6 +22,7 @@ const Calendar = React.createClass({
     minDate: React.PropTypes.any,
     maxDate: React.PropTypes.any,
     format: React.PropTypes.string,
+    inputName: React.PropTypes.string,
     inputFieldId: React.PropTypes.string,
     inputFieldClass: React.PropTypes.string,
     minView: React.PropTypes.number,
@@ -323,6 +324,7 @@ const Calendar = React.createClass({
     return (
       <div className="input-calendar">
         <input
+          name={this.props.inputName}
           className={inputClass}
           id={this.props.inputFieldId}
           onBlur={this.inputBlur}
