@@ -39,7 +39,7 @@ export default class DayView extends React.Component {
     this.props.setDate(prevDate)
   }
 
-  cellClick = (e) => {
+  cellClick = e => {
     let cell = e.target,
       date = parseInt(cell.innerHTML, 10),
       newDate = this.props.date ? this.props.date.clone() : moment()

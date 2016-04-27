@@ -20,7 +20,7 @@ http://rudeg.github.io/react-input-calendar
 ## Usage
 
 ```javascript
-var Calendar = require('react-input-calendar')
+import Calendar from 'react-input-calendar'
 <Calendar format='DD/MM/YYYY' date='4-12-2014' />
 ```
 
