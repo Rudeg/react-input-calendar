@@ -17,9 +17,45 @@ export default class YearsView extends React.Component {
     years: []
   }
 
+  cellClick = e => {
+    const year = parseInt(e.target.innerHTML, 10)
+    const date = this.props.date.clone().year(year)
+    if (this.checkIfYearDisabled(date)) return
+    this.props.prevView(date)
+  }
+
   checkIfYearDisabled (year) {
     return year.clone().endOf('year').isBefore(this.props.minDate, 'day') ||
       year.clone().startOf('year').isAfter(this.props.maxDate, 'day')
+  }
+
+  getYears() {
+    let now = this.props.date
+    let start = now.clone().subtract(5, 'year')
+    let end = now.clone().add(6, 'year')
+    let currYear = now.year()
+    let items = []
+    let inRange = this.rangeCheck(currYear)
+
+    const { years } = this.state
+
+    if (years.length > 0 && inRange) {
+      return years
+    }
+
+    moment()
+      .range(start, end)
+      .by('years', year => {
+        items.push({
+          label: year.format('YYYY'),
+          disabled: this.checkIfYearDisabled(year),
+          curr: currYear === year.year()
+        })
+      })
+
+    this.setState({ years: items })
+
+    return items
   }
 
   next = () => {
@@ -46,42 +82,6 @@ export default class YearsView extends React.Component {
     return years[0].label <= currYear && years[years.length-1].label >= currYear
   }
 
-  getYears() {
-    let now = this.props.date,
-      start = now.clone().subtract(5, 'year'),
-      end = now.clone().add(6, 'year'),
-      currYear = now.year(),
-      items = [],
-      inRange = this.rangeCheck(currYear)
-
-    const { years } = this.state
-
-    if (years.length > 0 && inRange) {
-      return years
-    }
-
-    moment()
-      .range(start, end)
-      .by('years', year => {
-        items.push({
-          label: year.format('YYYY'),
-          disabled: this.checkIfYearDisabled(year),
-          curr: currYear === year.year()
-        })
-      })
-
-    this.setState({ years: items })
-
-    return items
-  }
-
-  cellClick = e => {
-    const year = parseInt(e.target.innerHTML, 10)
-    const date = this.props.date.clone().year(year)
-    if (this.checkIfYearDisabled(date)) return
-    this.props.prevView(date)
-  }
-
   render() {
     const years = this.getYears()
     const currYear = this.props.date.year()
@@ -89,9 +89,9 @@ export default class YearsView extends React.Component {
 
     let yearsCells = years.map((item, i) => {
       _class = cs({
-        'year': true,
-        'disabled': item.disabled,
-        'current': item.label == currYear
+        year: true,
+        disabled: item.disabled,
+        current: item.label == currYear
       })
       return <Cell value={item.label} classes={_class} key={i} />
     })

@@ -13,10 +13,29 @@ export default class MonthView extends React.Component {
     maxDate: React.PropTypes.any
   }
 
+  cellClick = e => {
+    const month = e.target.innerHTML
+    if (this.checkIfMonthDisabled(month)) return
+
+    const date = this.props.date.clone().month(month)
+    this.props.prevView(date)
+  }
+
   checkIfMonthDisabled(month) {
     const now = this.props.date
     return now.clone().month(month).endOf('month').isBefore(this.props.minDate, 'day') ||
       now.clone().month(month).startOf('month').isAfter(this.props.maxDate, 'day')
+  }
+
+  getMonth() {
+    const month = this.props.date.month()
+    return moment.monthsShort().map((item, i) => {
+      return {
+        label: item,
+        disabled: this.checkIfMonthDisabled(i),
+        curr: i === month
+      }
+    })
   }
 
   next = () => {
@@ -35,32 +54,13 @@ export default class MonthView extends React.Component {
     this.props.setDate(prevDate)
   }
 
-  cellClick = e => {
-    const month = e.target.innerHTML
-    if (this.checkIfMonthDisabled(month)) return
-
-    const date = this.props.date.clone().month(month)
-    this.props.prevView(date)
-  }
-
-  getMonth() {
-    const month = this.props.date.month()
-    return moment.monthsShort().map((item, i) => {
-      return {
-        label: item,
-        disabled: this.checkIfMonthDisabled(i),
-        curr: i === month
-      }
-    })
-  }
-
   render() {
     const currentDate = this.props.date.format('YYYY')
     let months = this.getMonth().map((item, i) => {
       let _class = cs({
-        'month': true,
-        'disabled': item.disabled,
-        'current': item.curr
+        month: true,
+        disabled: item.disabled,
+        current: item.curr
       })
       return <Cell classes={_class} key={i} value={item.label} />
     })

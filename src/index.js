@@ -79,30 +79,12 @@ const Calendar = React.createClass({
     document.removeEventListener('click', this.documentClick)
   },
 
-  setVisibility(val) {
-    const value = val !== undefined ? val : !this.state.isVisible
-    const eventMethod = value ? 'addEventListener' : 'removeEventListener'
-
-    document[eventMethod]('keydown', this.keyDown)
-
-    if (this.state.isVisible !== value) {
-      this.setState({ isVisible: value })
-    }
+  calendarClick() {
+    this.isCalendar = true
   },
 
-  setDate(date, isDayView) {
-    if (this.checkIfDateDisabled(date)) return
-
-    this.setState({
-      date,
-      inputValue: date.format(this.state.format),
-      isVisible: this.props.closeOnSelect
-        && isDayView ? !this.state.isVisible : this.state.isVisible
-    })
-
-    if (this.props.onChange) {
-      this.props.onChange(date.format(this.state.computableFormat))
-    }
+  changeDate(e) {
+    this.setState({ inputValue: e.target.value })
   },
 
   checkIfDateDisabled(date) {
@@ -110,40 +92,11 @@ const Calendar = React.createClass({
       || date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day')
   },
 
-  nextView() {
-    if (this.checkIfDateDisabled(this.state.date)) return
-    this.setState({ currentView: ++this.state.currentView })
-  },
-
-  prevView(date) {
-    let newDate = date
-    if (this.state.minDate && date.isBefore(this.state.minDate, 'day')) {
-      newDate = this.state.minDate.clone()
+  documentClick() {
+    if (!this.isCalendar) {
+      this.setVisibility(false)
     }
-
-    if (this.state.maxDate && date.isAfter(this.state.maxDate, 'day')) {
-      newDate = this.state.maxDate.clone()
-    }
-
-    if (this.state.currentView === this.state.minView) {
-      this.setState({
-        date: newDate,
-        inputValue: date.format(this.state.format),
-        isVisible: false
-      })
-      if (this.props.onChange) {
-        this.props.onChange(date.format(this.state.computableFormat))
-      }
-    } else {
-      this.setState({
-        date,
-        currentView: --this.state.currentView
-      })
-    }
-  },
-
-  changeDate(e) {
-    this.setState({ inputValue: e.target.value })
+    this.isCalendar = false
   },
 
   inputBlur(e) {
@@ -184,16 +137,69 @@ const Calendar = React.createClass({
     }
   },
 
+  isCalendar: false,
 
-  documentClick() {
-    if (!this.isCalendar) {
-      this.setVisibility(false)
-    }
-    this.isCalendar = false
+  keyDown(e) {
+    Util.keyDownActions.call(this, e.keyCode)
   },
 
-  calendarClick() {
-    this.isCalendar = true
+
+  nextView() {
+    if (this.checkIfDateDisabled(this.state.date)) return
+    this.setState({ currentView: ++this.state.currentView })
+  },
+
+  prevView(date) {
+    let newDate = date
+    if (this.state.minDate && date.isBefore(this.state.minDate, 'day')) {
+      newDate = this.state.minDate.clone()
+    }
+
+    if (this.state.maxDate && date.isAfter(this.state.maxDate, 'day')) {
+      newDate = this.state.maxDate.clone()
+    }
+
+    if (this.state.currentView === this.state.minView) {
+      this.setState({
+        date: newDate,
+        inputValue: date.format(this.state.format),
+        isVisible: false
+      })
+      if (this.props.onChange) {
+        this.props.onChange(date.format(this.state.computableFormat))
+      }
+    } else {
+      this.setState({
+        date,
+        currentView: --this.state.currentView
+      })
+    }
+  },
+
+  setDate(date, isDayView) {
+    if (this.checkIfDateDisabled(date)) return
+
+    this.setState({
+      date,
+      inputValue: date.format(this.state.format),
+      isVisible: this.props.closeOnSelect
+        && isDayView ? !this.state.isVisible : this.state.isVisible
+    })
+
+    if (this.props.onChange) {
+      this.props.onChange(date.format(this.state.computableFormat))
+    }
+  },
+
+  setVisibility(val) {
+    const value = val !== undefined ? val : !this.state.isVisible
+    const eventMethod = value ? 'addEventListener' : 'removeEventListener'
+
+    document[eventMethod]('keydown', this.keyDown)
+
+    if (this.state.isVisible !== value) {
+      this.setState({ isVisible: value })
+    }
   },
 
   todayClick() {
@@ -216,12 +222,6 @@ const Calendar = React.createClass({
     this.isCalendar = true
     this.setVisibility()
   },
-
-  keyDown(e) {
-    Util.keyDownActions.call(this, e.keyCode)
-  },
-
-  isCalendar: false,
 
   render() {
     // its ok for this.state.date to be null, but we should never
@@ -279,7 +279,7 @@ const Calendar = React.createClass({
       <div className={calendarClass} onClick={this.calendarClick}>
         {view}
         <span
-          className={'today-btn' + (this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : '')}
+          className={`today-btn${this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''}`}
           onClick={this.todayClick}
         >
           {todayText}

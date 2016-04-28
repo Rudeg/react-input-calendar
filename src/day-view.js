@@ -15,6 +15,50 @@ export default class DayView extends React.Component {
     nextView: React.PropTypes.func
   }
 
+  cellClick = e => {
+    let cell = e.target;
+    let date = parseInt(cell.innerHTML, 10);
+    let newDate = this.props.date ? this.props.date.clone() : moment();
+
+    if (isNaN(date)) return
+
+    if (cell.className.indexOf('prev') > -1 ) {
+        newDate.subtract(1, 'months')
+    } else if (cell.className.indexOf('next') > -1) {
+        newDate.add(1, 'months')
+    }
+
+    newDate.date(date)
+    this.props.setDate(newDate, true)
+  }
+
+  getDays() {
+    let now = this.props.date ? this.props.date : moment()
+    let start = now.clone().startOf('month').weekday(0)
+    let end = now.clone().endOf('month').weekday(6)
+    let minDate = this.props.minDate
+    let maxDate = this.props.maxDate
+    let month = now.month()
+    let today = moment()
+    let currDay = now.date()
+    let year = now.year()
+    let days = []
+
+    moment()
+      .range(start, end)
+      .by('days', day => {
+        days.push({
+          label: day.format('D'),
+          prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
+          next: day.month() > month || day.year() > year,
+          disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
+          curr: day.date() === currDay && day.month() === month,
+          today: day.date() === today.date() && day.month() === today.month() && day.year() === today.year()
+        })
+      })
+    return days
+  }
+
   getDaysTitles() {
     let now = moment()
     return [0,1,2,3,4,5,6].map(i => {
@@ -39,63 +83,21 @@ export default class DayView extends React.Component {
     this.props.setDate(prevDate)
   }
 
-  cellClick = e => {
-    let cell = e.target,
-      date = parseInt(cell.innerHTML, 10),
-      newDate = this.props.date ? this.props.date.clone() : moment()
-
-    if (isNaN(date)) return
-
-    if (cell.className.indexOf('prev') > -1 ) {
-        newDate.subtract(1, 'months')
-    } else if (cell.className.indexOf('next') > -1) {
-        newDate.add(1, 'months')
-    }
-
-    newDate.date(date)
-    this.props.setDate(newDate, true)
-  }
-
-  getDays() {
-    let now = this.props.date ? this.props.date : moment(),
-      start = now.clone().startOf('month').weekday(0),
-      end = now.clone().endOf('month').weekday(6),
-      minDate = this.props.minDate,
-      maxDate = this.props.maxDate,
-      month = now.month(),
-      today = moment(),
-      currDay = now.date(),
-      year = now.year(),
-      days = []
-
-    moment()
-      .range(start, end)
-      .by('days', day => {
-        days.push({
-          label: day.format('D'),
-          prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
-          next: day.month() > month || day.year() > year,
-          disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
-          curr: day.date() === currDay && day.month() === month,
-          today: day.date() === today.date() && day.month() === today.month() && day.year() === today.year()
-        })
-      })
-    return days
-  }
-
   render() {
     let titles = this.getDaysTitles().map((item, i) => {
       return <Cell classes="day title" key={i} value={item.label} />
-    }), _class
+    });
+
+    let _class;
 
     let days = this.getDays().map((item, i) => {
       _class = cs({
-        'day': true,
-        'next': item.next,
-        'prev': item.prev,
-        'disabled': item.disabled,
-        'current': item.curr,
-        'today': item.today
+        day: true,
+        next: item.next,
+        prev: item.prev,
+        disabled: item.disabled,
+        current: item.curr,
+        today: item.today
       })
       return <Cell classes={_class} key={i} value={item.label} />
     })
