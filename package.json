@@ -3,7 +3,7 @@
   "description": "Datepicker widget react component",
   "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
   "user": "Rudeg",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "scripts": {
     "prepublish": ". ./.scripts/prepublish.sh",
     "lint": "eslint src",
