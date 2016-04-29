@@ -16,16 +16,16 @@ export default class DayView extends React.Component {
   }
 
   cellClick = e => {
-    let cell = e.target;
-    let date = parseInt(cell.innerHTML, 10);
-    let newDate = this.props.date ? this.props.date.clone() : moment();
+    let cell = e.target
+    let date = parseInt(cell.innerHTML, 10)
+    let newDate = this.props.date ? this.props.date.clone() : moment()
 
     if (isNaN(date)) return
 
     if (cell.className.indexOf('prev') > -1 ) {
-        newDate.subtract(1, 'months')
+      newDate.subtract(1, 'months')
     } else if (cell.className.indexOf('next') > -1) {
-        newDate.add(1, 'months')
+      newDate.add(1, 'months')
     }
 
     newDate.date(date)
@@ -86,9 +86,8 @@ export default class DayView extends React.Component {
   render() {
     let titles = this.getDaysTitles().map((item, i) => {
       return <Cell classes="day title" key={i} value={item.label} />
-    });
-
-    let _class;
+    })
+    let _class
 
     let days = this.getDays().map((item, i) => {
       _class = cs({

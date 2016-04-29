@@ -12,16 +12,6 @@ import Util from './util'
 class Calendar extends React.Component {
   constructor(props, context) {
     super(props, context)
-    this.calendarClick = this.calendarClick.bind(this)
-    this.changeDate = this.changeDate.bind(this)
-    this.documentClick = this.documentClick.bind(this)
-    this.inputBlur = this.inputBlur.bind(this)
-    this.keyDown = this.keyDown.bind(this)
-    this.nextView = this.nextView.bind(this)
-    this.prevView = this.prevView.bind(this)
-    this.setDate = this.setDate.bind(this)
-    this.todayClick = this.todayClick.bind(this)
-    this.toggleClick = this.toggleClick.bind(this)
     const date = props.date ? moment(Util.toDate(props.date)) : null
     const minDate = props.minDate ? moment(Util.toDate(props.minDate)) : null
     const maxDate = props.maxDate ? moment(Util.toDate(props.maxDate)) : null
@@ -63,7 +53,7 @@ class Calendar extends React.Component {
     document.removeEventListener('click', this.documentClick)
   }
 
-  changeDate(e) { //eslint-disable-line
+  changeDate = e => { //eslint-disable-line
     this.setState({ inputValue: e.target.value })
   }
 
@@ -72,14 +62,14 @@ class Calendar extends React.Component {
       || date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day')
   }
 
-  documentClick() {
+  documentClick = () => {
     if (!this.state.isCalendar) {
       this.setVisibility(false)
     }
     this.setState({ isCalendar: false })
   }
 
-  inputBlur(e) {
+  inputBlur = e => {
     let newDate = null
     let computableDate = null
     const date = this.state.inputValue
@@ -117,16 +107,16 @@ class Calendar extends React.Component {
     }
   }
 
-  keyDown(e) {
+  keyDown = e => {
     Util.keyDownActions.call(this, e.keyCode)
   }
 
-  nextView() {
+  nextView = () => {
     if (this.checkIfDateDisabled(this.state.date)) return
     this.setState({ currentView: ++this.state.currentView })
   }
 
-  prevView(date) {
+  prevView = date => {
     let newDate = date
     if (this.state.minDate && date.isBefore(this.state.minDate, 'day')) {
       newDate = this.state.minDate.clone()
@@ -153,15 +143,15 @@ class Calendar extends React.Component {
     }
   }
 
-  setDate(date, isDayView) {
+  setDate = (date, isDayView) => {
     if (this.checkIfDateDisabled(date)) return
 
-    // this.setState({
-    //   date,
-    //   inputValue: date.format(this.state.format),
-    //   isVisible: this.props.closeOnSelect
-    //     && isDayView ? !this.state.isVisible : this.state.isVisible
-    // })
+    this.setState({
+      date,
+      inputValue: date.format(this.state.format),
+      isVisible: this.props.closeOnSelect
+        && isDayView ? !this.state.isVisible : this.state.isVisible
+    })
 
     if (this.props.onChange) {
       this.props.onChange(date.format(this.state.computableFormat))
@@ -179,11 +169,11 @@ class Calendar extends React.Component {
     }
   }
 
-  calendarClick() {
+  calendarClick = () => {
     this.setState({ isCalendar: true })
   }
 
-  todayClick() {
+  todayClick = () => {
     const today = moment().startOf('day')
 
     if (this.checkIfDateDisabled(today)) return
@@ -199,7 +189,7 @@ class Calendar extends React.Component {
     }
   }
 
-  toggleClick() {
+  toggleClick = () => {
     this.setState({ isCalendar: true })
     this.setVisibility()
   }
