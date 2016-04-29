@@ -13,8 +13,14 @@ export default class YearsView extends React.Component {
     maxDate: React.PropTypes.any,
     changeView: React.PropTypes.func
   }
-  state = {
-    years: []
+  state = { years: [] }
+
+  componentWillMount() {
+    this.getYears()
+  }
+
+  componentWillReceiveProps() {
+    this.getYears()
   }
 
   cellClick = e => {
@@ -83,7 +89,7 @@ export default class YearsView extends React.Component {
   }
 
   render() {
-    const years = this.getYears()
+    const years = this.state.years
     const currYear = this.props.date.year()
     let _class
 

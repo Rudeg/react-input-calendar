@@ -7,7 +7,7 @@ import Cell from './cell'
 import ViewHeader from './view-header'
 
 export default class MonthView extends React.Component {
-  propTypes = {
+  static propTypes = {
     date: React.PropTypes.object.isRequired,
     minDate: React.PropTypes.any,
     maxDate: React.PropTypes.any
