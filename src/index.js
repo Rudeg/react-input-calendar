@@ -42,10 +42,12 @@ class Calendar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     this.setState({
       date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
       inputValue: nextProps.date
-        ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null
+        ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null,
+        isVisible: nextProps.disabled === true
     })
   }
 
@@ -164,7 +166,7 @@ class Calendar extends React.Component {
 
     document[eventMethod]('keydown', this.keyDown)
 
-    if (this.state.isVisible !== value) {
+    if (this.state.isVisible !== value && !this.props.disabled) {
       this.setState({ isVisible: value })
     }
   }
@@ -253,8 +255,7 @@ class Calendar extends React.Component {
           className={
             `today-btn${this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''}`
           }
-          onClick={this.todayClick}
-        >
+          onClick={this.todayClick}>
           {todayText}
         </span>
       </div>
@@ -276,7 +277,7 @@ class Calendar extends React.Component {
     let calendarIcon
     if (this.props.customIcon == null) {
       // Do not show calendar icon if hideIcon is true
-      calendarIcon = this.props.hideIcon ? '' :
+      calendarIcon = this.props.hideIcon || this.props.disabled ? '' :
         <span className="icon-wrapper calendar-icon" onClick={this.toggleClick} >
           <svg width="16" height="16" viewBox="0 0 16 16">
             <path d="M5 6h2v2h-2zM8 6h2v2h-2zM11 6h2v2h-2zM2 12h2v2h-2zM5
@@ -308,6 +309,7 @@ class Calendar extends React.Component {
           onFocus={this.props.openOnInputFocus ? this.toggleClick : ''}
           placeholder={this.props.placeholder}
           readOnly={readOnly}
+          disabled={this.props.disabled}
           type="text"
           value={this.state.inputValue}
         />
@@ -341,7 +343,8 @@ Calendar.propTypes = {
   hideTouchKeyboard: React.PropTypes.bool,
   hideIcon: React.PropTypes.bool,
   customIcon: React.PropTypes.string,
-  todayText: React.PropTypes.string
+  todayText: React.PropTypes.string,
+  disabled: React.PropTypes.bool
 }
 
 export default Calendar
