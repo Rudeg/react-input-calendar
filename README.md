@@ -130,6 +130,14 @@ Default: null
 
 Set a function that will be triggered when the input field is blurred. It will return the event and the date in the props.computableFormat format.
 
+#### props.hideOnBlur
+
+Type: `Boolean`
+
+Default: false
+
+Setting this value to true will hide the calendar, this works best in conjunction with onBlur prop.
+
 #### props.closeOnSelect
 
 Type: `Boolean`
