@@ -109,6 +109,16 @@ class Calendar extends React.Component {
     }
   }
 
+  inputFocus = e => {
+    if (this.props.openOnInputFocus) {
+      this.toggleClick()
+    }
+
+    if (this.props.onFocus) {
+      this.props.onFocus(e)
+    }
+  }
+
   keyDown = e => {
     Util.keyDownActions.call(this, e.keyCode)
   }
@@ -306,7 +316,7 @@ class Calendar extends React.Component {
           id={this.props.inputFieldId}
           onBlur={this.inputBlur}
           onChange={this.changeDate}
-          onFocus={this.props.openOnInputFocus ? this.toggleClick : ''}
+          onFocus={this.inputFocus}
           placeholder={this.props.placeholder}
           readOnly={readOnly}
           disabled={this.props.disabled}
@@ -338,6 +348,7 @@ Calendar.propTypes = {
   minView: React.PropTypes.number,
   onBlur: React.PropTypes.func,
   onChange: React.PropTypes.func,
+  onFocus: React.PropTypes.func,
   openOnInputFocus: React.PropTypes.bool,
   placeholder: React.PropTypes.string,
   hideTouchKeyboard: React.PropTypes.bool,
