@@ -138,6 +138,14 @@ Default: false
 
 Setting this value to true will hide the calendar, this works best in conjunction with onBlur prop.
 
+#### props.onFocus
+
+Type: `Function`
+
+Default: null
+
+Set a function that will be triggered when the input field is focused.
+
 #### props.closeOnSelect
 
 Type: `Boolean`
