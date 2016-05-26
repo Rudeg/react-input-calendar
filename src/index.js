@@ -258,7 +258,7 @@ class Calendar extends React.Component {
       'icon-hidden': this.props.hideIcon
     })
 
-    let calendar = !this.state.isVisible ? '' :
+    let calendar = !this.state.isVisible || this.props.disabled ? '' :
       <div className={calendarClass} onClick={this.calendarClick}>
         {view}
         <span
