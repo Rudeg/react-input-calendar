@@ -40,7 +40,6 @@
   line-height: 27px;
   transform: translateY(4px);
   cursor: pointer;
-  background-image: url('../../icon/calendar.svg');
 }
 
 .input-calendar .days,
