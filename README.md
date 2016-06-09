@@ -226,6 +226,22 @@ Default: false
 
 If true, the input field gets disabled and the icon next to it disappears.
 
+#### props.customIcon
+
+Type: `String`
+
+Default: null
+
+Define the className of the calendar icon. If you need to customize the calendar icon, I would recommend using [FontAwesome's](http://fontawesome.io/icons/) `fa fa-calendar` icon. Then, update the css style for the icon.
+```
+.fa-calendar {
+    color: white;
+}
+
+```
+
+If null, then the default calendar icon is used   
+
 ## License
 
 MIT
