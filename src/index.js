@@ -27,7 +27,7 @@ class Calendar extends React.Component {
       maxDate,
       format,
       computableFormat,
-      inputValue: date ? date.format(format) : null,
+      inputValue: date ? date.format(format) : undefined,
       views: ['days', 'months', 'years'],
       minView,
       currentView: minView || 0,
