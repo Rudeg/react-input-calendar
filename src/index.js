@@ -64,11 +64,13 @@ class Calendar extends React.Component {
       || date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day')
   }
 
-  documentClick = () => {
+  documentClick = e => {
+    e.preventDefault();
     if (!this.state.isCalendar) {
       this.setVisibility(false)
     }
     this.setState({ isCalendar: false })
+
   }
 
   inputBlur = e => {
