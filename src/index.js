@@ -43,12 +43,14 @@ class Calendar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    this.setState({
+    var newState = {
       date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
-      inputValue: nextProps.date
-        ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null,
-        isVisible: nextProps.disabled === true
-    })
+      inputValue: nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null,
+    };
+    if (nextProps.disabled === true) {
+      newState.isVisible = false;
+    }
+    this.setState(newState);
   }
 
   componentWillUnmount() {
