@@ -328,7 +328,7 @@ class Calendar extends React.Component {
           readOnly={readOnly}
           disabled={this.props.disabled}
           type="text"
-          value={this.state.inputValue}
+          value={this.state.inputValue||''}
         />
         {calendarIcon}
         {calendar}
