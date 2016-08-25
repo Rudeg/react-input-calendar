@@ -70,12 +70,10 @@ class Calendar extends React.Component {
   }
 
   documentClick = e => {
-    e.preventDefault();
     if (!this.state.isCalendar) {
       this.setVisibility(false)
     }
     this.setState({ isCalendar: false })
-
   }
 
   inputBlur = e => {
