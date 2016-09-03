@@ -160,7 +160,7 @@ class Calendar extends React.Component {
     }
   }
 
-  setDate = (date, isDayView = true) => {
+  setDate = (date, isDayView = false) => {
     if (this.checkIfDateDisabled(date)) return
 
     this.setState({
