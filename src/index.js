@@ -47,6 +47,8 @@ class Calendar extends React.Component {
       date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
       inputValue:
         nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null,
+      minDate: nextProps.minDate ? moment(Util.toDate(nextProps.minDate)) : null,
+      maxDate: nextProps.maxDate ? moment(Util.toDate(nextProps.maxDate)) : null,
     }
 
     if (nextProps.disabled === true) {
