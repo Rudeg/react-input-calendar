@@ -42,17 +42,18 @@
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "sinon": "^1.17.3",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "moment": "^2.10.6",
     "moment-range": "^2.1.0",
-    "react": "^0.14.7 || ^15.0.0"
+    "react": "^0.14.7 || ^15.0.0",
+    "prop-types": "^15.5.10"
   },
   "dependencies": {
     "babel-runtime": "^6.5.0",
-    "classnames": "^2.2.3",
-    "prop-types": "^15.5.10"
+    "classnames": "^2.2.3"
   },
   "main": "dist/index.js",
   "engines": {
