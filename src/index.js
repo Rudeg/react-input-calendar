@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import cs from 'classnames'
 import moment from 'moment'
@@ -353,31 +354,31 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  closeOnSelect: React.PropTypes.bool,
-  computableFormat: React.PropTypes.string,
-  strictDateParsing: React.PropTypes.bool,
-  parsingFormat: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.arrayOf(React.PropTypes.string)
+  closeOnSelect: PropTypes.bool,
+  computableFormat: PropTypes.string,
+  strictDateParsing: PropTypes.bool,
+  parsingFormat: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
   ]),
-  date: React.PropTypes.any,
-  minDate: React.PropTypes.any,
-  maxDate: React.PropTypes.any,
-  format: React.PropTypes.string,
-  inputName: React.PropTypes.string,
-  inputFieldId: React.PropTypes.string,
-  inputFieldClass: React.PropTypes.string,
-  minView: React.PropTypes.number,
-  onBlur: React.PropTypes.func,
-  onChange: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  openOnInputFocus: React.PropTypes.bool,
-  placeholder: React.PropTypes.string,
-  hideTouchKeyboard: React.PropTypes.bool,
-  hideIcon: React.PropTypes.bool,
-  customIcon: React.PropTypes.string,
-  todayText: React.PropTypes.string,
-  disabled: React.PropTypes.bool
+  date: PropTypes.any,
+  minDate: PropTypes.any,
+  maxDate: PropTypes.any,
+  format: PropTypes.string,
+  inputName: PropTypes.string,
+  inputFieldId: PropTypes.string,
+  inputFieldClass: PropTypes.string,
+  minView: PropTypes.number,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  openOnInputFocus: PropTypes.bool,
+  placeholder: PropTypes.string,
+  hideTouchKeyboard: PropTypes.bool,
+  hideIcon: PropTypes.bool,
+  customIcon: PropTypes.string,
+  todayText: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default Calendar

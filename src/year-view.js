@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import cs from 'classnames'
 import moment from 'moment'
 import 'moment-range'
@@ -8,10 +9,10 @@ import ViewHeader from './view-header'
 
 export default class YearsView extends React.Component {
   static propTypes = {
-    date: React.PropTypes.object,
-    minDate: React.PropTypes.any,
-    maxDate: React.PropTypes.any,
-    changeView: React.PropTypes.func
+    date: PropTypes.object,
+    minDate: PropTypes.any,
+    maxDate: PropTypes.any,
+    changeView: PropTypes.func
   }
   state = { years: [] }
 

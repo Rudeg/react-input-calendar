@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import cs from 'classnames'
 import moment from 'moment'
 import 'moment-range'
@@ -8,9 +9,9 @@ import ViewHeader from './view-header'
 
 export default class MonthView extends React.Component {
   static propTypes = {
-    date: React.PropTypes.object.isRequired,
-    minDate: React.PropTypes.any,
-    maxDate: React.PropTypes.any
+    date: PropTypes.object.isRequired,
+    minDate: PropTypes.any,
+    maxDate: PropTypes.any
   }
 
   cellClick = e => {
