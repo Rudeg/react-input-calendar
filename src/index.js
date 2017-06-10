@@ -41,14 +41,14 @@ class Calendar extends React.Component {
     document.addEventListener('click', this.documentClick)
   }
 
-
   componentWillReceiveProps(nextProps) {
     let newState = {
       date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
-      inputValue:
-        nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null,
+      inputValue: nextProps.date
+        ? moment(Util.toDate(nextProps.date)).format(this.state.format)
+        : null,
       minDate: nextProps.minDate ? moment(Util.toDate(nextProps.minDate)) : null,
-      maxDate: nextProps.maxDate ? moment(Util.toDate(nextProps.maxDate)) : null,
+      maxDate: nextProps.maxDate ? moment(Util.toDate(nextProps.maxDate)) : null
     }
 
     if (nextProps.disabled === true) {
@@ -62,13 +62,16 @@ class Calendar extends React.Component {
     document.removeEventListener('click', this.documentClick)
   }
 
-  changeDate = e => { //eslint-disable-line
+  changeDate = e => {
+    //eslint-disable-line
     this.setState({ inputValue: e.target.value })
   }
 
   checkIfDateDisabled(date) {
-    return date && this.state.minDate && date.isBefore(this.state.minDate, 'day')
-      || date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day')
+    return (
+      (date && this.state.minDate && date.isBefore(this.state.minDate, 'day')) ||
+      (date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day'))
+    )
   }
 
   documentClick = e => {
@@ -168,8 +171,9 @@ class Calendar extends React.Component {
     this.setState({
       date,
       inputValue: date.format(this.state.format),
-      isVisible: this.props.closeOnSelect
-        && isDayView ? !this.state.isVisible : this.state.isVisible
+      isVisible: this.props.closeOnSelect && isDayView
+        ? !this.state.isVisible
+        : this.state.isVisible
     })
 
     if (this.props.onChange) {
@@ -222,41 +226,49 @@ class Calendar extends React.Component {
 
     switch (this.state.currentView) {
       case 0:
-        view = (<DaysView
-          date={calendarDate}
-          nextView={this.nextView}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          setDate={this.setDate}
-        />)
+        view = (
+          <DaysView
+            date={calendarDate}
+            nextView={this.nextView}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            setDate={this.setDate}
+          />
+        )
         break
       case 1:
-        view = (<MonthsView
-          date={calendarDate}
-          nextView={this.nextView}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          prevView={this.prevView}
-          setDate={this.setDate}
-        />)
+        view = (
+          <MonthsView
+            date={calendarDate}
+            nextView={this.nextView}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            prevView={this.prevView}
+            setDate={this.setDate}
+          />
+        )
         break
       case 2:
-        view = (<YearsView
-          date={calendarDate}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          prevView={this.prevView}
-          setDate={this.setDate}
-        />)
+        view = (
+          <YearsView
+            date={calendarDate}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            prevView={this.prevView}
+            setDate={this.setDate}
+          />
+        )
         break
       default:
-        view = (<DaysView
-          date={calendarDate}
-          nextView={this.nextView}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          setDate={this.setDate}
-        />)
+        view = (
+          <DaysView
+            date={calendarDate}
+            nextView={this.nextView}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            setDate={this.setDate}
+          />
+        )
     }
 
     let todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today')
@@ -265,25 +277,28 @@ class Calendar extends React.Component {
       'icon-hidden': this.props.hideIcon
     })
 
-    let calendar = !this.state.isVisible || this.props.disabled ? '' :
-      <div className={calendarClass} onClick={this.calendarClick}>
-        {view}
-        <span
-          className={
-            `today-btn${this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''}`
-          }
-          onClick={this.todayClick}>
-          {todayText}
-        </span>
-      </div>
+    let calendar = !this.state.isVisible || this.props.disabled
+      ? ''
+      : <div className={calendarClass} onClick={this.calendarClick}>
+          {view}
+          <span
+            className={`today-btn${this.checkIfDateDisabled(moment().startOf('day'))
+              ? ' disabled'
+              : ''}`}
+            onClick={this.todayClick}
+          >
+            {todayText}
+          </span>
+        </div>
 
     let readOnly = false
 
     if (this.props.hideTouchKeyboard) {
       // do not break server side rendering:
       try {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-          .test(navigator.userAgent)) {
+        if (
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        ) {
           readOnly = true
         }
       } catch (e) {
@@ -328,7 +343,7 @@ class Calendar extends React.Component {
           readOnly={readOnly}
           disabled={this.props.disabled}
           type="text"
-          value={this.state.inputValue||''}
+          value={this.state.inputValue || ''}
         />
         {calendarIcon}
         {calendar}
