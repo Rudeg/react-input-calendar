@@ -39,6 +39,8 @@
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "^15.0.0",
+    "moment": "^2.10.6",
+    "moment-range": "^2.1.0",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.1"
   },
