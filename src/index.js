@@ -247,7 +247,7 @@ class Calendar extends React.Component {
             maxDate={this.state.maxDate}
             minDate={this.state.minDate}
             setDate={this.setDate}
-            setDateMonthChange={this.setDate}
+            setDateMonthChange={this.setDateNoSave}
           />
         )
         break
@@ -282,7 +282,7 @@ class Calendar extends React.Component {
             maxDate={this.state.maxDate}
             minDate={this.state.minDate}
             setDate={this.setDate}
-            setDateMonthChange={this.setDate}
+            setDateMonthChange={this.setDateNoSave}
           />
         )
     }
