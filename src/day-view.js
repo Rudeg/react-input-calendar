@@ -14,6 +14,7 @@ export default class DayView extends React.Component {
     minDate: PropTypes.any,
     maxDate: PropTypes.any,
     setDate:PropTypes.func,
+    setDateMonthChange:PropTypes.func,
     nextView: PropTypes.func
   }
 
@@ -75,7 +76,7 @@ export default class DayView extends React.Component {
     if (this.props.maxDate && nextDate.isAfter(this.props.maxDate, 'day')) {
       nextDate = this.props.maxDate
     }
-    this.props.setDate(nextDate)
+    this.props.setDateMonthChange(nextDate)
   }
 
   prev = () => {
@@ -83,7 +84,7 @@ export default class DayView extends React.Component {
     if (this.props.minDate && prevDate.isBefore(this.props.minDate, 'day')) {
       prevDate = this.props.minDate
     }
-    this.props.setDate(prevDate)
+    this.props.setDateMonthChange(prevDate)
   }
 
   render() {

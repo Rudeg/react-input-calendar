@@ -5,4 +5,6 @@ import '../../style/index.css'
 
 storiesOf('Calendar', module).add('default view', () => {
   return <Calendar format="DD/MM/YYYY" date="01/01/2016" />
+}).add('Save on close', () => {
+  return <Calendar format="DD/MM/YYYY" closeOnSelect={true}/>
 })
