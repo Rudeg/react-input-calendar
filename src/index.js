@@ -182,6 +182,19 @@ class Calendar extends React.Component {
     }
   }
 
+  setDateNoSave = (date) => {
+    if (!this.props.closeOnSelect) {
+      this.setDate(date);
+      return;
+    }
+
+    this.setState((previousState) => {
+      return Object.assign({}, previousState, {
+        date
+      });
+    });
+  }
+
   setVisibility(val) {
     const value = val !== undefined ? val : !this.state.isVisible
     const eventMethod = value ? 'addEventListener' : 'removeEventListener'
@@ -234,6 +247,7 @@ class Calendar extends React.Component {
             maxDate={this.state.maxDate}
             minDate={this.state.minDate}
             setDate={this.setDate}
+            setDateMonthChange={this.setDate}
           />
         )
         break
@@ -245,7 +259,7 @@ class Calendar extends React.Component {
             maxDate={this.state.maxDate}
             minDate={this.state.minDate}
             prevView={this.prevView}
-            setDate={this.setDate}
+            setDate={this.setDateNoSave}
           />
         )
         break
@@ -256,7 +270,7 @@ class Calendar extends React.Component {
             maxDate={this.state.maxDate}
             minDate={this.state.minDate}
             prevView={this.prevView}
-            setDate={this.setDate}
+            setDate={this.setDateNoSave}
           />
         )
         break
@@ -268,6 +282,7 @@ class Calendar extends React.Component {
             maxDate={this.state.maxDate}
             minDate={this.state.minDate}
             setDate={this.setDate}
+            setDateMonthChange={this.setDate}
           />
         )
     }
