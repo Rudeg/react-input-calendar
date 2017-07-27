@@ -40,6 +40,15 @@ class Calendar extends React.Component {
 
   componentDidMount() {
     document.addEventListener('click', this.documentClick)
+    if (this.props.focused) {
+      this.focusDateInput();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.focused !== prevProps.focused && this.props.focused) {
+      this.focusDateInput();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -218,6 +227,10 @@ class Calendar extends React.Component {
     this.setVisibility()
   }
 
+  focusDateInput = () => {
+    this.dateInput && this.dateInput.focus();
+  }
+
   render() {
     // its ok for this.state.date to be null, but we should never
     // pass null for the date into the calendar pop up, as we want
@@ -344,6 +357,7 @@ class Calendar extends React.Component {
           readOnly={readOnly}
           disabled={this.props.disabled}
           type="text"
+          ref={(input) => { this.dateInput = input; }}
           value={this.state.inputValue || ''}
         />
         {calendarIcon}
@@ -378,7 +392,8 @@ Calendar.propTypes = {
   hideIcon: PropTypes.bool,
   customIcon: PropTypes.string,
   todayText: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  focused: PropTypes.bool,
 }
 
 export default Calendar
