@@ -154,6 +154,7 @@
   content: '.';
   position: absolute;
   bottom: 15px;
+  right: 1px;
   font-size: 20px;
   color: #F39C12;
 }

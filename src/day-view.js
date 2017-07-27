@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import cs from 'classnames'
 import moment from 'moment'
 import 'moment-range'
@@ -8,11 +10,11 @@ import ViewHeader from './view-header'
 
 export default class DayView extends React.Component {
   static propTypes = {
-    date: React.PropTypes.object.isRequired,
-    minDate: React.PropTypes.any,
-    maxDate: React.PropTypes.any,
-    setDate: React.PropTypes.func,
-    nextView: React.PropTypes.func
+    date: PropTypes.object.isRequired,
+    minDate: PropTypes.any,
+    maxDate: PropTypes.any,
+    setDate:PropTypes.func,
+    nextView: PropTypes.func
   }
 
   cellClick = e => {
@@ -22,7 +24,7 @@ export default class DayView extends React.Component {
 
     if (isNaN(date)) return
 
-    if (cell.className.indexOf('prev') > -1 ) {
+    if (cell.className.indexOf('prev') > -1) {
       newDate.subtract(1, 'months')
     } else if (cell.className.indexOf('next') > -1) {
       newDate.add(1, 'months')
@@ -44,24 +46,25 @@ export default class DayView extends React.Component {
     let year = now.year()
     let days = []
 
-    moment()
-      .range(start, end)
-      .by('days', day => {
-        days.push({
-          label: day.format('D'),
-          prev: (day.month() < month && !(day.year() > year)) || day.year() < year ,
-          next: day.month() > month || day.year() > year,
-          disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
-          curr: day.date() === currDay && day.month() === month,
-          today: day.date() === today.date() && day.month() === today.month() && day.year() === today.year()
-        })
+    moment().range(start, end).by('days', day => {
+      days.push({
+        label: day.format('D'),
+        prev: (day.month() < month && !(day.year() > year)) || day.year() < year,
+        next: day.month() > month || day.year() > year,
+        disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
+        curr: day.date() === currDay && day.month() === month,
+        today:
+          day.date() === today.date() &&
+            day.month() === today.month() &&
+            day.year() === today.year()
       })
+    })
     return days
   }
 
   getDaysTitles() {
     let now = moment()
-    return [0,1,2,3,4,5,6].map(i => {
+    return [0, 1, 2, 3, 4, 5, 6].map(i => {
       let weekday = now.weekday(i).format('dd')
       return { val: weekday, label: weekday }
     })
@@ -109,7 +112,8 @@ export default class DayView extends React.Component {
           data={currentDate}
           next={this.next}
           prev={this.prev}
-          titleAction={this.props.nextView} />
+          titleAction={this.props.nextView}
+        />
         <div className="days-title">{titles}</div>
         <div className="days" onClick={this.cellClick}>{days}</div>
       </div>

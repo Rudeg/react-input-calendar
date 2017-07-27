@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import cs from 'classnames'
 import moment from 'moment'
@@ -41,12 +42,14 @@ class Calendar extends React.Component {
     document.addEventListener('click', this.documentClick)
   }
 
-
   componentWillReceiveProps(nextProps) {
     let newState = {
       date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
-      inputValue:
-        nextProps.date ? moment(Util.toDate(nextProps.date)).format(this.state.format) : null,
+      inputValue: nextProps.date
+        ? moment(Util.toDate(nextProps.date)).format(this.state.format)
+        : null,
+      minDate: nextProps.minDate ? moment(Util.toDate(nextProps.minDate)) : null,
+      maxDate: nextProps.maxDate ? moment(Util.toDate(nextProps.maxDate)) : null
     }
 
     if (nextProps.disabled === true) {
@@ -60,13 +63,16 @@ class Calendar extends React.Component {
     document.removeEventListener('click', this.documentClick)
   }
 
-  changeDate = e => { //eslint-disable-line
+  changeDate = e => {
+    //eslint-disable-line
     this.setState({ inputValue: e.target.value })
   }
 
   checkIfDateDisabled(date) {
-    return date && this.state.minDate && date.isBefore(this.state.minDate, 'day')
-      || date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day')
+    return (
+      (date && this.state.minDate && date.isBefore(this.state.minDate, 'day')) ||
+      (date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day'))
+    )
   }
 
   documentClick = e => {
@@ -166,8 +172,9 @@ class Calendar extends React.Component {
     this.setState({
       date,
       inputValue: date.format(this.state.format),
-      isVisible: this.props.closeOnSelect
-        && isDayView ? !this.state.isVisible : this.state.isVisible
+      isVisible: this.props.closeOnSelect && isDayView
+        ? !this.state.isVisible
+        : this.state.isVisible
     })
 
     if (this.props.onChange) {
@@ -220,41 +227,49 @@ class Calendar extends React.Component {
 
     switch (this.state.currentView) {
       case 0:
-        view = (<DaysView
-          date={calendarDate}
-          nextView={this.nextView}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          setDate={this.setDate}
-        />)
+        view = (
+          <DaysView
+            date={calendarDate}
+            nextView={this.nextView}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            setDate={this.setDate}
+          />
+        )
         break
       case 1:
-        view = (<MonthsView
-          date={calendarDate}
-          nextView={this.nextView}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          prevView={this.prevView}
-          setDate={this.setDate}
-        />)
+        view = (
+          <MonthsView
+            date={calendarDate}
+            nextView={this.nextView}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            prevView={this.prevView}
+            setDate={this.setDate}
+          />
+        )
         break
       case 2:
-        view = (<YearsView
-          date={calendarDate}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          prevView={this.prevView}
-          setDate={this.setDate}
-        />)
+        view = (
+          <YearsView
+            date={calendarDate}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            prevView={this.prevView}
+            setDate={this.setDate}
+          />
+        )
         break
       default:
-        view = (<DaysView
-          date={calendarDate}
-          nextView={this.nextView}
-          maxDate={this.state.maxDate}
-          minDate={this.state.minDate}
-          setDate={this.setDate}
-        />)
+        view = (
+          <DaysView
+            date={calendarDate}
+            nextView={this.nextView}
+            maxDate={this.state.maxDate}
+            minDate={this.state.minDate}
+            setDate={this.setDate}
+          />
+        )
     }
 
     let todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today')
@@ -263,25 +278,28 @@ class Calendar extends React.Component {
       'icon-hidden': this.props.hideIcon
     })
 
-    let calendar = !this.state.isVisible || this.props.disabled ? '' :
-      <div className={calendarClass} onClick={this.calendarClick}>
-        {view}
-        <span
-          className={
-            `today-btn${this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''}`
-          }
-          onClick={this.todayClick}>
-          {todayText}
-        </span>
-      </div>
+    let calendar = !this.state.isVisible || this.props.disabled
+      ? ''
+      : <div className={calendarClass} onClick={this.calendarClick}>
+          {view}
+          <span
+            className={`today-btn${this.checkIfDateDisabled(moment().startOf('day'))
+              ? ' disabled'
+              : ''}`}
+            onClick={this.todayClick}
+          >
+            {todayText}
+          </span>
+        </div>
 
     let readOnly = false
 
     if (this.props.hideTouchKeyboard) {
       // do not break server side rendering:
       try {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-          .test(navigator.userAgent)) {
+        if (
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        ) {
           readOnly = true
         }
       } catch (e) {
@@ -326,7 +344,7 @@ class Calendar extends React.Component {
           readOnly={readOnly}
           disabled={this.props.disabled}
           type="text"
-          value={this.state.inputValue||''}
+          value={this.state.inputValue || ''}
         />
         {calendarIcon}
         {calendar}
@@ -336,31 +354,31 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  closeOnSelect: React.PropTypes.bool,
-  computableFormat: React.PropTypes.string,
-  strictDateParsing: React.PropTypes.bool,
-  parsingFormat: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.arrayOf(React.PropTypes.string)
+  closeOnSelect: PropTypes.bool,
+  computableFormat: PropTypes.string,
+  strictDateParsing: PropTypes.bool,
+  parsingFormat: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
   ]),
-  date: React.PropTypes.any,
-  minDate: React.PropTypes.any,
-  maxDate: React.PropTypes.any,
-  format: React.PropTypes.string,
-  inputName: React.PropTypes.string,
-  inputFieldId: React.PropTypes.string,
-  inputFieldClass: React.PropTypes.string,
-  minView: React.PropTypes.number,
-  onBlur: React.PropTypes.func,
-  onChange: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  openOnInputFocus: React.PropTypes.bool,
-  placeholder: React.PropTypes.string,
-  hideTouchKeyboard: React.PropTypes.bool,
-  hideIcon: React.PropTypes.bool,
-  customIcon: React.PropTypes.string,
-  todayText: React.PropTypes.string,
-  disabled: React.PropTypes.bool
+  date: PropTypes.any,
+  minDate: PropTypes.any,
+  maxDate: PropTypes.any,
+  format: PropTypes.string,
+  inputName: PropTypes.string,
+  inputFieldId: PropTypes.string,
+  inputFieldClass: PropTypes.string,
+  minView: PropTypes.number,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  openOnInputFocus: PropTypes.bool,
+  placeholder: PropTypes.string,
+  hideTouchKeyboard: PropTypes.bool,
+  hideIcon: PropTypes.bool,
+  customIcon: PropTypes.string,
+  todayText: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default Calendar
