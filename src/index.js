@@ -41,13 +41,13 @@ class Calendar extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.documentClick)
     if (this.props.focused) {
-      this.focusDateInput();
+      this.focusDateInput()
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.focused !== prevProps.focused && this.props.focused) {
-      this.focusDateInput();
+      this.focusDateInput()
     }
   }
 
@@ -228,7 +228,7 @@ class Calendar extends React.Component {
   }
 
   focusDateInput = () => {
-    this.dateInput && this.dateInput.focus();
+    this.dateInput && this.dateInput.focus()
   }
 
   render() {
@@ -357,7 +357,7 @@ class Calendar extends React.Component {
           readOnly={readOnly}
           disabled={this.props.disabled}
           type="text"
-          ref={(input) => { this.dateInput = input; }}
+          ref={(input) => { this.dateInput = input }}
           value={this.state.inputValue || ''}
         />
         {calendarIcon}

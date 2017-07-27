@@ -23,14 +23,12 @@ storiesOf('Calendar', module)
 
 class FocusDateInput extends React.Component {
   constructor(props) {
-    super();
-    this.state = {
-      focused: false
-    };
+    super()
+    this.state = {focused: false}
   }
 
   render() {
-    const {focused} = this.state;
+    const {focused} = this.state
     return (
       <div>
         <Calendar
@@ -38,24 +36,24 @@ class FocusDateInput extends React.Component {
           format="DD/MM/YYYY"
           date="01/01/2016"
           onBlur={() => {
-            this.setState( { ...this.state, focused: false });
+            this.setState({...this.state, focused: false})
           }}
         />
         <input
           type="button"
           value="Focus date input with a button"
           onClick={() => {
-            this.setState( { ...this.state, focused: true });
+            this.setState({...this.state, focused: true})
           }}
         />
         <div
           onClick={() => {
-            this.setState( { ...this.state, focused: true });
+            this.setState({...this.state, focused: true})
           }}
         >
           Focus date input with a div
         </div>
       </div>
-    );
+    )
   }
 }
