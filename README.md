@@ -101,7 +101,7 @@ import Calendar from 'react-input-calendar'
 
  - `Function`
  - default: `null`
- - Set a function that will be triggered when the input field is blurred. It will return the event and the date in the  
+ - Set a function that will be triggered when the input field is blurred. It will return the event and the date in the
   props.computableFormat format.
 
 #### props.hideOnBlur
@@ -162,7 +162,7 @@ import Calendar from 'react-input-calendar'
 
  - `String`
  - default: null
- - Define the ID of the input field where the date picker represents it's value. This can be useful when the date picker is   
+ - Define the ID of the input field where the date picker represents it's value. This can be useful when the date picker is
   used with a label element. The label element can be bound to the input field using the `label for` attribute.
 
 #### props.inputFieldClass
@@ -182,7 +182,7 @@ import Calendar from 'react-input-calendar'
  - `String`
  - default: `null`
  - Define the className of the calendar icon. If you need to customize the calendar icon, I would recommend using  [FontAwesome's](http://fontawesome.io/icons/) `fa fa-calendar` icon. Then, update the css style for the icon.
- 
+
 ```
 .fa-calendar {
     color: white;
@@ -190,7 +190,13 @@ import Calendar from 'react-input-calendar'
 
 ```
 
- - If null, then the default calendar icon is used   
+ - If null, then the default calendar icon is used
+
+ #### props.focused
+
+ - `Boolean`
+ - default: `false`
+ - If `true`, the date picker's input field will be focused.
 
 ## License
 
