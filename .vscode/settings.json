@@ -1,0 +1,10 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "javascript.format.enable": false,
+  "prettier.printWidth": 100,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.javascriptEnable": ["javascript", "javascriptreact"]
+}
