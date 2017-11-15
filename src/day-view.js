@@ -13,7 +13,7 @@ export default class DayView extends React.Component {
     date: PropTypes.object.isRequired,
     minDate: PropTypes.any,
     maxDate: PropTypes.any,
-    setDate:PropTypes.func,
+    setDate: PropTypes.func,
     nextView: PropTypes.func
   }
 
@@ -36,8 +36,14 @@ export default class DayView extends React.Component {
 
   getDays() {
     let now = this.props.date ? this.props.date : moment()
-    let start = now.clone().startOf('month').weekday(0)
-    let end = now.clone().endOf('month').weekday(6)
+    let start = now
+      .clone()
+      .startOf('month')
+      .weekday(0)
+    let end = now
+      .clone()
+      .endOf('month')
+      .weekday(6)
     let minDate = this.props.minDate
     let maxDate = this.props.maxDate
     let month = now.month()
@@ -46,19 +52,21 @@ export default class DayView extends React.Component {
     let year = now.year()
     let days = []
 
-    moment().range(start, end).by('days', day => {
-      days.push({
-        label: day.format('D'),
-        prev: (day.month() < month && !(day.year() > year)) || day.year() < year,
-        next: day.month() > month || day.year() > year,
-        disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
-        curr: day.date() === currDay && day.month() === month,
-        today:
-          day.date() === today.date() &&
+    moment()
+      .range(start, end)
+      .by('days', day => {
+        days.push({
+          label: day.format('D'),
+          prev: (day.month() < month && !(day.year() > year)) || day.year() < year,
+          next: day.month() > month || day.year() > year,
+          disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
+          curr: day.date() === currDay && day.month() === month,
+          today:
+            day.date() === today.date() &&
             day.month() === today.month() &&
             day.year() === today.year()
+        })
       })
-    })
     return days
   }
 
@@ -115,7 +123,9 @@ export default class DayView extends React.Component {
           titleAction={this.props.nextView}
         />
         <div className="days-title">{titles}</div>
-        <div className="days" onClick={this.cellClick}>{days}</div>
+        <div className="days" onClick={this.cellClick}>
+          {days}
+        </div>
       </div>
     )
   }

@@ -181,9 +181,8 @@ class Calendar extends React.Component {
     this.setState({
       date,
       inputValue: date.format(this.state.format),
-      isVisible: this.props.closeOnSelect && isDayView
-        ? !this.state.isVisible
-        : this.state.isVisible
+      isVisible:
+        this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
     })
 
     if (this.props.onChange) {
@@ -291,19 +290,22 @@ class Calendar extends React.Component {
       'icon-hidden': this.props.hideIcon
     })
 
-    let calendar = !this.state.isVisible || this.props.disabled
-      ? ''
-      : <div className={calendarClass} onClick={this.calendarClick}>
+    let calendar =
+      !this.state.isVisible || this.props.disabled ? (
+        ''
+      ) : (
+        <div className={calendarClass} onClick={this.calendarClick}>
           {view}
           <span
-            className={`today-btn${this.checkIfDateDisabled(moment().startOf('day'))
-              ? ' disabled'
-              : ''}`}
+            className={`today-btn${
+              this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''
+            }`}
             onClick={this.todayClick}
           >
             {todayText}
           </span>
         </div>
+      )
 
     let readOnly = false
 
@@ -323,16 +325,19 @@ class Calendar extends React.Component {
     let calendarIcon
     if (this.props.customIcon == null) {
       // Do not show calendar icon if hideIcon is true
-      calendarIcon = this.props.hideIcon || this.props.disabled ? '' :
-        <span className="icon-wrapper calendar-icon" onClick={this.toggleClick} >
-          <svg width="16" height="16" viewBox="0 0 16 16">
-            <path d="M5 6h2v2h-2zM8 6h2v2h-2zM11 6h2v2h-2zM2 12h2v2h-2zM5
+      calendarIcon =
+        this.props.hideIcon || this.props.disabled ? (
+          ''
+        ) : (
+          <span className="icon-wrapper calendar-icon" onClick={this.toggleClick}>
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <path d="M5 6h2v2h-2zM8 6h2v2h-2zM11 6h2v2h-2zM2 12h2v2h-2zM5
               12h2v2h-2zM8 12h2v2h-2zM5 9h2v2h-2zM8 9h2v2h-2zM11 9h2v2h-2zM2
               9h2v2h-2zM13 0v1h-2v-1h-7v1h-2v-1h-2v16h15v-16h-2zM14
-              15h-13v-11h13v11z"
-            />
-          </svg>
-        </span>
+              15h-13v-11h13v11z" />
+            </svg>
+          </span>
+        )
     } else {
       calendarIcon = (
         <span
@@ -357,7 +362,9 @@ class Calendar extends React.Component {
           readOnly={readOnly}
           disabled={this.props.disabled}
           type="text"
-          ref={(input) => { this.dateInput = input }}
+          ref={input => {
+            this.dateInput = input
+          }}
           value={this.state.inputValue || ''}
         />
         {calendarIcon}
@@ -371,10 +378,7 @@ Calendar.propTypes = {
   closeOnSelect: PropTypes.bool,
   computableFormat: PropTypes.string,
   strictDateParsing: PropTypes.bool,
-  parsingFormat: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
-  ]),
+  parsingFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   date: PropTypes.any,
   minDate: PropTypes.any,
   maxDate: PropTypes.any,
@@ -393,7 +397,7 @@ Calendar.propTypes = {
   customIcon: PropTypes.string,
   todayText: PropTypes.string,
   disabled: PropTypes.bool,
-  focused: PropTypes.bool,
+  focused: PropTypes.bool
 }
 
 export default Calendar

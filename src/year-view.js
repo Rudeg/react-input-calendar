@@ -33,8 +33,14 @@ export default class YearsView extends React.Component {
 
   checkIfYearDisabled(year) {
     return (
-      year.clone().endOf('year').isBefore(this.props.minDate, 'day') ||
-      year.clone().startOf('year').isAfter(this.props.maxDate, 'day')
+      year
+        .clone()
+        .endOf('year')
+        .isBefore(this.props.minDate, 'day') ||
+      year
+        .clone()
+        .startOf('year')
+        .isAfter(this.props.maxDate, 'day')
     )
   }
 
@@ -52,13 +58,15 @@ export default class YearsView extends React.Component {
       return years
     }
 
-    moment().range(start, end).by('years', year => {
-      items.push({
-        label: year.format('YYYY'),
-        disabled: this.checkIfYearDisabled(year),
-        curr: currYear === year.year()
+    moment()
+      .range(start, end)
+      .by('years', year => {
+        items.push({
+          label: year.format('YYYY'),
+          disabled: this.checkIfYearDisabled(year),
+          curr: currYear === year.year()
+        })
       })
-    })
 
     this.setState({ years: items })
 
@@ -103,11 +111,13 @@ export default class YearsView extends React.Component {
       return <Cell value={item.label} classes={_class} key={i} />
     })
     const currentDate = [years[0].label, years[years.length - 1].label].join('-')
-    
+
     return (
       <div className="years-view">
         <ViewHeader data={currentDate} next={this.next} prev={this.prev} />
-        <div className="years" onClick={this.cellClick}>{yearsCells}</div>
+        <div className="years" onClick={this.cellClick}>
+          {yearsCells}
+        </div>
       </div>
     )
   }
