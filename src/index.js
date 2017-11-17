@@ -233,48 +233,25 @@ class Calendar extends React.Component {
 
   getView() {
     const calendarDate = this.state.date || moment()
+    const { maxDate, minDate } = this.state
+    const props = {
+      date: calendarDate,
+      nextView: this.nextView,
+      setDate: this.setDate,
+      prevView: this.prevView,
+      maxDate,
+      minDate
+    }
+
     switch (this.state.currentView) {
       case 0:
-        return (
-          <DaysView
-            date={calendarDate}
-            nextView={this.nextView}
-            maxDate={this.state.maxDate}
-            minDate={this.state.minDate}
-            setDate={this.setDate}
-          />
-        )
+        return <DaysView {...props} />
       case 1:
-        return (
-          <MonthsView
-            date={calendarDate}
-            nextView={this.nextView}
-            maxDate={this.state.maxDate}
-            minDate={this.state.minDate}
-            prevView={this.prevView}
-            setDate={this.setDate}
-          />
-        )
+        return <MonthsView {...props} />
       case 2:
-        return (
-          <YearsView
-            date={calendarDate}
-            maxDate={this.state.maxDate}
-            minDate={this.state.minDate}
-            prevView={this.prevView}
-            setDate={this.setDate}
-          />
-        )
+        return <YearsView {...props} />
       default:
-        return (
-          <DaysView
-            date={calendarDate}
-            nextView={this.nextView}
-            maxDate={this.state.maxDate}
-            minDate={this.state.minDate}
-            setDate={this.setDate}
-          />
-        )
+        return <DaysView {...props} />
     }
   }
 
@@ -283,7 +260,6 @@ class Calendar extends React.Component {
     // pass null for the date into the calendar pop up, as we want
     // it to just start on todays date if there is no date set
     const view = this.getView()
-
     const todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today')
     const calendarClass = cs({
       'input-calendar-wrapper': true,
