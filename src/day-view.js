@@ -18,21 +18,20 @@ export default class DayView extends React.Component {
   }
 
   getDays() {
-    let now = this.props.date ? this.props.date : moment()
-    let start = now
+    const { minDate, maxDate, date } = this.props
+    const now = date ? date : moment()
+    const start = now
       .clone()
       .startOf('month')
       .weekday(0)
-    let end = now
+    const end = now
       .clone()
       .endOf('month')
       .weekday(6)
-    let minDate = this.props.minDate
-    let maxDate = this.props.maxDate
-    let month = now.month()
-    let today = moment()
-    let currDay = now.date()
-    let year = now.year()
+    const month = now.month()
+    const today = moment()
+    const currDay = now.date()
+    const year = now.year()
     let days = []
 
     moment()
@@ -54,11 +53,11 @@ export default class DayView extends React.Component {
   }
 
   getDaysTitles() {
-    let now = moment()
-    return [0, 1, 2, 3, 4, 5, 6].map(i => {
-      let weekday = now.weekday(i).format('dd')
-      return { val: weekday, label: weekday }
-    })
+    return [0, 1, 2, 3, 4, 5, 6].map(i => ({
+      label: moment()
+        .weekday(i)
+        .format('dd')
+    }))
   }
 
   cellClick = e => {

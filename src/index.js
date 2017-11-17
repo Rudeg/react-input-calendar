@@ -9,6 +9,7 @@ import DaysView from './day-view'
 import MonthsView from './month-view'
 import YearsView from './year-view'
 import Util from './util'
+import getIcon from './icon'
 
 class Calendar extends React.Component {
   constructor(props, context) {
@@ -230,16 +231,11 @@ class Calendar extends React.Component {
     this.setVisibility()
   }
 
-  render() {
-    // its ok for this.state.date to be null, but we should never
-    // pass null for the date into the calendar pop up, as we want
-    // it to just start on todays date if there is no date set
-    let calendarDate = this.state.date || moment()
-    let view
-
+  getView() {
+    const calendarDate = this.state.date || moment()
     switch (this.state.currentView) {
       case 0:
-        view = (
+        return (
           <DaysView
             date={calendarDate}
             nextView={this.nextView}
@@ -248,9 +244,8 @@ class Calendar extends React.Component {
             setDate={this.setDate}
           />
         )
-        break
       case 1:
-        view = (
+        return (
           <MonthsView
             date={calendarDate}
             nextView={this.nextView}
@@ -260,9 +255,8 @@ class Calendar extends React.Component {
             setDate={this.setDate}
           />
         )
-        break
       case 2:
-        view = (
+        return (
           <YearsView
             date={calendarDate}
             maxDate={this.state.maxDate}
@@ -271,9 +265,8 @@ class Calendar extends React.Component {
             setDate={this.setDate}
           />
         )
-        break
       default:
-        view = (
+        return (
           <DaysView
             date={calendarDate}
             nextView={this.nextView}
@@ -283,14 +276,20 @@ class Calendar extends React.Component {
           />
         )
     }
+  }
 
-    let todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today')
-    let calendarClass = cs({
+  render() {
+    // its ok for this.state.date to be null, but we should never
+    // pass null for the date into the calendar pop up, as we want
+    // it to just start on todays date if there is no date set
+    const view = this.getView()
+
+    const todayText = this.props.todayText || (moment.locale() === 'de' ? 'Heute' : 'Today')
+    const calendarClass = cs({
       'input-calendar-wrapper': true,
       'icon-hidden': this.props.hideIcon
     })
-
-    let calendar =
+    const calendar =
       !this.state.isVisible || this.props.disabled ? (
         ''
       ) : (
@@ -306,47 +305,8 @@ class Calendar extends React.Component {
           </span>
         </div>
       )
-
-    let readOnly = false
-
-    if (this.props.hideTouchKeyboard) {
-      // do not break server side rendering:
-      try {
-        if (
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        ) {
-          readOnly = true
-        }
-      } catch (e) {
-        console.warn(e) //eslint-disable-line
-      }
-    }
-
-    let calendarIcon
-    if (this.props.customIcon == null) {
-      // Do not show calendar icon if hideIcon is true
-      calendarIcon =
-        this.props.hideIcon || this.props.disabled ? (
-          ''
-        ) : (
-          <span className="icon-wrapper calendar-icon" onClick={this.toggleClick}>
-            <svg width="16" height="16" viewBox="0 0 16 16">
-              <path d="M5 6h2v2h-2zM8 6h2v2h-2zM11 6h2v2h-2zM2 12h2v2h-2zM5
-              12h2v2h-2zM8 12h2v2h-2zM5 9h2v2h-2zM8 9h2v2h-2zM11 9h2v2h-2zM2
-              9h2v2h-2zM13 0v1h-2v-1h-7v1h-2v-1h-2v16h15v-16h-2zM14
-              15h-13v-11h13v11z" />
-            </svg>
-          </span>
-        )
-    } else {
-      calendarIcon = (
-        <span
-          className={cs('icon-wrapper', 'calendar-icon', this.props.customIcon)}
-          onClick={this.toggleClick}
-        />
-      )
-    }
-
+    const readOnly = Util.checkForMobile(this.props.hideTouchKeyboard)
+    const calendarIcon = getIcon(this.props, this.toggleClick)
     const inputClass = this.props.inputFieldClass || 'input-calendar-field'
 
     return (

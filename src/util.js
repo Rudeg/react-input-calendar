@@ -66,5 +66,20 @@ export default {
       default:
         break
     }
+  },
+
+  checkForMobile(hideTouchKeyboard) {
+    let readOnly = false
+    // do not break server side rendering:
+    try {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      ) {
+        readOnly = true
+      }
+    } catch (e) {
+      console.warn(e) //eslint-disable-line
+    }
+    return readOnly
   }
 }
