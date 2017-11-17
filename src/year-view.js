@@ -100,16 +100,18 @@ export default class YearsView extends React.Component {
   render() {
     const years = this.state.years
     const currYear = this.props.date.year()
-    let _class
 
-    let yearsCells = years.map((item, i) => {
-      _class = cs({
-        year: true,
-        disabled: item.disabled,
-        current: item.label == currYear
-      })
-      return <Cell value={item.label} classes={_class} key={i} />
-    })
+    const yearsCells = years.map((item, i) => (
+      <Cell
+        value={item.label}
+        classes={cs({
+          year: true,
+          disabled: item.disabled,
+          current: item.label == currYear
+        })}
+        key={i}
+      />
+    ))
     const currentDate = [years[0].label, years[years.length - 1].label].join('-')
 
     return (

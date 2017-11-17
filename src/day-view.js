@@ -95,24 +95,24 @@ export default class DayView extends React.Component {
   }
 
   render() {
-    let titles = this.getDaysTitles().map((item, i) => {
-      return <Cell classes="day title" key={i} value={item.label} />
-    })
-    let _class
-
-    let days = this.getDays().map((item, i) => {
-      _class = cs({
-        day: true,
-        next: item.next,
-        prev: item.prev,
-        disabled: item.disabled,
-        current: item.curr,
-        today: item.today
-      })
-      return <Cell classes={_class} key={i} value={item.label} />
-    })
-
-    let currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM')
+    const titles = this.getDaysTitles().map((item, i) => (
+      <Cell classes="day title" key={i} value={item.label} />
+    ))
+    const days = this.getDays().map((item, i) => (
+      <Cell
+        classes={cs({
+          day: true,
+          next: item.next,
+          prev: item.prev,
+          disabled: item.disabled,
+          current: item.curr,
+          today: item.today
+        })}
+        key={i}
+        value={item.label}
+      />
+    ))
+    const currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM')
 
     return (
       <div className="view days-view" onKeyDown={this.keyDown}>

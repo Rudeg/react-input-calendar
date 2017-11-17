@@ -67,14 +67,17 @@ export default class MonthView extends React.Component {
 
   render() {
     const currentDate = this.props.date.format('YYYY')
-    let months = this.getMonth().map((item, i) => {
-      let _class = cs({
-        month: true,
-        disabled: item.disabled,
-        current: item.curr
-      })
-      return <Cell classes={_class} key={i} value={item.label} />
-    })
+    const months = this.getMonth().map((item, i) => (
+      <Cell
+        classes={cs({
+          month: true,
+          disabled: item.disabled,
+          current: item.curr
+        })}
+        key={i}
+        value={item.label}
+      />
+    ))
 
     return (
       <div className="months-view">
