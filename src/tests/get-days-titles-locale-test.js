@@ -1,14 +1,13 @@
-import React from 'react'
 import DayView from '../day-view.js'
 import moment from 'moment'
 import { expect } from 'chai'
 const { describe, it } = global
 
-describe('getDaysTitles', function() {
-  it('should start on monday for swedish locale', function() {
+describe('getDaysTitles', () => {
+  it('should start on monday for swedish locale', () => {
     moment.locale('sv')
 
-    var daysTitles = new DayView().getDaysTitles()
+    const daysTitles = new DayView().getDaysTitles();
 
     expect(daysTitles[0].val).to.equal('må')
     expect(daysTitles[0].label).to.equal('må')
@@ -26,10 +25,10 @@ describe('getDaysTitles', function() {
     expect(daysTitles[6].label).to.equal('sö')
   })
 
-  it('should start on monday for german locale', function() {
+  it('should start on monday for german locale', () => {
     moment.locale('de')
 
-    var daysTitles = new DayView().getDaysTitles()
+    const daysTitles = new DayView().getDaysTitles();
 
     expect(daysTitles[0].val).to.equal('Mo')
     expect(daysTitles[0].label).to.equal('Mo')
@@ -47,10 +46,10 @@ describe('getDaysTitles', function() {
     expect(daysTitles[6].label).to.equal('So')
   })
 
-  it('should start on sunday for english locale', function() {
+  it('should start on sunday for english locale', () => {
     moment.locale('en')
 
-    var daysTitles = new DayView().getDaysTitles()
+    const daysTitles = new DayView().getDaysTitles();
 
     expect(daysTitles[0].val).to.equal('Su')
     expect(daysTitles[0].label).to.equal('Su')

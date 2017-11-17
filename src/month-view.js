@@ -14,6 +14,17 @@ export default class MonthView extends React.Component {
     maxDate: PropTypes.any
   }
 
+  getMonth() {
+    const month = this.props.date.month()
+    return moment.monthsShort().map((item, i) => {
+      return {
+        label: item,
+        disabled: this.checkIfMonthDisabled(i),
+        curr: i === month
+      }
+    })
+  }
+
   cellClick = e => {
     const month = e.target.innerHTML
     if (this.checkIfMonthDisabled(month)) return
@@ -36,17 +47,6 @@ export default class MonthView extends React.Component {
         .startOf('month')
         .isAfter(this.props.maxDate, 'day')
     )
-  }
-
-  getMonth() {
-    const month = this.props.date.month()
-    return moment.monthsShort().map((item, i) => {
-      return {
-        label: item,
-        disabled: this.checkIfMonthDisabled(i),
-        curr: i === month
-      }
-    })
   }
 
   next = () => {

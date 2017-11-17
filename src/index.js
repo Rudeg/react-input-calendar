@@ -45,12 +45,6 @@ class Calendar extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.focused !== prevProps.focused && this.props.focused) {
-      this.focusDateInput()
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
     let newState = {
       date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
@@ -68,8 +62,44 @@ class Calendar extends React.Component {
     this.setState(newState)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.focused !== prevProps.focused && this.props.focused) {
+      this.focusDateInput()
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.documentClick)
+  }
+
+  setDate = (date, isDayView = false) => {
+    if (this.checkIfDateDisabled(date)) return
+
+    this.setState({
+      date,
+      inputValue: date.format(this.state.format),
+      isVisible:
+        this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
+    })
+
+    if (this.props.onChange) {
+      this.props.onChange(date.format(this.state.computableFormat))
+    }
+  }
+
+  setVisibility(val) {
+    const value = val !== undefined ? val : !this.state.isVisible
+    const eventMethod = value ? 'addEventListener' : 'removeEventListener'
+
+    document[eventMethod]('keydown', this.keyDown)
+
+    if (this.state.isVisible !== value && !this.props.disabled) {
+      this.setState({ isVisible: value })
+    }
+  }
+
+  calendarClick = () => {
+    this.setState({ isCalendar: true })
   }
 
   changeDate = e => {
@@ -89,6 +119,10 @@ class Calendar extends React.Component {
       this.setVisibility(false)
     }
     this.setState({ isCalendar: false })
+  }
+
+  focusDateInput = () => {
+    this.dateInput && this.dateInput.focus()
   }
 
   inputBlur = e => {
@@ -175,36 +209,6 @@ class Calendar extends React.Component {
     }
   }
 
-  setDate = (date, isDayView = false) => {
-    if (this.checkIfDateDisabled(date)) return
-
-    this.setState({
-      date,
-      inputValue: date.format(this.state.format),
-      isVisible:
-        this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
-    })
-
-    if (this.props.onChange) {
-      this.props.onChange(date.format(this.state.computableFormat))
-    }
-  }
-
-  setVisibility(val) {
-    const value = val !== undefined ? val : !this.state.isVisible
-    const eventMethod = value ? 'addEventListener' : 'removeEventListener'
-
-    document[eventMethod]('keydown', this.keyDown)
-
-    if (this.state.isVisible !== value && !this.props.disabled) {
-      this.setState({ isVisible: value })
-    }
-  }
-
-  calendarClick = () => {
-    this.setState({ isCalendar: true })
-  }
-
   todayClick = () => {
     const today = moment().startOf('day')
 
@@ -224,10 +228,6 @@ class Calendar extends React.Component {
   toggleClick = () => {
     this.setState({ isCalendar: true })
     this.setVisibility()
-  }
-
-  focusDateInput = () => {
-    this.dateInput && this.dateInput.focus()
   }
 
   render() {

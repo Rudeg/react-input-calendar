@@ -24,26 +24,6 @@ export default class YearsView extends React.Component {
     this.getYears()
   }
 
-  cellClick = e => {
-    const year = parseInt(e.target.innerHTML, 10)
-    const date = this.props.date.clone().year(year)
-    if (this.checkIfYearDisabled(date)) return
-    this.props.prevView(date)
-  }
-
-  checkIfYearDisabled(year) {
-    return (
-      year
-        .clone()
-        .endOf('year')
-        .isBefore(this.props.minDate, 'day') ||
-      year
-        .clone()
-        .startOf('year')
-        .isAfter(this.props.maxDate, 'day')
-    )
-  }
-
   getYears() {
     let now = this.props.date
     let start = now.clone().subtract(5, 'year')
@@ -71,6 +51,26 @@ export default class YearsView extends React.Component {
     this.setState({ years: items })
 
     return items
+  }
+
+  cellClick = e => {
+    const year = parseInt(e.target.innerHTML, 10)
+    const date = this.props.date.clone().year(year)
+    if (this.checkIfYearDisabled(date)) return
+    this.props.prevView(date)
+  }
+
+  checkIfYearDisabled(year) {
+    return (
+      year
+        .clone()
+        .endOf('year')
+        .isBefore(this.props.minDate, 'day') ||
+      year
+        .clone()
+        .startOf('year')
+        .isAfter(this.props.maxDate, 'day')
+    )
   }
 
   next = () => {

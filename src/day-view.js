@@ -17,23 +17,6 @@ export default class DayView extends React.Component {
     nextView: PropTypes.func
   }
 
-  cellClick = e => {
-    let cell = e.target
-    let date = parseInt(cell.innerHTML, 10)
-    let newDate = this.props.date ? this.props.date.clone() : moment()
-
-    if (isNaN(date)) return
-
-    if (cell.className.indexOf('prev') > -1) {
-      newDate.subtract(1, 'months')
-    } else if (cell.className.indexOf('next') > -1) {
-      newDate.add(1, 'months')
-    }
-
-    newDate.date(date)
-    this.props.setDate(newDate, true)
-  }
-
   getDays() {
     let now = this.props.date ? this.props.date : moment()
     let start = now
@@ -76,6 +59,23 @@ export default class DayView extends React.Component {
       let weekday = now.weekday(i).format('dd')
       return { val: weekday, label: weekday }
     })
+  }
+
+  cellClick = e => {
+    let cell = e.target
+    let date = parseInt(cell.innerHTML, 10)
+    let newDate = this.props.date ? this.props.date.clone() : moment()
+
+    if (isNaN(date)) return
+
+    if (cell.className.indexOf('prev') > -1) {
+      newDate.subtract(1, 'months')
+    } else if (cell.className.indexOf('next') > -1) {
+      newDate.add(1, 'months')
+    }
+
+    newDate.date(date)
+    this.props.setDate(newDate, true)
   }
 
   next = () => {
