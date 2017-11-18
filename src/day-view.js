@@ -61,9 +61,9 @@ export default class DayView extends React.Component {
   }
 
   cellClick = e => {
-    let cell = e.target
-    let date = parseInt(cell.innerHTML, 10)
-    let newDate = this.props.date ? this.props.date.clone() : moment()
+    const cell = e.target
+    const date = parseInt(cell.innerHTML, 10)
+    const newDate = this.props.date ? this.props.date.clone() : moment()
 
     if (isNaN(date)) return
 

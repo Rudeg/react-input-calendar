@@ -155,23 +155,15 @@ class Calendar extends React.Component {
       inputValue: newDate ? newDate.format(format) : null
     })
 
-    if (this.props.onChange) {
-      this.props.onChange(computableDate)
-    }
-
-    if (this.props.onBlur) {
-      this.props.onBlur(e, computableDate)
-    }
+    this.props.onChange && this.props.onChange(computableDate)
+    this.props.onBlur && this.props.onBlur(e, computableDate)
   }
 
   inputFocus = e => {
     if (this.props.openOnInputFocus) {
       this.toggleClick()
     }
-
-    if (this.props.onFocus) {
-      this.props.onFocus(e)
-    }
+    this.props.onFocus && this.props.onFocus(e)
   }
 
   keyDown = e => {

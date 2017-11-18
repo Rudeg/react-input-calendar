@@ -25,12 +25,12 @@ export default class YearsView extends React.Component {
   }
 
   getYears() {
-    let now = this.props.date
-    let start = now.clone().subtract(5, 'year')
-    let end = now.clone().add(6, 'year')
-    let currYear = now.year()
+    const now = this.props.date
+    const start = now.clone().subtract(5, 'year')
+    const end = now.clone().add(6, 'year')
+    const currYear = now.year()
+    const inRange = this.rangeCheck(currYear)
     let items = []
-    let inRange = this.rangeCheck(currYear)
 
     const { years } = this.state
 
