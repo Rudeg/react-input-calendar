@@ -12,6 +12,7 @@
   background-color: #fff;
   text-align: center;
   left: 140px;
+  z-index: 2;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
