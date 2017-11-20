@@ -14,6 +14,7 @@ import getIcon from './icon'
 class Calendar extends React.Component {
   constructor(props, context) {
     super(props, context)
+    moment.locale(this.props.locale || 'en')
     const date = props.date ? moment(Util.toDate(props.date)) : null
     const minDate = props.minDate ? moment(Util.toDate(props.minDate)) : null
     const maxDate = props.maxDate ? moment(Util.toDate(props.maxDate)) : null
@@ -325,7 +326,8 @@ Calendar.propTypes = {
   customIcon: PropTypes.string,
   todayText: PropTypes.string,
   disabled: PropTypes.bool,
-  focused: PropTypes.bool
+  focused: PropTypes.bool,
+  locale: PropTypes.string
 }
 
 export default Calendar

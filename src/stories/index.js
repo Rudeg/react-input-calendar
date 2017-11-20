@@ -4,19 +4,16 @@ import Calendar from '../index'
 import '../../style/index.css'
 
 storiesOf('Calendar', module)
-  .add('default view', () => {
-    return <Calendar format="DD/MM/YYYY" date="01/01/2016" />
-  })
-  .add('focus example', () => {
-    return (
-      <div>
-        <h3>Focused initially when rendered</h3>
-        <Calendar focused={true} format="DD/MM/YYYY" date="01/01/2016" />
-        <h3>Focus date input field programmatically</h3>
-        <FocusDateInput />
-      </div>
-    )
-  })
+  .add('default view', () => <Calendar format="DD/MM/YYYY" date="01/01/2016" />)
+  .add('focus example', () => (
+    <div>
+      <h3>Focused initially when rendered</h3>
+      <Calendar focused={true} format="DD/MM/YYYY" date="01/01/2016" />
+      <h3>Focus date input field programmatically</h3>
+      <FocusDateInput />
+    </div>
+  ))
+  .add('locale example', () => <Calendar locale="de" format="DD/MM/YYYY" date="01/01/2016" />)
 
 class FocusDateInput extends React.Component {
   constructor(props) {

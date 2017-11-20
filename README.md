@@ -198,6 +198,12 @@ import Calendar from 'react-input-calendar'
  - default: `false`
  - If `true`, the date picker's input field will be focused.
 
+ #### props.locale
+
+ - `String`
+ - default: `en`
+ - Change locale of the moment in the date picker. 
+
 ## License
 
 MIT
