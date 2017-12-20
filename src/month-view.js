@@ -11,7 +11,8 @@ export default class MonthView extends React.Component {
   static propTypes = {
     date: PropTypes.object.isRequired,
     minDate: PropTypes.any,
-    maxDate: PropTypes.any
+    maxDate: PropTypes.any,
+    setInternalDate: PropTypes.func
   }
 
   getMonth() {
@@ -54,7 +55,7 @@ export default class MonthView extends React.Component {
     if (this.props.maxDate && nextDate.isAfter(this.props.maxDate, 'day')) {
       nextDate = this.props.maxDate
     }
-    this.props.setDate(nextDate)
+    this.props.setInternalDate(nextDate)
   }
 
   prev = () => {
@@ -62,7 +63,7 @@ export default class MonthView extends React.Component {
     if (this.props.minDate && prevDate.isBefore(this.props.minDate, 'day')) {
       prevDate = this.props.minDate
     }
-    this.props.setDate(prevDate)
+    this.props.setInternalDate(prevDate)
   }
 
   render() {

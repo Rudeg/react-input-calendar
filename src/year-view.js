@@ -12,7 +12,8 @@ export default class YearsView extends React.Component {
     date: PropTypes.object,
     minDate: PropTypes.any,
     maxDate: PropTypes.any,
-    changeView: PropTypes.func
+    changeView: PropTypes.func,
+    setInternalDate: PropTypes.func
   }
   state = { years: [] }
 
@@ -78,7 +79,7 @@ export default class YearsView extends React.Component {
     if (this.props.maxDate && nextDate.isAfter(this.props.maxDate, 'day')) {
       nextDate = this.props.maxDate
     }
-    this.props.setDate(nextDate)
+    this.props.setInternalDate(nextDate)
   }
 
   prev = () => {
@@ -86,7 +87,7 @@ export default class YearsView extends React.Component {
     if (this.props.minDate && prevDate.isBefore(this.props.minDate, 'day')) {
       prevDate = this.props.minDate
     }
-    this.props.setDate(prevDate)
+    this.props.setInternalDate(prevDate)
   }
 
   rangeCheck = currYear => {

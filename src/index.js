@@ -74,7 +74,7 @@ class Calendar extends React.Component {
     document.removeEventListener('click', this.documentClick)
   }
 
-  setDate = (date, isDayView = false) => {
+  setInputDate = (date, isDayView = false) => {
     if (this.checkIfDateDisabled(date)) return
 
     this.setState({
@@ -87,6 +87,14 @@ class Calendar extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(date.format(this.state.computableFormat))
     }
+  }
+
+  setInternalDate = (date, isDayView = false) => {
+    if (this.checkIfDateDisabled(date)) return
+
+    this.setState({
+      date
+    })
   }
 
   setVisibility(val) {
@@ -230,7 +238,8 @@ class Calendar extends React.Component {
     const props = {
       date: calendarDate,
       nextView: this.nextView,
-      setDate: this.setDate,
+      setInputDate: this.setInputDate,
+      setInternalDate: this.setInternalDate,
       prevView: this.prevView,
       maxDate,
       minDate
