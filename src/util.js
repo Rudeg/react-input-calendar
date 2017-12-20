@@ -22,6 +22,7 @@ const _keyDownViewHelper = [
 
 const KEYS = {
   backspace: 8,
+  tab: 9,
   enter: 13,
   esc: 27,
   left: 37,
@@ -62,6 +63,9 @@ export default {
         break
       case KEYS.esc:
         this.setState({ isVisible: false })
+        break
+      case KEYS.tab:
+        this.props.hideOnBlur && this.setState({ isVisible: false })
         break
       default:
         break

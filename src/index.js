@@ -326,6 +326,7 @@ Calendar.propTypes = {
   inputFieldClass: PropTypes.string,
   minView: PropTypes.number,
   onBlur: PropTypes.func,
+  hideOnBlur: PropTypes.bool,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   openOnInputFocus: PropTypes.bool,
