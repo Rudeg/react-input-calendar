@@ -273,14 +273,14 @@ class Calendar extends React.Component {
       ) : (
         <div className={calendarClass} onClick={this.calendarClick}>
           {view}
-          <span
+          {this.props.hideTodayButton ? undefined : <span
             className={`today-btn${
               this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''
             }`}
             onClick={this.todayClick}
           >
             {todayText}
-          </span>
+          </span>}
         </div>
       )
     const readOnly = Util.checkForMobile(this.props.hideTouchKeyboard)
@@ -332,6 +332,7 @@ Calendar.propTypes = {
   placeholder: PropTypes.string,
   hideTouchKeyboard: PropTypes.bool,
   hideIcon: PropTypes.bool,
+  hideTodayButton: PropTypes.bool,
   customIcon: PropTypes.string,
   todayText: PropTypes.string,
   disabled: PropTypes.bool,
