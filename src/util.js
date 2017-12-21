@@ -42,22 +42,23 @@ export default {
 
     switch (code) {
       case KEYS.left:
-        this.setDate(this.state.date.subtract(1, unit))
+        this.setInternalDate(this.state.date.subtract(1, unit))
         break
       case KEYS.right:
-        this.setDate(this.state.date.add(1, unit))
+        this.setInternalDate(this.state.date.add(1, unit))
         break
       case KEYS.up:
-        this.setDate(this.state.date.subtract(_viewHelper.upDown, unit))
+        this.setInternalDate(this.state.date.subtract(_viewHelper.upDown, unit))
         break
       case KEYS.down:
-        this.setDate(this.state.date.add(_viewHelper.upDown, unit))
+        this.setInternalDate(this.state.date.add(_viewHelper.upDown, unit))
         break
       case KEYS.enter:
         if (_viewHelper.prev) {
           this.prevView(this.state.date)
         }
         if (_viewHelper.exit) {
+          this.setInputDate(this.state.date)
           this.setState({ isVisible: false })
         }
         break
