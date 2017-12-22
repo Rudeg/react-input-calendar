@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const _keyDownViewHelper = [
   {
     prev: false,
@@ -39,26 +41,27 @@ export default {
   keyDownActions(code) {
     const _viewHelper = _keyDownViewHelper[this.state.currentView]
     const unit = _viewHelper.unit
+    const currentDate = this.state.date || moment().startOf('day')
 
     switch (code) {
       case KEYS.left:
-        this.setInternalDate(this.state.date.subtract(1, unit))
+        this.setInternalDate(currentDate.subtract(1, unit))
         break
       case KEYS.right:
-        this.setInternalDate(this.state.date.add(1, unit))
+        this.setInternalDate(currentDate.add(1, unit))
         break
       case KEYS.up:
-        this.setInternalDate(this.state.date.subtract(_viewHelper.upDown, unit))
+        this.setInternalDate(currentDate.subtract(_viewHelper.upDown, unit))
         break
       case KEYS.down:
-        this.setInternalDate(this.state.date.add(_viewHelper.upDown, unit))
+        this.setInternalDate(currentDate.add(_viewHelper.upDown, unit))
         break
       case KEYS.enter:
         if (_viewHelper.prev) {
-          this.prevView(this.state.date)
+          this.prevView(currentDate)
         }
         if (_viewHelper.exit) {
-          this.setInputDate(this.state.date)
+          this.setInputDate(currentDate)
           this.setState({ isVisible: false })
         }
         break
