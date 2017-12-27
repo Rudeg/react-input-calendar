@@ -1,4 +1,5 @@
 import React from 'react'
+import cs from 'classnames'
 
 export default ({ customIcon, hideIcon, disabled }, toggleClick) => {
   if (customIcon == null) {
