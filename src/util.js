@@ -34,10 +34,6 @@ const KEYS = {
 }
 
 export default {
-  toDate(date) {
-    return date instanceof Date ? date : new Date(date)
-  },
-
   keyDownActions(code) {
     const _viewHelper = _keyDownViewHelper[this.state.currentView]
     const unit = _viewHelper.unit
