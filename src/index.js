@@ -179,6 +179,14 @@ class Calendar extends React.Component {
     Util.keyDownActions.call(this, e.keyCode)
   }
 
+  inputKeyUp = e => {
+    this.props.onInputKeyUp && this.props.onInputKeyUp(e)
+  }
+
+  inputKeyDown = e => {
+    this.props.onInputKeyDown && this.props.onInputKeyDown(e)
+  }
+
   nextView = () => {
     if (this.checkIfDateDisabled(this.state.date)) return
     this.setState({ currentView: ++this.state.currentView })
@@ -296,6 +304,8 @@ class Calendar extends React.Component {
           onBlur={this.inputBlur}
           onChange={this.changeDate}
           onFocus={this.inputFocus}
+          onKeyUp={this.inputKeyUp}
+          onKeyDown={this.inputKeyDown}
           placeholder={this.props.placeholder}
           readOnly={readOnly}
           disabled={this.props.disabled}
@@ -329,6 +339,8 @@ Calendar.propTypes = {
   hideOnBlur: PropTypes.bool,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onInputKeyUp: PropTypes.func,
+  onInputKeyDown: PropTypes.func,
   openOnInputFocus: PropTypes.bool,
   placeholder: PropTypes.string,
   hideTouchKeyboard: PropTypes.bool,
