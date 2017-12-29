@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const _keyDownViewHelper = [
   {
     prev: false,
@@ -22,6 +24,7 @@ const _keyDownViewHelper = [
 
 const KEYS = {
   backspace: 8,
+  tab: 9,
   enter: 13,
   esc: 27,
   left: 37,
@@ -31,37 +34,38 @@ const KEYS = {
 }
 
 export default {
-  toDate(date) {
-    return date instanceof Date ? date : new Date(date)
-  },
-
   keyDownActions(code) {
     const _viewHelper = _keyDownViewHelper[this.state.currentView]
     const unit = _viewHelper.unit
+    const currentDate = this.state.date || moment().startOf('day')
 
     switch (code) {
       case KEYS.left:
-        this.setDate(this.state.date.subtract(1, unit))
+        this.setInternalDate(currentDate.subtract(1, unit))
         break
       case KEYS.right:
-        this.setDate(this.state.date.add(1, unit))
+        this.setInternalDate(currentDate.add(1, unit))
         break
       case KEYS.up:
-        this.setDate(this.state.date.subtract(_viewHelper.upDown, unit))
+        this.setInternalDate(currentDate.subtract(_viewHelper.upDown, unit))
         break
       case KEYS.down:
-        this.setDate(this.state.date.add(_viewHelper.upDown, unit))
+        this.setInternalDate(currentDate.add(_viewHelper.upDown, unit))
         break
       case KEYS.enter:
         if (_viewHelper.prev) {
-          this.prevView(this.state.date)
+          this.prevView(currentDate)
         }
         if (_viewHelper.exit) {
+          this.setInputDate(currentDate)
           this.setState({ isVisible: false })
         }
         break
       case KEYS.esc:
         this.setState({ isVisible: false })
+        break
+      case KEYS.tab:
+        this.props.hideOnBlur && this.setState({ isVisible: false })
         break
       default:
         break

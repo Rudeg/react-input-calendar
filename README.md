@@ -116,6 +116,18 @@ import Calendar from 'react-input-calendar'
  - default: `null`
  - Set a function that will be triggered when the input field is focused.
 
+#### props.onInputKeyDown
+
+ - `Function`
+ - default: `null`
+ - Set a function that will be triggered when a key is pressed down with the input field focused.
+
+#### props.onInputKeyUp
+
+ - `Function`
+ - default: `null`
+ - Set a function that will be triggered when a key is released with the input field focused.
+
 #### props.closeOnSelect
 
  - `Boolean`
@@ -203,6 +215,12 @@ import Calendar from 'react-input-calendar'
  - `String`
  - default: `en`
  - Change locale of the moment in the date picker. 
+
+#### props.hideTodayButton
+
+ - `Boolean`
+ - default: `false`
+ - If `true`, the date picker's today button will be hidden.
 
 ## License
 

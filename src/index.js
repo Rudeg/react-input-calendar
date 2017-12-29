@@ -15,14 +15,14 @@ class Calendar extends React.Component {
   constructor(props, context) {
     super(props, context)
     moment.locale(this.props.locale || 'en')
-    const date = props.date ? moment(Util.toDate(props.date)) : null
-    const minDate = props.minDate ? moment(Util.toDate(props.minDate)) : null
-    const maxDate = props.maxDate ? moment(Util.toDate(props.maxDate)) : null
     const format = props.format || 'MM-DD-YYYY'
-    const minView = parseInt(props.minView, 10) || 0
     const computableFormat = props.computableFormat || 'MM-DD-YYYY'
     const strictDateParsing = props.strictDateParsing || false
     const parsingFormat = props.parsingFormat || format
+    const date = props.date ? moment(props.date, parsingFormat) : null
+    const minDate = props.minDate ? moment(props.minDate, parsingFormat) : null
+    const maxDate = props.maxDate ? moment(props.maxDate, parsingFormat) : null
+    const minView = parseInt(props.minView, 10) || 0
 
     this.state = {
       date,
@@ -49,12 +49,12 @@ class Calendar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let newState = {
-      date: nextProps.date ? moment(Util.toDate(nextProps.date)) : this.state.date,
+      date: nextProps.date ? moment(nextProps.date, this.state.parsingFormat) : this.state.date,
       inputValue: nextProps.date
-        ? moment(Util.toDate(nextProps.date)).format(this.state.format)
+        ? moment(nextProps.date, this.state.parsingFormat).format(this.state.format)
         : null,
-      minDate: nextProps.minDate ? moment(Util.toDate(nextProps.minDate)) : null,
-      maxDate: nextProps.maxDate ? moment(Util.toDate(nextProps.maxDate)) : null
+      minDate: nextProps.minDate ? moment(nextProps.minDate, this.state.parsingFormat) : null,
+      maxDate: nextProps.maxDate ? moment(nextProps.maxDate, this.state.parsingFormat) : null
     }
 
     if (nextProps.disabled === true) {
@@ -74,7 +74,7 @@ class Calendar extends React.Component {
     document.removeEventListener('click', this.documentClick)
   }
 
-  setDate = (date, isDayView = false) => {
+  setInputDate = (date, isDayView = false) => {
     if (this.checkIfDateDisabled(date)) return
 
     this.setState({
@@ -87,6 +87,14 @@ class Calendar extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(date.format(this.state.computableFormat))
     }
+  }
+
+  setInternalDate = (date, isDayView = false) => {
+    if (this.checkIfDateDisabled(date)) return
+
+    this.setState({
+      date
+    })
   }
 
   setVisibility(val) {
@@ -136,10 +144,10 @@ class Calendar extends React.Component {
 
     if (date) {
       // format, with strict parsing true, so we catch bad dates
-      newDate = moment(date, parsingFormat, true)
+      newDate = moment(date, parsingFormat, this.props.strictDateParsing)
       // if the new date didn't match our format, see if the native
       // js date can parse it
-      if (!newDate.isValid() && !this.props.strictDateParsing) {
+      if (!newDate.isValid()) {
         let d = new Date(date)
         // if native js cannot parse, just make a new date
         if (isNaN(d.getTime())) {
@@ -169,6 +177,14 @@ class Calendar extends React.Component {
 
   keyDown = e => {
     Util.keyDownActions.call(this, e.keyCode)
+  }
+
+  inputKeyUp = e => {
+    this.props.onInputKeyUp && this.props.onInputKeyUp(e)
+  }
+
+  inputKeyDown = e => {
+    this.props.onInputKeyDown && this.props.onInputKeyDown(e)
   }
 
   nextView = () => {
@@ -230,7 +246,8 @@ class Calendar extends React.Component {
     const props = {
       date: calendarDate,
       nextView: this.nextView,
-      setDate: this.setDate,
+      setInputDate: this.setInputDate,
+      setInternalDate: this.setInternalDate,
       prevView: this.prevView,
       maxDate,
       minDate
@@ -264,14 +281,14 @@ class Calendar extends React.Component {
       ) : (
         <div className={calendarClass} onClick={this.calendarClick}>
           {view}
-          <span
+          {this.props.hideTodayButton ? undefined : <span
             className={`today-btn${
               this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''
             }`}
             onClick={this.todayClick}
           >
             {todayText}
-          </span>
+          </span>}
         </div>
       )
     const readOnly = Util.checkForMobile(this.props.hideTouchKeyboard)
@@ -287,6 +304,8 @@ class Calendar extends React.Component {
           onBlur={this.inputBlur}
           onChange={this.changeDate}
           onFocus={this.inputFocus}
+          onKeyUp={this.inputKeyUp}
+          onKeyDown={this.inputKeyDown}
           placeholder={this.props.placeholder}
           readOnly={readOnly}
           disabled={this.props.disabled}
@@ -317,12 +336,16 @@ Calendar.propTypes = {
   inputFieldClass: PropTypes.string,
   minView: PropTypes.number,
   onBlur: PropTypes.func,
+  hideOnBlur: PropTypes.bool,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onInputKeyUp: PropTypes.func,
+  onInputKeyDown: PropTypes.func,
   openOnInputFocus: PropTypes.bool,
   placeholder: PropTypes.string,
   hideTouchKeyboard: PropTypes.bool,
   hideIcon: PropTypes.bool,
+  hideTodayButton: PropTypes.bool,
   customIcon: PropTypes.string,
   todayText: PropTypes.string,
   disabled: PropTypes.bool,
