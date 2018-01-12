@@ -58,14 +58,14 @@ export default {
         }
         if (_viewHelper.exit) {
           this.setInputDate(currentDate)
-          this.setState({ isVisible: false })
+          this.setVisibility(false)
         }
         break
       case KEYS.esc:
-        this.setState({ isVisible: false })
+        this.setVisibility(false)
         break
       case KEYS.tab:
-        this.props.hideOnBlur && this.setState({ isVisible: false })
+        this.props.hideOnBlur && this.setVisibility(false)
         break
       default:
         break
