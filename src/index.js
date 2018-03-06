@@ -24,6 +24,7 @@ class Calendar extends React.Component {
     const maxDate = props.maxDate ? moment(props.maxDate, parsingFormat) : null
     const minView = parseInt(props.minView, 10) || 0
 
+    const keyboardDisabled = props.keyboardDisabled;
     this.state = {
       date,
       minDate,
@@ -36,7 +37,8 @@ class Calendar extends React.Component {
       currentView: minView || 0,
       isVisible: false,
       strictDateParsing,
-      parsingFormat
+      parsingFormat,
+      keyboardDisabled
     }
   }
 
@@ -101,7 +103,7 @@ class Calendar extends React.Component {
     const value = val !== undefined ? val : !this.state.isVisible
     const eventMethod = value ? 'addEventListener' : 'removeEventListener'
 
-    document[eventMethod]('keydown', this.keyDown)
+    !this.state.keyboardDisabled && document[eventMethod]('keydown', this.keyDown)
 
     if (this.state.isVisible !== value && !this.props.disabled) {
       this.setState({ isVisible: value })
@@ -350,7 +352,8 @@ Calendar.propTypes = {
   todayText: PropTypes.string,
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
-  locale: PropTypes.string
+  locale: PropTypes.string,
+  keyboardDisabled: PropTypes.bool
 }
 
 export default Calendar
