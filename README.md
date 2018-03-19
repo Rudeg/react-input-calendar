@@ -222,6 +222,12 @@ import Calendar from 'react-input-calendar'
  - default: `false`
  - If `true`, the date picker's today button will be hidden.
 
+#### props.keyboardDisabled
+
+ - `Boolean`
+ - default: `false`
+ - If `true`, the keyboard handler will be disabled
+ 
 ## License
 
 MIT
