@@ -25,8 +25,9 @@ class Calendar extends React.Component {
     const minView = parseInt(props.minView, 10) || 0
     const defaultView = parseInt(props.defaultView, 10) || 0
     const displayYrWithMonth = props.displayYrWithMonth || false;
-
+    const currentView = (defaultView < minView) ? minView : defaultView;
     const keyboardDisabled = props.keyboardDisabled;
+
     this.state = {
       date,
       minDate,
@@ -36,7 +37,7 @@ class Calendar extends React.Component {
       inputValue: date ? date.format(format) : undefined,
       views: ['days', 'months', 'years'],
       minView,
-      currentView: defaultView || 0,
+      currentView,
       isVisible: false,
       strictDateParsing,
       parsingFormat,
