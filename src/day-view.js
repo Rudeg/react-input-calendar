@@ -15,7 +15,8 @@ export default class DayView extends React.Component {
     maxDate: PropTypes.any,
     setInternalDate: PropTypes.func,
     setInputDate: PropTypes.func,
-    nextView: PropTypes.func
+    nextView: PropTypes.func,
+    displayYrWithMonth: PropTypes.bool
   }
 
   getDays() {
@@ -112,7 +113,8 @@ export default class DayView extends React.Component {
         value={item.label}
       />
     ))
-    const currentDate = this.props.date ? this.props.date.format('MMMM') : moment().format('MMMM')
+    const format = this.props.displayYrWithMonth ? 'MMM YYYY' : 'MMMM';
+    const currentDate = this.props.date ? this.props.date.format(format) : moment().format(format);
 
     return (
       <div className="view days-view" onKeyDown={this.keyDown}>

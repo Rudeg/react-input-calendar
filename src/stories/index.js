@@ -14,6 +14,12 @@ storiesOf('Calendar', module)
     </div>
   ))
   .add('locale example', () => <Calendar locale="de" format="DD/MM/YYYY" date="01/01/2016" />)
+  .add('default view month', () => (
+    <Calendar format="DD/MM/YYYY" date="01/01/2016" defaultView={1} />
+  ))
+  .add('month/year display (day view)', () => (
+    <Calendar format="DD/MM/YYYY" date="01/01/2016" displayYrWithMonth={true} />
+  ))
 
 class FocusDateInput extends React.Component {
   constructor(props) {
