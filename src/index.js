@@ -23,8 +23,11 @@ class Calendar extends React.Component {
     const minDate = props.minDate ? moment(props.minDate, parsingFormat) : null
     const maxDate = props.maxDate ? moment(props.maxDate, parsingFormat) : null
     const minView = parseInt(props.minView, 10) || 0
-
+    const defaultView = parseInt(props.defaultView, 10) || 0
+    const displayYrWithMonth = props.displayYrWithMonth || false;
+    const currentView = (defaultView < minView) ? minView : defaultView;
     const keyboardDisabled = props.keyboardDisabled;
+
     this.state = {
       date,
       minDate,
@@ -34,11 +37,12 @@ class Calendar extends React.Component {
       inputValue: date ? date.format(format) : undefined,
       views: ['days', 'months', 'years'],
       minView,
-      currentView: minView || 0,
+      currentView,
       isVisible: false,
       strictDateParsing,
       parsingFormat,
-      keyboardDisabled
+      keyboardDisabled,
+      displayYrWithMonth
     }
   }
 
@@ -244,7 +248,7 @@ class Calendar extends React.Component {
 
   getView() {
     const calendarDate = this.state.date || moment()
-    const { maxDate, minDate } = this.state
+    const { maxDate, minDate, displayYrWithMonth } = this.state
     const props = {
       date: calendarDate,
       nextView: this.nextView,
@@ -252,7 +256,8 @@ class Calendar extends React.Component {
       setInternalDate: this.setInternalDate,
       prevView: this.prevView,
       maxDate,
-      minDate
+      minDate,
+      displayYrWithMonth
     }
 
     switch (this.state.currentView) {

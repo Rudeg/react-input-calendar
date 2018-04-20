@@ -67,14 +67,29 @@ import Calendar from 'react-input-calendar'
  - default: `null`
  - set the selectable maximum date
 
+#### props.defaultView
+
+ - `Int` (from 0 to 2)
+ - default: `0` (DaysView)
+ - Set default view displayed. Values:
+    - 0 - days
+    - 1 - months
+    - 2 - years
+
 #### props.minView
 
  - `Int` (from 0 to 2)
  - default: `0` (DaysView)
  - Set minimal view. Values:
-  - 0 - days
-  - 1 - months
-  - 2 - years
+    - 0 - days
+    - 1 - months
+    - 2 - years
+
+#### props.displayYrWithMonth
+
+ - `Boolean`
+ - default: `false`
+ - If set `true`, the day view's header will show an abbreviated month and full year. Example: Instead of the header displaying 'December', it will display 'Dec 2016'
 
 #### props.computableFormat
 
