@@ -3,7 +3,7 @@
   "description": "Datepicker widget react component- Fork from https://github.com/Rudeg/react-input-calendar",
   "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
   "user": "facosta0787",
-  "version": "0.5.5",
+  "version": "0.5.4",
   "scripts": {
     "prepublish": ". ./.scripts/prepublish.sh",
     "lint": "eslint src",
