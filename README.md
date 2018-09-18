@@ -6,7 +6,7 @@ React component for calendar widget.
 
 React Input Calendar is available as an [npm package](https://www.npmjs.org/package/react-input-calendar).
 ```sh
-npm install react-input-calendar
+npm install react-inputtext-calendar
 ```
 
 Use [browserify](http://browserify.org/) and [reactify](https://github.com/andreypopp/reactify) for dependency management and JSX transformation.
@@ -229,7 +229,7 @@ import Calendar from 'react-input-calendar'
 
  - `String`
  - default: `en`
- - Change locale of the moment in the date picker. 
+ - Change locale of the moment in the date picker.
 
 #### props.hideTodayButton
 
@@ -242,7 +242,7 @@ import Calendar from 'react-input-calendar'
  - `Boolean`
  - default: `false`
  - If `true`, the keyboard handler will be disabled
- 
+
 ## License
 
 MIT

@@ -1,9 +1,9 @@
 {
-  "name": "react-input-calendar",
-  "description": "Datepicker widget react component",
+  "name": "react-inputtext-calendar",
+  "description": "Datepicker widget react component- Fork from https://github.com/Rudeg/react-input-calendar",
   "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
-  "user": "Rudeg",
-  "version": "0.5.3",
+  "user": "facosta0787",
+  "version": "0.5.4",
   "scripts": {
     "prepublish": ". ./.scripts/prepublish.sh",
     "lint": "eslint src",
@@ -64,11 +64,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Rudeg/react-input-calendar"
+    "url": "https://github.com/facosta0787/react-input-calendar"
   },
-  "homepage": "http://rudeg.github.io/react-input-calendar/",
   "bugs": {
-    "url": "https://github.com/Rudeg/react-input-calendar/issues"
+    "url": "https://github.com/facosta0787/react-input-calendar/issues"
   },
   "keywords": [
     "react",
