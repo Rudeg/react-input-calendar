@@ -24,9 +24,9 @@ class Calendar extends React.Component {
     const maxDate = props.maxDate ? moment(props.maxDate, parsingFormat) : null
     const minView = parseInt(props.minView, 10) || 0
     const defaultView = parseInt(props.defaultView, 10) || 0
-    const displayYrWithMonth = props.displayYrWithMonth || false;
-    const currentView = (defaultView < minView) ? minView : defaultView;
-    const keyboardDisabled = props.keyboardDisabled;
+    const displayYrWithMonth = props.displayYrWithMonth || false
+    const currentView = defaultView < minView ? minView : defaultView
+    const keyboardDisabled = props.keyboardDisabled
 
     this.state = {
       date,
@@ -225,7 +225,7 @@ class Calendar extends React.Component {
     }
   }
 
-  todayClick = () => {
+  todayClick = (isDayView = false) => {
     const today = moment().startOf('day')
 
     if (this.checkIfDateDisabled(today)) return
@@ -233,7 +233,9 @@ class Calendar extends React.Component {
     this.setState({
       date: today,
       inputValue: today.format(this.state.format),
-      currentView: this.state.minView
+      currentView: this.state.minView,
+      isVisible:
+        this.props.closeOnSelect && isDayView ? !this.state.isVisible : this.state.isVisible
     })
 
     if (this.props.onChange) {
@@ -288,14 +290,18 @@ class Calendar extends React.Component {
       ) : (
         <div className={calendarClass} onClick={this.calendarClick}>
           {view}
-          {this.props.hideTodayButton ? undefined : <span
-            className={`today-btn${
-              this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''
-            }`}
-            onClick={this.todayClick}
-          >
-            {todayText}
-          </span>}
+          {this.props.hideTodayButton ? (
+            undefined
+          ) : (
+            <span
+              className={`today-btn${
+                this.checkIfDateDisabled(moment().startOf('day')) ? ' disabled' : ''
+              }`}
+              onClick={this.todayClick}
+            >
+              {todayText}
+            </span>
+          )}
         </div>
       )
     const readOnly = Util.checkForMobile(this.props.hideTouchKeyboard)
