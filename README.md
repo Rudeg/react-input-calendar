@@ -111,6 +111,13 @@ import Calendar from 'react-input-calendar'
  - `Function`
  - default: `null`
  - Set a function that will be triggered whenever there is a change in the selected date. It will return the date in the  `props.computableFormat` format.
+ 
+ #### props.onInputChange
+ 
+  - `Function`
+  - default: `null`
+  - Set a function that will be triggered within the input box's onChange handler, before the new value is set. It will take the event object 
+  and return a modified value. 
 
 #### props.onBlur
 
