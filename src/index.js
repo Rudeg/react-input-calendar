@@ -120,7 +120,13 @@ class Calendar extends React.Component {
 
   changeDate = e => {
     //eslint-disable-line
-    this.setState({ inputValue: e.target.value })
+    let value = e.target.value;
+
+    if (this.props.onInputChange) {
+      value = this.props.onInputChange(e);
+    }
+
+    this.setState({ inputValue: value })
   }
 
   checkIfDateDisabled(date) {
@@ -364,7 +370,8 @@ Calendar.propTypes = {
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
   locale: PropTypes.string,
-  keyboardDisabled: PropTypes.bool
+  keyboardDisabled: PropTypes.bool,
+  onInputChange: PropTypes.func,
 }
 
 export default Calendar
